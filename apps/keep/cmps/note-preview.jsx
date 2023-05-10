@@ -1,14 +1,14 @@
 const { useEffect, useState } = React
 
 
-export function NotePreview({note}){
+export function NotePreview({ note }) {
     const [cmpType, setCmpType] = useState('')
 
 
-    return(
+    return (
         <section>
-                <DynamicCmp cmpType={cmpType} name="tomer" note={note} />
-            </section>
+            <DynamicCmp cmpType={cmpType} name="tomer" note={note} />
+        </section>
     )
 }
 
