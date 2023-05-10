@@ -1,11 +1,9 @@
-export const storageService = {
+export const asyncStorageService = {
     query,
     get,
     post,
     put,
     remove,
-    loadFromStorage,
-    saveToStorage
 }
 
 function query(entityType, delay = 500) {
@@ -65,11 +63,3 @@ function _makeId(length = 5) {
     return text
 }
 
-function saveToStorage(key, val) {
-    localStorage.setItem(key, JSON.stringify(val))
-}
-
-function loadFromStorage(key) {
-    var val = localStorage.getItem(key)
-    return JSON.parse(val)
-}
