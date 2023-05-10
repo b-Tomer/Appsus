@@ -27,22 +27,40 @@ export function KeepIndex() {
     keepService.query().then((notes) => setNotes(notes))
   }
 
+  function onRemoveNote(noteId){
+    // console.log("noteId from onRemove: ", noteId);
+    keepService.remove(noteId).then(() => {
+      const updatedNotes = notes.filter((note) => note.id !== noteId)
+      setNotes(updatedNotes)
+      //   showSuccessMsg(`Note removed!`)
+    })    
+  }
+  
+  function onPinNote(noteId){
+    
+    keepService.get(noteId).then((note) => {
+      note.isPinned = note.isPinned? false : true
+      keepService.put(note)
+        // console.log(note); 
+      // const updatedNotes = keepService.query()
+      // setNotes(updatedNotes)
+  })
+    }
 
 
-  {console.log(notes);}
+
   return (
 
     <section className="note-inedx app main-layout ">
       <KeepHeader />
       <main>
 
-        <NoteList notes={notes} />
+        <NoteList onRemoveNote={onRemoveNote} onPinNote={onPinNote} notes={notes} />
 
       </main>
       {/* <UserMsg /> */}
       <KeepFooter />
     </section>
-
 
   )
 }

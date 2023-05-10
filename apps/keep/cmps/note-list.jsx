@@ -6,15 +6,22 @@ import { NotePreview } from "../../../note-preview.jsx"
 
 
 
-export function NoteList({ notes }) {
+export function NoteList({ notes, onRemoveNote ,onPinNote}) {
+
+    function onHandleChange(val) {
+        // console.log(val);
+    }
 
     return (
 
-        <section>
+        <React.Fragment>
 
-            <div className="note-list">{notes.map(note => <NotePreview key={note.id} note={note} />)}</div>
+            <input className="card add-box" type="search" placeholder="write somthing.." />
+            <section className="pinned">pinned: </section>
+            <div className="note-list">{notes.map(note => <NotePreview onPinNote={onPinNote} onRemoveNote={onRemoveNote} key={note.id} note={note} />)}</div>
 
-        </section>
+
+        </React.Fragment>
 
     )
 }
