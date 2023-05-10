@@ -26,6 +26,7 @@ export function MailDetails() {
     }
     console.log(mail)
 
+    if (!mail) return <div>Loading...</div>
     return (
         <section className="email-deatils">
             <div className="email-details-tools"></div>

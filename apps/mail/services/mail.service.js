@@ -1,4 +1,3 @@
-import { func } from 'prop-types'
 import { asyncStorageService } from '../../../services/async-storage.service.js'
 import { storageService } from '../../../services/storage.service.js'
 import { utilService } from '../../../services/util.service.js'
@@ -43,7 +42,7 @@ const demoEmails = [
     },
 ]
 
-const loggedinUser = { email: 'user@appsus.com', fullname: 'Mahatma Appsus' }
+// const loggedinUser = { email: 'user@appsus.com', fullname: 'Mahatma Appsus' }
 
 _createEmails()
 
