@@ -4,6 +4,8 @@ export const asyncStorageService = {
     post,
     put,
     remove,
+    loadFromStorage,
+    saveToStorage,
 }
 
 function query(entityType, delay = 500) {
