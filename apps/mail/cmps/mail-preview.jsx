@@ -3,7 +3,7 @@ import { MailActions as MailActions } from './mail-actions.jsx'
 
 const { useState } = React
 
-export function MailPreview({ mail, onNavigate }) {
+export function MailPreview({ mail, onNavigate, onRemoveMail }) {
     const [isHovered, setIsHovered] = useState(false)
 
     const handleMouseEnter = () => {
@@ -23,7 +23,9 @@ export function MailPreview({ mail, onNavigate }) {
         >
             <td className="mail-subject">{mail.subject} </td>
             <td className="mail-body no-wrap">{mail.body}</td>
-            {isHovered && <MailActions />}
+            {isHovered && (
+                <MailActions onRemoveMail={onRemoveMail} mailId={mail.id} />
+            )}
             {!isHovered && (
                 <td className="mail-date">
                     {utilService.getTimeFromStamp(mail.sentAt)}

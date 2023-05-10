@@ -1,16 +1,34 @@
 import { MailPreview as MailPreview } from './mail-preview.jsx'
 import { mailService } from '../services/mail.service.js'
 
-// import { useNavigate } from 'react-router-dom'
 const { useNavigate } = ReactRouterDOM
-const { useState } = React
+const { useEffect, useState } = React
 
-export function MailList({ mails }) {
+export function MailList() {
     const navigate = useNavigate()
-    // const [mail, setMail] = useState(initialState)
+    const [mails, setMails] = useState([])
+
+    useEffect(() => {
+        loadMails()
+    }, [mails])
+
+    function loadMails() {
+        mailService.query().then((mails) => {
+            setMails(mails)
+        })
+    }
 
     function onNavigate(id) {
         navigate(`/mail/${id}`)
+    }
+
+    function onRemoveMail(ev, id) {
+        ev.stopPropagation()
+        if (confirm('Are you sure you wish to delete this email?')) {
+            mailService.remove(id).then(() => {
+                setMails(mails)
+            })
+        }
     }
 
     if (!mails || !mails.length)
@@ -27,6 +45,7 @@ export function MailList({ mails }) {
                         key={mail.id}
                         mail={mail}
                         onNavigate={onNavigate}
+                        onRemoveMail={onRemoveMail}
                     />
                 ))}
             </tbody>

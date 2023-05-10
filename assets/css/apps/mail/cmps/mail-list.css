@@ -1,5 +1,6 @@
 .mails-list-container {
     width: 100%;
+    margin-inline-start: 100px;
 }
 table {
     width: 100%;

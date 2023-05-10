@@ -5,6 +5,7 @@ import { utilService } from '../../../services/util.service.js'
 export const mailService = {
     query,
     get,
+    remove,
 }
 
 const EMAILS_STORAGE_KEY = 'emailsDB'
@@ -56,6 +57,10 @@ function get(id) {
     return asyncStorageService.get(EMAILS_STORAGE_KEY, id).then((mail) => {
         return mail
     })
+}
+
+function remove(id) {
+    return asyncStorageService.remove(EMAILS_STORAGE_KEY, id)
 }
 
 // private functions:
