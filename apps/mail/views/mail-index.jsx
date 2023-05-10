@@ -4,15 +4,24 @@ import { MailList } from '../cmps/mail-list.jsx'
 const { useEffect, useState } = React
 
 export function MailIndex() {
-    const [emails, setEmails] = useState([])
+    const [mails, setMails] = useState([])
 
     useEffect(() => {
-        mailService.test()
-    })
+        loadMails()
+    }, [])
+
+    function loadMails() {
+        mailService.query().then((mails) => {
+            setMails(mails)
+        })
+    }
 
     return (
-        <div className="emails-container">
-            <MailList />
-        </div>
+        <main className="mail-app ">
+            <aside className="mail-menu"></aside>
+            <div className="mails-list-container">
+                <MailList mails={mails} />
+            </div>
+        </main>
     )
 }
