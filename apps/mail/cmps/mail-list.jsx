@@ -1,4 +1,5 @@
 import { MailPreview as MailPreview } from './mail-preview.jsx'
+const { Link } = ReactRouterDOM
 
 export function MailList({ mails }) {
     if (!mails || !mails.length)
@@ -11,7 +12,9 @@ export function MailList({ mails }) {
         <table className="mail-list">
             <tbody>
                 {mails.map((mail) => (
-                    <MailPreview key={mail.id} mail={mail} />
+                    <Link to={`/mail/${mail.id}`}>
+                        <MailPreview key={mail.id} mail={mail} />
+                    </Link>
                 ))}
             </tbody>
         </table>

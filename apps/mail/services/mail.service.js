@@ -1,9 +1,11 @@
+import { func } from 'prop-types'
 import { asyncStorageService } from '../../../services/async-storage.service.js'
 import { storageService } from '../../../services/storage.service.js'
 import { utilService } from '../../../services/util.service.js'
 
 export const mailService = {
     query,
+    get,
 }
 
 const EMAILS_STORAGE_KEY = 'emailsDB'
@@ -48,6 +50,12 @@ _createEmails()
 function query() {
     return asyncStorageService.query(EMAILS_STORAGE_KEY).then((mails) => {
         return mails
+    })
+}
+
+function get(id) {
+    return asyncStorageService.get(EMAILS_STORAGE_KEY, id).then((mail) => {
+        return mail
     })
 }
 

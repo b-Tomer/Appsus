@@ -1,4 +1,5 @@
 import { utilService } from '../../../services/util.service.js'
+const { Link } = ReactRouterDOM
 
 export function MailPreview({ mail }) {
     return (
