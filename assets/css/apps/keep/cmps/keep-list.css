@@ -1,5 +1,11 @@
  /* note list */
 
+ .keep-content{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+ }
+
  .note-list {
      margin-top: 30px;
      display: flex;
@@ -34,6 +40,7 @@
     .card:hover .options-container{
         /* transform: translateY(0); */
         opacity: 1;
+      
 
  }
 

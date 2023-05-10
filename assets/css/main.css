@@ -13,12 +13,14 @@
 /* Views */
 @import './views/home.css';
 
+/* Keep */
 @import './apps/keep/views/keep-index.css';
 @import './apps/keep/basics-keep/forms.css';
 @import './apps/keep/cmps/app-header.css';
 @import './apps/keep/cmps/keep-list.css';
 @import './apps/keep/cmps/app-footer.css';
 @import './apps/keep/cmps/user-msg.css';
+@import './apps/keep/cmps/add-note.css';
 
 /* Cmps */
 

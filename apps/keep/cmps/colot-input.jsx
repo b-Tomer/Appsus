@@ -1,6 +1,6 @@
 
 export function ColorInput({ name, onSetCardStyle }) {
-    const colors = ['#B4FF9F', '#F9FFA4', '#FFD59E', '#FFA1A1']
+    const colors = ['#B4FF9F', '#F9FFA4', '#FFD59E', '#FFA1A1' , '#ffffff']
 
     function onChooseColor(color) {
         const newStyle= { backgroundColor: color }
