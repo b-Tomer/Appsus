@@ -19,11 +19,10 @@
 @import './apps/keep/cmps/app-footer.css';
 @import './apps/keep/cmps/user-msg.css';
 
-/* @import './apps/mail/views/mail-index.css'; */
-
 /* Cmps */
 
 @import './cmps/user-msg.css';
 @import './cmps/app-header.css';
 
-/* @import './apps/mail/cmps/mail-list.css'; */
+@import './apps/mail/views/mail-index.css';
+@import './apps/mail/cmps/mail-list.css';

@@ -1,1 +1,21 @@
- /* mail list */
+.mails-list-container {
+    width: 100%;
+}
+table {
+    width: 100%;
+}
+
+.mail-preview {
+}
+
+.mail-subject {
+    flex-basis: 10%;
+}
+
+.mail-body {
+    flex-basis: 80%;
+}
+
+.mail-date {
+    flex-basis: 10%;
+}

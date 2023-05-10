@@ -3,7 +3,7 @@ import { storageService } from '../../../services/storage.service.js'
 import { utilService } from '../../../services/util.service.js'
 
 export const mailService = {
-    test,
+    query,
 }
 
 const EMAILS_STORAGE_KEY = 'emailsDB'
@@ -29,15 +29,26 @@ const demoEmails = [
         from: 'muki@muki.com',
         to: 'user@appsus.com',
     },
+    {
+        id: utilService.makeId(),
+        subject: 'some mail',
+        body: 'Would love to catch up sometimes flsdlifsdlif sdfsdfsdf sdfsdfsdf sdfsdfs dfsdfsdf sdfsdf',
+        isRead: true,
+        sentAt: Date.now(),
+        removedAt: null,
+        from: 'muki@muki.com',
+        to: 'user@appsus.com',
+    },
 ]
 
 const loggedinUser = { email: 'user@appsus.com', fullname: 'Mahatma Appsus' }
 
 _createEmails()
 
-function test() {
-    // console.log('bla')
-    return 'bla'
+function query() {
+    return asyncStorageService.query(EMAILS_STORAGE_KEY).then((mails) => {
+        return mails
+    })
 }
 
 // private functions:
