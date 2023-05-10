@@ -2,17 +2,22 @@
 
 @import './setup/variables.css';
 @import './setup/typography.css';
+@import './apps/keep/basics-keep/vars.css';
 
 /* Basics */
 
 @import './basics/base.css';
 @import './basics/helpers.css';
-/* @import './basics/layout.css'; */
+@import './basics/layout.css';
 
 /* Views */
 @import './views/home.css';
 
-/* @import './apps/note/views/note-index.css'; */
+@import './apps/keep/views/keep-index.css';
+@import './apps/keep/basics-keep/forms.css';
+@import './apps/keep/cmps/app-header.css';
+@import './apps/keep/cmps/app-footer.css';
+@import './apps/keep/cmps/user-msg.css';
 
 /* @import './apps/mail/views/mail-index.css'; */
 
