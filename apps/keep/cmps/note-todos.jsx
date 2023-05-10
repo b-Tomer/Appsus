@@ -4,15 +4,17 @@ console.log(note);
     return(
         <div className="card todos-note">
            <h5>{note.info.title}</h5>
-           <ul>
-            {note.info.todos.map(todo => <li>todo.txt </li>
-            
-            // <input type="checkbox" id="todo" name="todo" checked>
-            // <label for="todo">todo.txt</label>
-
+           
+            {note.info.todos.map(todo => <React.Fragment>
+                <span>
+            <input type="checkbox" id="todo" name="todo" />
+            <label for="todo">{todo.txt}</label>
+                </span>
+          
+            </React.Fragment> 
 
             )}
-           </ul>
+           
         </div>
     )
 }
