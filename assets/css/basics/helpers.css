@@ -29,3 +29,9 @@
     margin: 0;
     list-style-type: none;
 }
+
+.no-wrap {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
