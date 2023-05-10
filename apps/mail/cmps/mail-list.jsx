@@ -1,7 +1,18 @@
 import { MailPreview as MailPreview } from './mail-preview.jsx'
-const { Link } = ReactRouterDOM
+import { mailService } from '../services/mail.service.js'
+
+// import { useNavigate } from 'react-router-dom'
+const { useNavigate } = ReactRouterDOM
+const { useState } = React
 
 export function MailList({ mails }) {
+    const navigate = useNavigate()
+    // const [mail, setMail] = useState(initialState)
+
+    function onNavigate(id) {
+        navigate(`/mail/${id}`)
+    }
+
     if (!mails || !mails.length)
         return (
             <React.Fragment>
@@ -12,9 +23,11 @@ export function MailList({ mails }) {
         <table className="mail-list">
             <tbody>
                 {mails.map((mail) => (
-                    <Link to={`/mail/${mail.id}`}>
-                        <MailPreview key={mail.id} mail={mail} />
-                    </Link>
+                    <MailPreview
+                        key={mail.id}
+                        mail={mail}
+                        onNavigate={onNavigate}
+                    />
                 ))}
             </tbody>
         </table>

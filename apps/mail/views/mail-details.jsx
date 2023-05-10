@@ -24,7 +24,6 @@ export function MailDetails() {
     function onBack() {
         navigate('/book')
     }
-    console.log(mail)
 
     if (!mail) return <div>Loading...</div>
     return (
