@@ -36,7 +36,7 @@ const loggedinUser = { email: 'user@appsus.com', fullname: 'Mahatma Appsus' }
 _createEmails()
 
 function test() {
-    console.log('bla')
+    // console.log('bla')
     return 'bla'
 }
 
