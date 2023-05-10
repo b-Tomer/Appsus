@@ -18,7 +18,7 @@
      border-radius: 0.5em;
      max-width: 250px;
      padding: 10px;
-     padding-bottom: 40px;
+     padding-bottom: 55px;
      height: max-content;
      /* break-inside: avoid; */
  }
@@ -38,3 +38,29 @@
  }
 
  .options-btn {}
+
+
+ .colors-container {
+    /* background-color: var(--clr1bg-light); */
+    padding-left: 20px;
+    display: flex;
+    gap: 10px;
+    position: absolute;
+    /* z-index: -1; */
+    
+    transform: translateY(-268%);
+    transition: 0.6s;
+}
+
+.color-item {
+    /* background-color: var(--clr2bg); */
+    padding: 5px;
+    min-height: 20px;
+    min-width: 20px;
+    cursor: pointer;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    border: 0.5px solid var(--clr3);
+}
+

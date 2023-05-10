@@ -5,18 +5,28 @@ import { OptionsBtns } from "./apps/keep/cmps/options-btns.jsx";
 
 const { useEffect, useState } = React
 
-
 export function NotePreview({ note, onRemoveNote, onPinNote }) {
     const [cmpType, setCmpType] = useState('')
+    const [cardStyle , setCardStyle] = useState({
+        backgroundColor: '',
+    })
+
     useEffect(() => {
         setCmpType(note.type)
         // console.log(note.type);
     }, [])
 // console.log(onRemoveNote);
-    return (
+
+
+function onSetCardStyle(newStyle) {
+    setCardStyle((prevStyle) => ({ ...prevStyle, ...newStyle }))
+}
+
+
+return (
         <div>
-            <DynamicCmp cmpType={cmpType} name="tomer" note={note} />
-            <OptionsBtns onPinNote={onPinNote} onRemoveNote={onRemoveNote} note={note} />
+            <DynamicCmp cmpType={cmpType} name="tomer" note={note} cardStyle={cardStyle} />
+            <OptionsBtns onPinNote={onPinNote} onSetCardStyle={onSetCardStyle} onRemoveNote={onRemoveNote} note={note} />
         </div>
     )
 }

@@ -16,12 +16,14 @@ export function KeepIndex() {
 
   const [notes, setNotes] = useState([])
 
+  const pinnedNotes = notes.filter(note => note.isPinned);
+  const unpinnedNotes = notes.filter(note => !note.isPinned);
   // const [filterBy, setFilterBy] = useState(bookService.getDefaultFilter())
   //
   useEffect(() => {
     loadNotes()
     // showSuccessMsg('Welcome to the Keeper!')
-  }, []);
+  }, [pinnedNotes]);
 
   function loadNotes() {
     keepService.query().then((notes) => setNotes(notes))
@@ -55,7 +57,7 @@ export function KeepIndex() {
       <KeepHeader />
       <main>
 
-        <NoteList onRemoveNote={onRemoveNote} onPinNote={onPinNote} notes={notes} />
+        <NoteList pinnedNotes={pinnedNotes} unpinnedNotes={unpinnedNotes} onRemoveNote={onRemoveNote} onPinNote={onPinNote} notes={notes} />
 
       </main>
       {/* <UserMsg /> */}

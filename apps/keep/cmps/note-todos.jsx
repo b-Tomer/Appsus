@@ -1,10 +1,10 @@
 
 
-export function NoteTodos({ note }) {
+export function NoteTodos({ note , cardStyle }) {
     // console.log(note);
 
     return (
-        <div key={note.id} className="card todos-note">
+        <div key={note.id} style={cardStyle} className="card todos-note">
             <h5>{note.info.title}</h5>
 
             {note.info.todos.map(todo =>
