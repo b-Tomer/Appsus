@@ -75,7 +75,3 @@ function _makeId(length = 5) {
     }
     return text
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> dc111f1f3eb7c3b7e1064e12293579a6b4290240
