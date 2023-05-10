@@ -1,9 +1,16 @@
+import { NoteTodos } from "./apps/keep/cmps/note-todos.jsx";
+import { NoteTxt } from "./apps/keep/cmps/note-txt.jsx";
+import { NoteImg } from "./apps/keep/cmps/notw-img.jsx";
+
 const { useEffect, useState } = React
 
 
 export function NotePreview({ note }) {
     const [cmpType, setCmpType] = useState('')
-
+useEffect(()=>{
+        setCmpType(note.type)  
+        console.log(note.type); 
+    },[])
 
     return (
         <section>
@@ -15,11 +22,11 @@ export function NotePreview({ note }) {
 
 function DynamicCmp(props) {
     switch (props.cmpType) {
-        case 'txt':
+        case 'NoteTxt':
             return <NoteTxt {...props} />
-        case 'todos':
+        case 'NoteTodos':
             return <NoteTodos {...props} />
-        case 'img':
+        case 'NoteImg':
             return <NoteImg {...props} />
     }
 }
