@@ -20,6 +20,9 @@ export function MailList() {
 
     function onNavigate(id) {
         navigate(`/mail/${id}`)
+        mailService.setRead(id).then(() => {
+            setMails(mails)
+        })
     }
 
     function onRemoveMail(ev, id) {
@@ -29,6 +32,13 @@ export function MailList() {
                 setMails(mails)
             })
         }
+    }
+
+    function onMarkUnread(ev, id) {
+        ev.stopPropagation()
+        mailService.setUnread(id).then(() => {
+            setMails(mails)
+        })
     }
 
     if (!mails || !mails.length)
@@ -46,6 +56,7 @@ export function MailList() {
                         mail={mail}
                         onNavigate={onNavigate}
                         onRemoveMail={onRemoveMail}
+                        onMarkUnread={onMarkUnread}
                     />
                 ))}
             </tbody>

@@ -6,6 +6,8 @@ export const mailService = {
     query,
     get,
     remove,
+    setUnread,
+    setRead,
 }
 
 const EMAILS_STORAGE_KEY = 'emailsDB'
@@ -61,6 +63,28 @@ function get(id) {
 
 function remove(id) {
     return asyncStorageService.remove(EMAILS_STORAGE_KEY, id)
+}
+
+function setUnread(id) {
+    asyncStorageService.get(EMAILS_STORAGE_KEY, id).then((mail) => {
+        mail.isRead = false
+        return asyncStorageService
+            .put(EMAILS_STORAGE_KEY, mail)
+            .then((mail) => {
+                return mail
+            })
+    })
+}
+
+function setRead(id) {
+    asyncStorageService.get(EMAILS_STORAGE_KEY, id).then((mail) => {
+        mail.isRead = true
+        return asyncStorageService
+            .put(EMAILS_STORAGE_KEY, mail)
+            .then((mail) => {
+                return mail
+            })
+    })
 }
 
 // private functions:

@@ -3,7 +3,7 @@ import { MailActions as MailActions } from './mail-actions.jsx'
 
 const { useState } = React
 
-export function MailPreview({ mail, onNavigate, onRemoveMail }) {
+export function MailPreview({ mail, onNavigate, onRemoveMail, onMarkUnread }) {
     const [isHovered, setIsHovered] = useState(false)
 
     const handleMouseEnter = () => {
@@ -16,7 +16,11 @@ export function MailPreview({ mail, onNavigate, onRemoveMail }) {
 
     return (
         <tr
-            className="mail-preview flex"
+            className={
+                mail.isRead
+                    ? 'read mail-preview flex"'
+                    : 'unread mail-preview flex"'
+            }
             onClick={() => onNavigate(mail.id)}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
@@ -24,7 +28,11 @@ export function MailPreview({ mail, onNavigate, onRemoveMail }) {
             <td className="mail-subject">{mail.subject} </td>
             <td className="mail-body no-wrap">{mail.body}</td>
             {isHovered && (
-                <MailActions onRemoveMail={onRemoveMail} mailId={mail.id} />
+                <MailActions
+                    onRemoveMail={onRemoveMail}
+                    onMarkUnread={onMarkUnread}
+                    mailId={mail.id}
+                />
             )}
             {!isHovered && (
                 <td className="mail-date">

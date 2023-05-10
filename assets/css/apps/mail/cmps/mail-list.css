@@ -5,6 +5,7 @@
 table {
     width: 100%;
     table-layout: fixed;
+    background-color: var(--unshown-mail-bg-color);
 }
 
 .mail-preview {
@@ -12,6 +13,7 @@ table {
     height: 100%;
     display: flex;
     padding-block: 0.5rem;
+    border-block-end: 1px lightgray solid;
 }
 
 .mail-preview img {
@@ -41,7 +43,6 @@ table {
     white-space: nowrap;
     min-width: 100px;
     margin-inline-end: 50px;
-    font-family: roboto-bold;
 }
 
 .mail-body {
@@ -51,4 +52,14 @@ table {
 .mail-date {
     white-space: nowrap;
     width: auto;
+}
+
+.unread {
+    font-family: roboto-bold;
+    background-color: var(--unshown-mail-bg-color);
+}
+
+.read {
+    font-family: roboto;
+    background-color: var(--shown-mail-bg-color);
 }
