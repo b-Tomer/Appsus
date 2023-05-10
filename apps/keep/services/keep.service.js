@@ -41,8 +41,8 @@ const gNotes = [
         info: {
             title: 'Get my stuff together',
             todos: [
-                { txt: 'Driving license', doneAt: null },
-                { txt: 'Coding power', doneAt: 187111111 }
+                { txt: 'Driving license', id: utilService.makeId() , doneAt: null },
+                { txt: 'Coding power', id: utilService.makeId() , doneAt: 187111111 }
             ]
         }
     }
@@ -55,6 +55,7 @@ _createNotes()
 export const keepService = {
     query,
     get,
+    put,
     remove,
     save,
     getEmptyNote,
@@ -81,6 +82,11 @@ function query(/*filterBy = {}*/) {
 
 function get(noteId) {
     return asyncStorageService.get(KEEP_KEY, noteId)
+    // return axios.get(KEEP_KEY, noteId)
+}
+
+function put(updatedNote) {
+    return asyncStorageService.put(KEEP_KEY, updatedNote)
     // return axios.get(KEEP_KEY, noteId)
 }
 
