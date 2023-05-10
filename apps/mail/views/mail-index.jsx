@@ -1,26 +1,15 @@
-import { mailService } from '../services/mail.service.js'
+// import { mailService } from '../services/mail.service.js'
 import { MailList } from '../cmps/mail-list.jsx'
-
-const { useEffect, useState } = React
+import { MailMenu } from '../cmps/mail-menu.jsx'
 
 export function MailIndex() {
-    const [mails, setMails] = useState([])
-
-    useEffect(() => {
-        loadMails()
-    }, [])
-
-    function loadMails() {
-        mailService.query().then((mails) => {
-            setMails(mails)
-        })
-    }
-
     return (
         <main className="mail-app ">
-            <aside className="mail-menu"></aside>
+            <aside className="mail-menu-container">
+                <MailMenu />
+            </aside>
             <div className="mails-list-container">
-                <MailList mails={mails} />
+                <MailList />
             </div>
         </main>
     )
