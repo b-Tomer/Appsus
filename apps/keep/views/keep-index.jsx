@@ -55,7 +55,7 @@ export function KeepIndex() {
 
     <section className="note-inedx app main-layout ">
       <KeepHeader />
-      <main>
+      <main className="keep-content">
 
         <NoteList pinnedNotes={pinnedNotes} unpinnedNotes={unpinnedNotes} onRemoveNote={onRemoveNote} onPinNote={onPinNote} notes={notes} />
 

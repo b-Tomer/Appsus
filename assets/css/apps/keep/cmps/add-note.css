@@ -1,0 +1,25 @@
+
+.add-container{
+    
+display: flex;
+justify-content: center;  
+width: 100%;  
+
+}
+
+.add-box{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border: 0;
+    box-shadow: rgba(0, 0, 0, 0.38) 0px 3px 6px;
+    border-radius: 0.5em; 
+    padding: 10px;
+    width: 100%;
+    min-width: 350px;
+    max-width: 500px;
+    height: 45px;
+    font-weight: 500;
+    font-size: 1.2em;
+    align-self: center;
+
+}

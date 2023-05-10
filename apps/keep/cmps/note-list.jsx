@@ -12,15 +12,18 @@ export function NoteList({ pinnedNotes, unpinnedNotes, onRemoveNote, onPinNote }
         // console.log(val);
     }
 
+    let pinnedTxt = (pinnedNotes.length > 0) ? 'Pinned: ' : ''
+
 
 
     return (
 
         <React.Fragment>
+            {/* <section className="add-container"> */}
+            <input className="add-box" type="search" placeholder="write somthing.." />
+            {/* </section> */}
 
-            <input className="card add-box" type="search" placeholder="write somthing.." />
-
-            <section className="pinned"><h6>Pinned:</h6>
+            <section className="pinned"><h6>{pinnedTxt}</h6>
                 <div className="note-list">{pinnedNotes.map(note =>
                     <NotePreview onPinNote={onPinNote} onRemoveNote={onRemoveNote} key={note.id} note={note} />
                 )}</div>
