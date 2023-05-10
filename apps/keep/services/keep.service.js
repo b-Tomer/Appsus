@@ -27,7 +27,7 @@ const gNotes = [
         type: 'NoteImg',
         isPinned: false,
         info: {
-            url: 'http://some-img/me',
+            url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyL5cIeywWrjdsTywCSa_cyT5XqphMQXWL3g&usqp=CAU',
             title: 'Bobi and Me'
         },
         style: {
