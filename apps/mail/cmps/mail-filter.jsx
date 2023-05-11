@@ -2,6 +2,12 @@ import { mailService } from '../services/mail.service.js'
 const { useState, useEffect } = React
 
 export function MailFilter() {
+    // const [filterBy, setFilterBy] = useState(filterBy)
+
+    // useEffect(() => {
+    //     onSetFilter(filterByToEdit)
+    // }, [filterByToEdit])
+
     return (
         <section className="mail-filter">
             <form>

@@ -16,32 +16,32 @@ export function MailMenu() {
                     onToggleCompose(event)
                 }}
             >
-                <img src="../../../assets/icons/compose.svg" alt="" />
+                <img src="./assets/icons/compose.svg" alt="" />
             </button>
             <ul className="mail-categories clean-list">
                 <li>
                     <button className="mail-inbox">
-                        <img src="../../../assets/icons/inbox.png" alt="" />
+                        <img src="./assets/icons/inbox.png" alt="" />
                     </button>
                 </li>
                 <li>
                     <button className="mail-star">
-                        <img src="../../../assets/icons/star.png" alt="" />
+                        <img src="./assets/icons/star.png" alt="" />
                     </button>
                 </li>
                 <li>
                     <button className="mail-sent">
-                        <img src="../../../assets/icons/send.png" alt="" />
+                        <img src="./assets/icons/send.png" alt="" />
                     </button>
                 </li>
                 <li>
                     <button className="mail-draft">
-                        <img src="../../../assets/icons/draft.png" alt="" />
+                        <img src="./assets/icons/draft.png" alt="" />
                     </button>
                 </li>
                 <li>
                     <button className="mail-trash">
-                        <img src="../../../assets/icons/delete.png" alt="" />
+                        <img src="./assets/icons/delete.png" alt="" />
                     </button>
                 </li>
             </ul>

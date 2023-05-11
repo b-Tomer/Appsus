@@ -30,7 +30,7 @@ export function MailCompose() {
                         Send
                     </button>
                     <button className="form-trash-btn">
-                        <img src="../../../assets/icons/delete.png" alt="" />
+                        <img src="./assets/icons/delete.png" alt="" />
                     </button>
                 </div>
             </form>

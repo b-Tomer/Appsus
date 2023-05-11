@@ -45,7 +45,7 @@ const demoEmails = [
     },
 ]
 
-// const loggedinUser = { email: 'user@appsus.com', fullname: 'Mahatma Appsus' }
+const loggedinUser = { email: 'user@appsus.com', fullname: 'Mahatma Appsus' }
 
 _createEmails()
 
