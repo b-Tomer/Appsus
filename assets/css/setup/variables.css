@@ -2,7 +2,9 @@
     --main-bg-color: lightblue;
     --shown-mail-bg-color: #f2f6fc;
     --unshown-mail-bg-color: #ffffff;
-    --mail-side-menu: #eeeeee;
+    --mail-side-menu: #f6f8fc;
     --shadow-color: #c1c1c1;
     --compose-mail-bg-color: #c2e7ff;
+    --selected-color: #d3e3fd;
+    --hover-color: #2021240d;
 }
