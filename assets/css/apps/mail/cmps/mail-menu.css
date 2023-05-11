@@ -16,16 +16,34 @@
 }
 
 .mail-categories {
+    width: 100%;
     display: flex;
     flex-direction: column;
 }
 
 .mail-categories button {
     width: 80%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 50px;
+    margin-inline-start: 25px;
 }
 
-.mail-categories button:hover {
+.mail-categories li:hover {
     background-color: darkgray;
+    /* cursor: pointer; */
+}
+
+.mail-categories li:hover button {
+    width: 100%;
+    margin: 0;
+}
+.mail-categories li:hover img {
+    width: 40px;
+    height: 40px;
 }
 
 .compose-mail {
@@ -38,6 +56,7 @@
     height: 70px;
     width: 70px;
     margin-block-end: 50px;
+    margin-block-start: 10px;
 }
 
 .compose-mail:hover {
@@ -46,7 +65,7 @@
 }
 
 .compose-mail img {
-    width: 50px;
+    width: auto;
 }
 
 .mail-menu-container:hover {
@@ -60,6 +79,33 @@
     font-size: 1rem;
     font-family: roboto-bold;
     margin-inline-start: 5px;
+}
+
+.mail-menu-container:hover .mail-categories button::after {
+    content: '';
+    font-size: 1rem;
+    font-family: roboto-bold;
+    margin-inline-start: 10px;
+}
+
+.mail-menu-container:hover .mail-categories .mail-inbox::after {
+    content: 'Inbox';
+}
+
+.mail-menu-container:hover .mail-categories .mail-star::after {
+    content: 'Starred';
+}
+
+.mail-menu-container:hover .mail-categories .mail-sent::after {
+    content: 'Sent';
+}
+
+.mail-menu-container:hover .mail-categories .mail-draft::after {
+    content: 'Draft';
+}
+
+.mail-menu-container:hover .mail-categories .mail-trash::after {
+    content: 'Trash';
 }
 
 .mail-menu-container:hover .compose-mail {

@@ -1,3 +1,16 @@
 .mail-app {
     display: flex;
 }
+
+button {
+    cursor: pointer;
+    background: transparent;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    border-radius: 0;
+}
+
+button:hover {
+    background-color: transparent;
+}
