@@ -25,7 +25,7 @@ function onSetCardStyle(newStyle) {
 
 
 return (
-        <div>
+        <div className="card-container">
             <DynamicCmp cmpType={cmpType} name="tomer" note={note} cardStyle={cardStyle} />
             <OptionsBtns onPinNote={onPinNote} onDuplicateNote={onDuplicateNote} onSetCardStyle={onSetCardStyle} onRemoveNote={onRemoveNote} note={note} />
         </div>

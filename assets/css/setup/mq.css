@@ -3,6 +3,10 @@
     .note-list {
         column-count: 1;
     }
+    .card-container {
+        padding-left: 20%;   
+    }
+   
 }
 @media (min-width: 570px) {
     .note-list {
