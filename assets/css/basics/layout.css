@@ -1,6 +1,7 @@
 .main-layout {
   display: grid;
   grid-template-columns: 1.6rem 1fr 1.6rem;
+  /* grid-template-rows: ; */
 }
 
 .main-layout>* {

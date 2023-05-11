@@ -21,14 +21,16 @@ function get(entityType, entityId) {
         return entity
     })
 }
-
+//***changed to use the same ID */
 function post(entityType, newEntity) {
     newEntity = { ...newEntity }
-    newEntity.id = _makeId()
+    newEntity.id = newEntity.id
     return query(entityType).then((entities) => {
         entities.push(newEntity)
         _save(entityType, entities)
+        // console.log('newEntity from asyncStorage: ', newEntity )
         return newEntity
+
     })
 }
 
@@ -39,7 +41,7 @@ function put(entityType, updatedEntity) {
         )
         if (idx < 0)
             throw new Error(
-                `Update failed, cannot find entity with id: ${entityId} in: ${entityType}`
+                `Update failed, cannot find entity with `
             )
         entities.splice(idx, 1, updatedEntity)
         _save(entityType, entities)
