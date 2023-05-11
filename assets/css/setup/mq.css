@@ -1,0 +1,26 @@
+
+@media (max-width: 570px) {
+    .note-list {
+        column-count: 1;
+    }
+    .card-container {
+        padding-left: 20%;   
+    }
+   
+}
+@media (min-width: 570px) {
+    .note-list {
+        column-count: 2;
+    }
+}
+
+@media (min-width: 840px) {
+    .note-list {
+        column-count: 3;
+    }
+}
+@media (min-width: 920px) {
+    .note-list {
+        column-count: 4;
+    }
+}

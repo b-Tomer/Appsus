@@ -1,11 +1,12 @@
 
 
-export function NoteTodos({ note , cardStyle }) {
-    // console.log(note);
+export function NoteTodos({ note, cardStyle }) {
+
+    const background = (cardStyle.backgroundColor) ? cardStyle : note.style
 
     return (
-        <div key={note.id} style={cardStyle} className="card todos-note">
-            <h5>{note.info.title}</h5>
+        <div key={note.id} style={background } className="card todos-note">
+            <h5 className="note-title">{note.info.title}</h5>
 
             {note.info.todos.map(todo =>
                 <div key={todo.id}>
@@ -15,7 +16,7 @@ export function NoteTodos({ note , cardStyle }) {
 
                 </div>
             )}
-          
+
         </div>
     )
 }

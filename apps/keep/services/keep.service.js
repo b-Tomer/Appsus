@@ -10,42 +10,98 @@ const KEEP_KEY = 'keepDB'
 
 
 const gNotes = [
+
     {
-        id: 'n101',
+        id: utilService.makeId(),
+        type: 'NoteTodos',
+        isPinned: false,
+        info: {
+            title: 'Get my shit together',
+            todos: [
+                { txt: 'Style the app', id: utilService.makeId() , doneAt: null },
+                { txt: 'Go to see a waterfall', id: utilService.makeId() , doneAt: 187111111 },
+                { txt: 'Go to the gym', id: utilService.makeId() , doneAt: null }
+            ]
+        }
+    },
+    {
+        id: utilService.makeId(),
+        type: 'NoteImg',
+        isPinned: false,
+        info: {
+            url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyL5cIeywWrjdsTywCSa_cyT5XqphMQXWL3g&usqp=CAU',
+            title: 'Eyal and Me'
+        },
+        style: {
+            backgroundColor: '#FFA1A1'
+        }
+    },
+    {
+        id: utilService.makeId(),
         createdAt: 1112222,
         type: 'NoteTxt',
-        isPinned: true,
+        isPinned: false,
         style: {
-            backgroundColor: '#00d'
+            backgroundColor: '#F9FFA4'
         },
         info: {
             txt: 'Fullstack Me Baby!'
         }
     },
     {
-        id: 'n102',
-        type: 'NoteImg',
-        isPinned: false,
+        id: utilService.makeId(),
+        type: 'NoteVideo',
+        isPinned: true,
         info: {
-            url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyL5cIeywWrjdsTywCSa_cyT5XqphMQXWL3g&usqp=CAU',
-            title: 'Bobi and Me'
+            url: 'https://www.youtube.com/embed/DtJzr1Wcy_s',
+            title: 'Nina Simon'
         },
         style: {
-            backgroundColor: '#00d'
+            backgroundColor: ''
+        }
+    },
+
+    {
+        id: utilService.makeId(),
+        type: 'NoteTodos',
+        isPinned: true,
+        info: {
+            title: 'Shoping list:',
+            todos: [
+                { txt: 'גמבות לדג', id: utilService.makeId() , doneAt: null },
+                { txt: 'פלפל חריף', id: utilService.makeId() , doneAt: 187121111 }
+            ]
+        },
+        style: {
+            backgroundColor: '#FFD59E'
         }
     },
     {
-        id: 'n103',
-        type: 'NoteTodos',
+        id: utilService.makeId(),
+        type: 'NoteImg',
+        isPinned: true,
+        info: {
+            url: 'https://images.unsplash.com/photo-1511884642898-4c92249e20b6?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=1080&ixid=MnwxfDB8MXxyYW5kb218MHx8d2FsbHBhcGVyLGxhbmRzY2FwZXx8fHx8fDE2ODM4MjAxMTY&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1920',
+            title: 'Nice view'
+        },
+        style: {
+            backgroundColor: ''
+        }
+    },
+
+    {
+        id: utilService.makeId(),
+        type: 'NoteVideo',
         isPinned: false,
         info: {
-            title: 'Get my stuff together',
-            todos: [
-                { txt: 'Driving license', id: utilService.makeId() , doneAt: null },
-                { txt: 'Coding power', id: utilService.makeId() , doneAt: 187111111 }
-            ]
+            url: 'https://www.youtube.com/embed/GnO7AEX3tJY',
+            title: 'Gaza'
+        },
+        style: {
+            backgroundColor: ''
         }
-    }
+    },
+
 ]
 
 
@@ -95,25 +151,28 @@ function remove(noteId) {
 }
 
 function save(note) {
-    if (note.id) {
-        return asyncStorageService.put(KEEP_KEY, note)
-    } else {
+    console.log('note.id: ', note.id )
+    // if (note.id) {
+    //     return asyncStorageService.put(KEEP_KEY, note)
+    // } else {
+       
+        console.log('note from saved: ', note )
         return asyncStorageService.post(KEEP_KEY, note)
-    }
+    // }
 }
 
-function getEmptyNote(title, txt) {
+function getEmptyNote() {
     return {
         id: utilService.makeId(),
-        title: title,
+        title: '',
         createdAt: Date.now(),
         type: 'NoteTxt',
-        isPinned: true,
+        isPinned: false,
         style: {
             backgroundColor: '#00d'
         },
         info: {
-            txt: txt
+            txt: ''
         }
     }
 

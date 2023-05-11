@@ -3,7 +3,7 @@ import { ColorInput } from "./colot-input.jsx"
 const { useEffect, useState } = React
 
 
-export function OptionsBtns({ onRemoveNote, onPinNote, note , onSetCardStyle }) {
+export function OptionsBtns({ onRemoveNote, onPinNote, note , onSetCardStyle ,onDuplicateNote}) {
 
   const [isChangeColor, setIsChangeColor] = useState(false)
 
@@ -17,7 +17,7 @@ export function OptionsBtns({ onRemoveNote, onPinNote, note , onSetCardStyle }) 
     return (
 
         <section className=" options-container">
-            <button className="btn options-btn"><i className="fa-regular fa-copy"></i></button>
+            <button onClick={()=>onDuplicateNote(note)} className="btn options-btn"><i className="fa-regular fa-copy"></i></button>
             <button onClick={() => onPinNote(note.id)} className="btn options-btn"><i className="fa-solid fa-thumbtack"></i></button>
             <button className="btn options-btn"><i className="fa-solid fa-envelope"></i></button>
             <button onClick={()=> setIsChangeColor(!isChangeColor)} className="btn options-btn"><i className="fa-solid fa-palette"></i></button>
