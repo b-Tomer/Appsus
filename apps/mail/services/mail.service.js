@@ -10,6 +10,7 @@ export const mailService = {
     setUnread,
     setRead,
     getDefaultFilter,
+    getDefaultSort,
 }
 
 const EMAILS_STORAGE_KEY = 'emailsDB'
@@ -51,10 +52,14 @@ const loggedinUser = { email: 'user@appsus.com', fullname: 'Mahatma Appsus' }
 
 _createEmails()
 
-function query(filterBy = {}) {
+function query(filterBy = {}, sortBy = {}) {
     return asyncStorageService.query(EMAILS_STORAGE_KEY).then((mails) => {
-        if (filterBy.readFilter === 'All mails') {
-            return mails
+        // if (filterBy.readFilter === 'All mails' || filterBy.readFilter === '') {
+        //     return mails
+        // }
+        if (filterBy.searchFilter) {
+            const regExp = new RegExp(filterBy.searchFilter, 'i')
+            mails = mails.filter((mail) => regExp.test(mail.subject))
         }
         if (filterBy.readFilter === 'Read') {
             mails = mails.filter((mail) => mail.isRead)
@@ -62,6 +67,8 @@ function query(filterBy = {}) {
         if (filterBy.readFilter === 'Unread') {
             mails = mails.filter((mail) => !mail.isRead)
         }
+        if (sortBy.sortByDate) mails = _sortMails(mails, 'sortByDate')
+        else mails = _sortMails(mails, 'sortBySubject')
         return mails
     })
 }
@@ -107,6 +114,10 @@ function getDefaultFilter() {
     return { readFilter: 'All mails' }
 }
 
+function getDefaultSort() {
+    return { sortByDate: true, sortBySubject: false }
+}
+
 // private functions:
 
 function _createEmails() {
@@ -128,4 +139,18 @@ function _createEmail({ toUser, subject, body }) {
     mail.from = loggedinUser.email
     mail.to = toUser
     return mail
+}
+
+function _sortMails(mails, sortBy) {
+    if (sortBy === 'sortByDate') {
+        const newMail = mails.sort(
+            (mailA, mailB) => mailB.sentAt - mailA.sentAt
+        )
+
+        return newMail
+    } else if (sortBy === 'sortBySubject') {
+        return mails.sort((mailA, mailB) =>
+            mailA.subject.localeCompare(mailB.subject)
+        )
+    }
 }

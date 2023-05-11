@@ -7,11 +7,23 @@ table {
     width: 100%;
     table-layout: fixed;
     background-color: var(--unshown-mail-bg-color);
+    padding-inline: 5px;
 }
 
 .mail-filter {
+    display: flex;
+    justify-content: start;
     margin-block: 10px;
     margin-inline-start: 20px;
+}
+
+.mail-filter > * {
+    margin-inline-end: 20px;
+    font-size: 1rem;
+}
+
+.mail-filter button {
+    border-radius: 10px;
 }
 
 .mail-preview {
