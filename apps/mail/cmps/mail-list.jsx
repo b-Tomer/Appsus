@@ -5,70 +5,110 @@ import { mailService } from '../services/mail.service.js'
 const { useNavigate } = ReactRouterDOM
 const { useEffect, useState } = React
 
-export function MailList({ onSetFilter, filterBy, onSetSortBy, sortBy }) {
+export function MailList({ onSetFilter, filterBy, isCompose }) {
     const navigate = useNavigate()
     const [mails, setMails] = useState([])
+    const [sortBy, setSortBy] = useState(mailService.getDefaultSort())
+
+    function onSetSortBy(sortBy) {
+        setSortBy((prevSortBy) => ({ ...prevSortBy, ...sortBy }))
+    }
 
     useEffect(() => {
         loadMails()
-    }, [mails, filterBy, sortBy])
+    }, [filterBy, sortBy, isCompose])
 
     function loadMails() {
-        mailService.query(filterBy).then((mails) => {
-            setMails(mails)
-        })
+        console.log('rndring')
+        mailService
+            .query(filterBy, sortBy)
+            .then((mails) => {
+                setMails(mails)
+            })
+            .catch((error) => {
+                console.error('Failed to load mails:', error)
+            })
     }
 
     function onNavigate(id) {
         navigate(`/mail/${id}`)
-        mailService.setRead(id).then(() => {
-            setMails(mails)
-        })
+        mailService
+            .setRead(id)
+            .then(() => {
+                setMails((prevMails) => {
+                    return prevMails.map((mail) => {
+                        if (mail.id === id) {
+                            return { ...mail, isRead: true }
+                        }
+                        return mail
+                    })
+                })
+            })
+            .catch((error) => {
+                console.error('Failed to mark mail as read:', error)
+            })
     }
 
     function onRemoveMail(ev, id) {
         ev.stopPropagation()
         if (confirm('Are you sure you wish to delete this email?')) {
-            mailService.remove(id).then(() => {
-                setMails(mails)
-            })
+            mailService
+                .remove(id)
+                .then(() => {
+                    setMails((prevMails) => {
+                        return prevMails.filter((mail) => mail.id !== id)
+                    })
+                })
+                .catch((error) => {
+                    console.error('Failed to remove mail:', error)
+                })
         }
     }
 
     function onMarkUnread(ev, id) {
         ev.stopPropagation()
-        mailService.setUnread(id).then(() => {
-            setMails(mails)
-        })
+        mailService
+            .setUnread(id)
+            .then(() => {
+                setMails((prevMails) => {
+                    return prevMails.map((mail) => {
+                        if (mail.id === id) {
+                            return { ...mail, isRead: false }
+                        }
+                        return mail
+                    })
+                })
+            })
+            .catch((error) => {
+                console.error('Failed to mark mail as unread:', error)
+            })
     }
 
-    if (!mails || !mails.length)
-        return (
-            <React.Fragment>
-                <h1 className="empty-list">There are no emails</h1>
-            </React.Fragment>
-        )
     return (
         <React.Fragment>
             <MailFilter
                 onSetFilter={onSetFilter}
                 filterBy={filterBy}
-                // onSetSortBy={onSetSortBy}
-                // sortBy={sortBy}
+                onSetSortBy={onSetSortBy}
+                sortBy={sortBy}
             />
-            <table className="mail-list">
-                <tbody>
-                    {mails.map((mail) => (
-                        <MailPreview
-                            key={mail.id}
-                            mail={mail}
-                            onNavigate={onNavigate}
-                            onRemoveMail={onRemoveMail}
-                            onMarkUnread={onMarkUnread}
-                        />
-                    ))}
-                </tbody>
-            </table>
+            {!mails || !mails.length ? (
+                <h1 className="empty-list">There are no emails</h1>
+            ) : (
+                <table className="mail-list">
+                    <tbody>
+                        {mails.map((mail) => (
+                            <MailPreview
+                                key={mail.id}
+                                mail={mail}
+                                onNavigate={onNavigate}
+                                onRemoveMail={onRemoveMail}
+                                onMarkUnread={onMarkUnread}
+                            />
+                        ))}
+                    </tbody>
+                </table>
+            )}
         </React.Fragment>
     )
 }

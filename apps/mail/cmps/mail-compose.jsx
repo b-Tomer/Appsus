@@ -2,18 +2,17 @@ import { mailService } from '../services/mail.service.js'
 const { useEffect, useState } = React
 
 export function MailCompose({ onToggleCompose }) {
-    const [inputs, setInputs] = useState({})
+    const [data, setData] = useState({})
 
     const handleChange = (event) => {
         const name = event.target.name
         const value = event.target.value
-        setInputs((values) => ({ ...values, [name]: value }))
+        setData((values) => ({ ...values, [name]: value }))
     }
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        mailService.send(inputs)
-        onToggleCompose()
+        mailService.send(data).then(onToggleCompose())
     }
 
     return (
@@ -27,7 +26,7 @@ export function MailCompose({ onToggleCompose }) {
                     <label htmlFor="to-user">To:</label>
                     <input
                         onChange={handleChange}
-                        value={inputs.toUser || ''}
+                        value={data.toUser || ''}
                         name="toUser"
                         type="text"
                         id="to-user"
@@ -38,7 +37,7 @@ export function MailCompose({ onToggleCompose }) {
                     <label htmlFor="subject">Subject:</label>
                     <input
                         onChange={handleChange}
-                        value={inputs.subject || ''}
+                        value={data.subject || ''}
                         name="subject"
                         type="text"
                         id="subject"
@@ -49,7 +48,7 @@ export function MailCompose({ onToggleCompose }) {
                     name="body"
                     rows="18"
                     onChange={handleChange}
-                    value={inputs.body || ''}
+                    value={data.body || ''}
                 />
                 <div className="form-btns">
                     <button type="submit" className="form-send-btn">

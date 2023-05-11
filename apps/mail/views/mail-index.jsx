@@ -8,18 +8,15 @@ const { useEffect, useState } = React
 export function MailIndex() {
     const [isCompose, setIsCompose] = useState(false)
     const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
-    // const [sortBy, setSortBy] = useState(mailService.getDefaultSort())
+    // const [composeDone, setComposeDone] = useState(false)
 
     function onSetFilter(filterBy) {
         setFilterBy((prevFilterBy) => ({ ...prevFilterBy, ...filterBy }))
     }
 
-    // function onSetSortBy(sortBy) {
-    //     setSortBy((prevSortBy) => ({ ...prevSortBy, ...sortBy }))
-    // }
-
     function onToggleCompose(event) {
         setIsCompose(!isCompose)
+        console.log(isCompose)
     }
 
     return (
@@ -34,8 +31,8 @@ export function MailIndex() {
                 <MailList
                     onSetFilter={onSetFilter}
                     filterBy={filterBy}
-                    // onSetSortBy={onSetSortBy}
-                    // sortBy={sortBy}
+                    onToggleCompose={onToggleCompose}
+                    isCompose={isCompose}
                 />
             </div>
         </main>
