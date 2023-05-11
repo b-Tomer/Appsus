@@ -19,21 +19,25 @@ export function MailIndex() {
     }
 
     return (
-        <main className="mail-app ">
-            <aside className="mail-menu-container">
-                <MailMenu
-                    onToggleCompose={onToggleCompose}
-                    isCompose={isCompose}
-                />
-            </aside>
-            <div className="mails-list-container">
-                <MailList
-                    onSetFilter={onSetFilter}
-                    filterBy={filterBy}
-                    onToggleCompose={onToggleCompose}
-                    isCompose={isCompose}
-                />
-            </div>
-        </main>
+        <React.Fragment>
+            <header>Logo</header>
+
+            <main className="mail-app ">
+                <aside className="mail-menu-container">
+                    <MailMenu
+                        onToggleCompose={onToggleCompose}
+                        isCompose={isCompose}
+                    />
+                </aside>
+                <div className="mails-list-container">
+                    <MailList
+                        onSetFilter={onSetFilter}
+                        filterBy={filterBy}
+                        onToggleCompose={onToggleCompose}
+                        isCompose={isCompose}
+                    />
+                </div>
+            </main>
+        </React.Fragment>
     )
 }
