@@ -2,7 +2,7 @@ const { Link, NavLink } = ReactRouterDOM
 
 export function AppHeader() {
 
-    return <header className="app-header">
+    return <header className="app-main-nav">
         <Link to="/">
             <h3>LOGO!</h3>
         </Link>
