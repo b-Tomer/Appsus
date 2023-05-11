@@ -48,8 +48,8 @@ export function MailFilter({ onSetFilter, filterBy, onSetSortBy, sortBy }) {
     const { searchFilter } = filterByToEdit
 
     return (
-        <section className="mail-filter">
-            <form>
+        <section>
+            <form className="mail-filter">
                 <input
                     value={searchFilter}
                     name="searchFilter"

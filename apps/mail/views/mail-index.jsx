@@ -16,7 +16,6 @@ export function MailIndex() {
 
     function onToggleCompose(event) {
         setIsCompose(!isCompose)
-        console.log(isCompose)
     }
 
     return (

@@ -19,7 +19,6 @@ export function MailList({ onSetFilter, filterBy, isCompose }) {
     }, [filterBy, sortBy, isCompose])
 
     function loadMails() {
-        console.log('rndring')
         mailService
             .query(filterBy, sortBy)
             .then((mails) => {

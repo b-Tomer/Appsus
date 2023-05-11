@@ -57,6 +57,10 @@ function query(filterBy = {}, sortBy = {}) {
         // if (filterBy.readFilter === 'All mails' || filterBy.readFilter === '') {
         //     return mails
         // }
+        if (filterBy.searchFilter) {
+            const regExp = new RegExp(filterBy.searchFilter, 'i')
+            mails = mails.filter((mail) => regExp.test(mail.subject))
+        }
         if (filterBy.readFilter === 'Read') {
             mails = mails.filter((mail) => mail.isRead)
         }
