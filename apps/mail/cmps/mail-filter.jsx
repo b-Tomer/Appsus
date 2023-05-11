@@ -1,7 +1,7 @@
 import { mailService } from '../services/mail.service.js'
 const { useState, useEffect } = React
 
-export function MailFilter({ onSetFilter, filterBy }) {
+export function MailFilter({ onSetFilter, filterBy, onSetSortBy, sortBy }) {
     const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
 
     useEffect(() => {
@@ -35,6 +35,20 @@ export function MailFilter({ onSetFilter, filterBy }) {
                     <option value="Read" />
                     <option value="Unread" />
                 </datalist>
+                {/* <button
+                    className="sort-date"
+                    onClick={this.props.onSetSort}
+                    name="sortByDate"
+                >
+                    Sort by date
+                </button>
+                <button
+                    className="sort-subject"
+                    onClick={this.props.onSetSort}
+                    name="sortBySubject"
+                >
+                    Sort by subject
+                </button> */}
             </form>
         </section>
     )

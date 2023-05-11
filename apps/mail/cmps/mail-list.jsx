@@ -5,13 +5,13 @@ import { mailService } from '../services/mail.service.js'
 const { useNavigate } = ReactRouterDOM
 const { useEffect, useState } = React
 
-export function MailList({ onSetFilter, filterBy }) {
+export function MailList({ onSetFilter, filterBy, onSetSortBy, sortBy }) {
     const navigate = useNavigate()
     const [mails, setMails] = useState([])
 
     useEffect(() => {
         loadMails()
-    }, [mails, filterBy])
+    }, [mails, filterBy, sortBy])
 
     function loadMails() {
         mailService.query(filterBy).then((mails) => {
@@ -50,7 +50,12 @@ export function MailList({ onSetFilter, filterBy }) {
         )
     return (
         <React.Fragment>
-            <MailFilter onSetFilter={onSetFilter} filterBy={filterBy} />
+            <MailFilter
+                onSetFilter={onSetFilter}
+                filterBy={filterBy}
+                // onSetSortBy={onSetSortBy}
+                // sortBy={sortBy}
+            />
             <table className="mail-list">
                 <tbody>
                     {mails.map((mail) => (
