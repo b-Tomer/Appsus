@@ -12,7 +12,7 @@ export function App() {
     return (
         <Router>
             <section className="app">
-                
+           
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/about" element={<About />} />
