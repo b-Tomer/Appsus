@@ -14,7 +14,7 @@
 .mail-menu-container:hover {
     transition: all 500ms;
     width: 200px;
-    box-shadow: 0px 3px 5px 0px #000;
+    box-shadow: 0px 3px 5px 0px var(--shadow-color);
 }
 
 .mail-menu-container:hover .mail-categories li {
@@ -44,7 +44,6 @@
 
 .mail-categories li:hover {
     background-color: darkgray;
-    /* cursor: pointer; */
     padding: 0;
 }
 
@@ -72,7 +71,7 @@
 }
 
 .compose-mail:hover {
-    box-shadow: 0px 3px 5px 0px #000;
+    box-shadow: 0px 3px 5px 0px var(--shadow-color);
     background-color: var(--compose-mail-bg-color);
 }
 
@@ -126,7 +125,7 @@
     display: flex;
     flex-direction: column;
     width: 70%;
-    box-shadow: 0px 3px 5px 0px #000;
+    box-shadow: 0px 3px 5px 0px var(--shadow-color);
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
 }
@@ -209,7 +208,7 @@ input:focus {
 }
 
 .mail-compose button:hover {
-    box-shadow: 0px 3px 5px 0px #000;
+    box-shadow: 0px 3px 5px 0px var(--shadow-color);
 }
 
 .mail-compose .form-trash-btn {

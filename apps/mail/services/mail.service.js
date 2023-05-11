@@ -9,6 +9,7 @@ export const mailService = {
     send,
     setUnread,
     setRead,
+    getDefaultFilter,
 }
 
 const EMAILS_STORAGE_KEY = 'emailsDB'
@@ -50,8 +51,17 @@ const loggedinUser = { email: 'user@appsus.com', fullname: 'Mahatma Appsus' }
 
 _createEmails()
 
-function query() {
+function query(filterBy = {}) {
     return asyncStorageService.query(EMAILS_STORAGE_KEY).then((mails) => {
+        if (filterBy.readFilter === 'All mails') {
+            return mails
+        }
+        if (filterBy.readFilter === 'Read') {
+            mails = mails.filter((mail) => mail.isRead)
+        }
+        if (filterBy.readFilter === 'Unread') {
+            mails = mails.filter((mail) => !mail.isRead)
+        }
         return mails
     })
 }
@@ -91,6 +101,10 @@ function setRead(id) {
                 return mail
             })
     })
+}
+
+function getDefaultFilter() {
+    return { readFilter: 'All mails' }
 }
 
 // private functions:

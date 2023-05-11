@@ -1,5 +1,5 @@
 .user-msg {
-    background-color: lightgray;
+    background-color: var(--mail-side-menu);
     padding: 1em;
     position: absolute;
     top: 1em;
@@ -14,8 +14,7 @@
     background-color: lightpink;
 }
 
-
-.user-msg button{
+.user-msg button {
     float: right;
     margin: 1em;
 }
