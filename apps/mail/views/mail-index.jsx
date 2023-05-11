@@ -2,6 +2,7 @@ import { mailService } from '../services/mail.service.js'
 import { MailList } from '../cmps/mail-list.jsx'
 import { MailMenu } from '../cmps/mail-menu.jsx'
 import { MailCompose } from '../cmps/mail-compose.jsx'
+import { MailHeader } from '../cmps/mail-header.jsx'
 
 const { useEffect, useState } = React
 
@@ -20,8 +21,7 @@ export function MailIndex() {
 
     return (
         <React.Fragment>
-            <header>Logo</header>
-
+            <MailHeader onSetFilter={onSetFilter} filterBy={filterBy} />
             <main className="mail-app ">
                 <aside className="mail-menu-container">
                     <MailMenu

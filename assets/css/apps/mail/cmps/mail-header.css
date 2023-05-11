@@ -1,0 +1,9 @@
+.mail-header {
+    display: flex;
+    margin-block: 10px;
+    margin-inline-start: 20px;
+}
+.mail-header .logo {
+    width: 50px;
+    margin-inline-end: 100px;
+}
