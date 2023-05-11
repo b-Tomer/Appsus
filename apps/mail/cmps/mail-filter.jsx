@@ -45,18 +45,10 @@ export function MailFilter({ onSetFilter, filterBy, onSetSortBy, sortBy }) {
     }
 
     const { readFilter } = filterByToEdit
-    const { searchFilter } = filterByToEdit
 
     return (
         <section>
             <form className="mail-filter">
-                <input
-                    value={searchFilter}
-                    name="searchFilter"
-                    type="text"
-                    placeholder="Search mails"
-                    onChange={handleChange}
-                />
                 <input
                     value={readFilter}
                     name="readFilter"
