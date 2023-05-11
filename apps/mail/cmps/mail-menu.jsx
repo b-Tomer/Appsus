@@ -11,15 +11,18 @@ export function MailMenu({ onToggleCompose, isCompose }) {
     ]
 
     useEffect(() => {
-        categoryRefs[0].current.parentElement.classList.add('selected')
+        categoryRefs[0].current.classList.add('selected')
+        categoryRefs[0].current.classList.remove('unselected')
     }, [])
 
     function handleClick(index) {
         categoryRefs.forEach((ref, i) => {
             if (i === index) {
-                ref.current.parentElement.classList.add('selected')
+                ref.current.classList.add('selected')
+                ref.current.classList.remove('unselected')
             } else {
-                ref.current.parentElement.classList.remove('selected')
+                ref.current.classList.remove('selected')
+                ref.current.classList.add('unselected')
             }
         })
     }
@@ -34,53 +37,47 @@ export function MailMenu({ onToggleCompose, isCompose }) {
             >
                 <img src="./assets/icons/compose.svg" alt="" />
             </button>
-            <ul className="mail-categories clean-list">
-                <li>
-                    <button
-                        className="mail-inbox"
-                        onClick={() => handleClick(0)}
-                        ref={categoryRefs[0]}
-                    >
-                        <img src="./assets/icons/inbox.png" alt="" />
-                    </button>
-                </li>
-                <li>
-                    <button
-                        className="mail-star"
-                        onClick={() => handleClick(1)}
-                        ref={categoryRefs[1]}
-                    >
-                        <img src="./assets/icons/star.png" alt="" />
-                    </button>
-                </li>
-                <li>
-                    <button
-                        className="mail-sent"
-                        onClick={() => handleClick(2)}
-                        ref={categoryRefs[2]}
-                    >
-                        <img src="./assets/icons/send.png" alt="" />
-                    </button>
-                </li>
-                <li>
-                    <button
-                        className="mail-draft"
-                        onClick={() => handleClick(3)}
-                        ref={categoryRefs[3]}
-                    >
-                        <img src="./assets/icons/draft.png" alt="" />
-                    </button>
-                </li>
-                <li>
-                    <button
-                        className="mail-trash"
-                        onClick={() => handleClick(4)}
-                        ref={categoryRefs[4]}
-                    >
-                        <img src="./assets/icons/delete.png" alt="" />
-                    </button>
-                </li>
-            </ul>
+            <div className="mail-categories clean-list">
+                <button
+                    className="mail-inbox"
+                    onClick={() => handleClick(0)}
+                    ref={categoryRefs[0]}
+                >
+                    <img src="./assets/icons/inbox.png" alt="" />
+                </button>
+
+                <button
+                    className="mail-star unselected"
+                    onClick={() => handleClick(1)}
+                    ref={categoryRefs[1]}
+                >
+                    <img src="./assets/icons/star.png" alt="" />
+                </button>
+
+                <button
+                    className="mail-sent unselected"
+                    onClick={() => handleClick(2)}
+                    ref={categoryRefs[2]}
+                >
+                    <img src="./assets/icons/send.png" alt="" />
+                </button>
+
+                <button
+                    className="mail-draft unselected"
+                    onClick={() => handleClick(3)}
+                    ref={categoryRefs[3]}
+                >
+                    <img src="./assets/icons/draft.png" alt="" />
+                </button>
+
+                <button
+                    className="mail-trash unselected"
+                    onClick={() => handleClick(4)}
+                    ref={categoryRefs[4]}
+                >
+                    <img src="./assets/icons/delete.png" alt="" />
+                </button>
+            </div>
 
             {isCompose && <MailCompose onToggleCompose={onToggleCompose} />}
         </React.Fragment>

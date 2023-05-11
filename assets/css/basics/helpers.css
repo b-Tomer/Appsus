@@ -42,5 +42,10 @@
 }
 
 .selected {
-    background-color: darkgray;
+    background-color: var(--selected-color);
+    border-radius: 100%;
+}
+
+.unselected {
+    background-color: transparent;
 }

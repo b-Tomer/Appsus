@@ -3,10 +3,9 @@
     flex-direction: column;
     position: fixed;
     height: 100%;
-    width: 100px;
+    width: 70px;
     background-color: var(--mail-side-menu);
     z-index: 1;
-    /* justify-content: center; */
     align-content: center;
     align-items: center;
 }
@@ -17,12 +16,22 @@
     box-shadow: 0px 3px 5px 0px var(--shadow-color);
 }
 
-.mail-menu-container:hover .mail-categories li {
+.mail-menu-container:hover .mail-categories button {
+    margin-inline: 0;
+    margin-inline-end: 10px;
     padding-inline-start: 10px;
 }
 
-.mail-menu-container button {
-    margin-inline: 0;
+.mail-menu-container:hover .compose-mail {
+    width: 80%;
+}
+
+.mail-menu-container:hover .selected {
+    border-radius: 0 50px 50px 0;
+}
+
+.mail-menu-container:hover .unselected {
+    border-radius: 0 50px 50px 0;
 }
 
 .mail-categories {
@@ -32,29 +41,26 @@
 }
 
 .mail-categories button {
-    width: 80%;
     position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: 50px;
-    width: 50px;
-    margin-inline-start: 25px;
+    margin-inline: 10px;
+
+    display: flex;
+    align-items: center;
 }
 
-.mail-categories li:hover {
-    background-color: darkgray;
+.mail-categories button img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 25px;
+    width: 25px;
+}
+
+.mail-categories button:hover {
+    background-color: var(--hover-color);
     padding: 0;
-}
-
-.mail-categories li:hover button {
-    width: 100%;
-    margin: 0;
-}
-
-.mail-categories li:hover img {
-    width: 40px;
-    height: 40px;
 }
 
 .compose-mail {
@@ -64,8 +70,6 @@
     align-items: center;
     background-color: var(--compose-mail-bg-color);
     border-radius: 20px;
-    height: 70px;
-    width: 70px;
     margin-block-end: 50px;
     margin-block-start: 10px;
 }
@@ -76,7 +80,8 @@
 }
 
 .compose-mail img {
-    width: auto;
+    height: 30px;
+    width: 30px;
 }
 
 .mail-menu-container:hover .compose-mail::after {
