@@ -1,18 +1,17 @@
+.add-container {
 
-.add-container{
-    
-display: flex;
-justify-content: center;  
-width: 100%;  
+    display: flex;
+    justify-content: center;
+    width: 100%;
 
 }
 
-.add-box{
+.add-box {
     margin-top: 15px;
     margin-bottom: 15px;
     border: 0;
     box-shadow: rgba(0, 0, 0, 0.38) 0px 3px 6px;
-    border-radius: 0.5em; 
+    border-radius: 0.5em;
     padding: 10px;
     width: 100%;
     min-width: 350px;
@@ -21,5 +20,64 @@ width: 100%;
     font-weight: 500;
     font-size: 1.2em;
     align-self: center;
+    display: flex;
+    justify-content: space-between;
 
+
+}
+
+.add-btns {
+    align-self: center;
+}
+
+.add-btn {
+    font-size: 1em;
+    margin: 0.2em;
+}
+
+
+
+.text-box {
+    outline: none;
+    border-radius: 0.5em;
+    padding: 10px;
+    width: 100%;
+    min-width: 350px;
+    max-width: 500px;
+    height: 45px;
+    border: 0;
+
+}
+
+.open-add-box {
+    height: max-content;
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.add-form{
+    display: grid;
+    grid-template-rows: 60px 1fr 120px;
+
+}
+
+.title-input {
+    grid-row: 1;
+    width: max-content;
+
+}
+
+.img-icon {
+    width: 20px;
+    padding: 0;
+    border-radius: 50%;
+}
+
+.pin-btn {
+    grid-row: 1;
+}
+
+.add-btn {
+    grid-row: 3;
+    justify-self: flex-end;
 }
