@@ -1,4 +1,5 @@
 import { MailPreview as MailPreview } from './mail-preview.jsx'
+import { MailFilter as MailFilter } from './mail-filter.jsx'
 import { mailService } from '../services/mail.service.js'
 
 const { useNavigate } = ReactRouterDOM
@@ -48,18 +49,21 @@ export function MailList() {
             </React.Fragment>
         )
     return (
-        <table className="mail-list">
-            <tbody>
-                {mails.map((mail) => (
-                    <MailPreview
-                        key={mail.id}
-                        mail={mail}
-                        onNavigate={onNavigate}
-                        onRemoveMail={onRemoveMail}
-                        onMarkUnread={onMarkUnread}
-                    />
-                ))}
-            </tbody>
-        </table>
+        <React.Fragment>
+            <MailFilter />
+            <table className="mail-list">
+                <tbody>
+                    {mails.map((mail) => (
+                        <MailPreview
+                            key={mail.id}
+                            mail={mail}
+                            onNavigate={onNavigate}
+                            onRemoveMail={onRemoveMail}
+                            onMarkUnread={onMarkUnread}
+                        />
+                    ))}
+                </tbody>
+            </table>
+        </React.Fragment>
     )
 }

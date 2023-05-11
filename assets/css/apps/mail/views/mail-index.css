@@ -2,7 +2,7 @@
     display: flex;
 }
 
-button {
+/* button {
     cursor: pointer;
     background: transparent;
     margin: 0;
@@ -13,4 +13,4 @@ button {
 
 button:hover {
     background-color: transparent;
-}
+} */

@@ -2,10 +2,16 @@
     width: 100%;
     margin-inline-start: 100px;
 }
+
 table {
     width: 100%;
     table-layout: fixed;
     background-color: var(--unshown-mail-bg-color);
+}
+
+.mail-filter {
+    margin-block: 10px;
+    margin-inline-start: 20px;
 }
 
 .mail-preview {
@@ -31,6 +37,11 @@ table {
 
 .mail-actions {
     justify-content: space-between;
+    margin-inline-end: 10px;
+}
+
+.mail-actions button {
+    margin-inline-start: 10px;
 }
 
 .mail-preview:hover {

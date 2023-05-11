@@ -11,6 +11,16 @@
     align-items: center;
 }
 
+.mail-menu-container:hover {
+    transition: all 500ms;
+    width: 200px;
+    box-shadow: 0px 3px 5px 0px #000;
+}
+
+.mail-menu-container:hover .mail-categories li {
+    padding-inline-start: 10px;
+}
+
 .mail-menu-container button {
     margin-inline: 0;
 }
@@ -35,12 +45,14 @@
 .mail-categories li:hover {
     background-color: darkgray;
     /* cursor: pointer; */
+    padding: 0;
 }
 
 .mail-categories li:hover button {
     width: 100%;
     margin: 0;
 }
+
 .mail-categories li:hover img {
     width: 40px;
     height: 40px;
@@ -66,12 +78,6 @@
 
 .compose-mail img {
     width: auto;
-}
-
-.mail-menu-container:hover {
-    transition: all 500ms;
-    width: 200px;
-    box-shadow: 0px 3px 5px 0px #000;
 }
 
 .mail-menu-container:hover .compose-mail::after {
