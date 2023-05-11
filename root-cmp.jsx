@@ -2,7 +2,7 @@ const { Route, Routes } = ReactRouterDOM
 const Router = ReactRouterDOM.HashRouter
 
 
-import { About } from './views/about.jsx'
+import { About } from './cmps/about.jsx'
 import { Home } from './views/home.jsx'
 import { MailIndex } from './apps/mail/views/mail-index.jsx'
 import { MailDetails } from './apps/mail/views/mail-details.jsx'
