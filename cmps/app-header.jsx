@@ -5,9 +5,9 @@ export function AppHeader() {
     return <header className="app-main-nav">
       
         <nav className="nav-container">
-            <NavLink to="/"><div className="home-container"><i class="home-icon icon-img animate__pulse fa-solid fa-house-chimney"></i></div></NavLink>
-            <NavLink to="/mail"><img className="icon-img animate__pulse" src="./assets/img/gmail-icon.png" alt="" /></NavLink>
-            <NavLink to="/keep"><img className="icon-img animate__pulse" src="./assets/img/keep-icon.png" alt="" /></NavLink>
+            <NavLink to="/book" className="book-img"><div className="book-container"><i className="book-icon img-icon fa-solid fa-book-open"></i></div></NavLink>
+            <NavLink to="/mail" className="mail-icon"><img className="icon-img mail animate__pulse" src="./assets/img/gmail-icon.png" alt="" /></NavLink>
+            <NavLink to="/keep" className="keep-icon"><img className="icon-img animate__pulse" src="./assets/img/keep-icon.png" alt="" /></NavLink>
         </nav>
     </header>
 }
