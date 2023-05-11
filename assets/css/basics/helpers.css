@@ -35,3 +35,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.selected {
+    background-color: darkgray;
+}

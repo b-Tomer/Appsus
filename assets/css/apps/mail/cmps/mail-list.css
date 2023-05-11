@@ -15,11 +15,18 @@ table {
 }
 
 .mail-preview {
+    position: relative;
     overflow-x: auto;
     height: 100%;
     display: flex;
     padding-block: 0.5rem;
-    border-block-end: 1px lightgray solid;
+    border-block-end: 1px var(--mail-side-menu) solid;
+}
+
+.mail-preview:hover {
+    z-index: 1;
+    box-shadow: 0px 3px 5px 0px var(--shadow-color);
+    cursor: pointer;
 }
 
 .mail-preview img {
@@ -32,7 +39,8 @@ table {
 }
 
 .mail-preview button:hover {
-    background-color: lightgray;
+    background-color: var(--mail-side-menu);
+    border-radius: 10px;
 }
 
 .mail-actions {
@@ -42,11 +50,6 @@ table {
 
 .mail-actions button {
     margin-inline-start: 10px;
-}
-
-.mail-preview:hover {
-    box-shadow: 0px 3px 5px 0px #000;
-    cursor: pointer;
 }
 
 .mail-subject {
