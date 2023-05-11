@@ -50,6 +50,7 @@
 }
 
 .mail-categories button img {
+    filter: hue-rotate(180deg);
     position: absolute;
     top: 50%;
     left: 50%;

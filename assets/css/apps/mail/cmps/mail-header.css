@@ -1,9 +1,42 @@
 .mail-header {
     display: flex;
+    justify-content: space-between;
     margin-block: 10px;
     margin-inline-start: 20px;
+    background-color: var(--shown-mail-bg-color);
 }
+
+.mail-header .mail-search {
+    background-color: var(--search-color);
+    flex-basis: 70%;
+    border: 0;
+    border-radius: 10px;
+    padding-inline-start: 20px;
+    font-size: 1.275rem;
+}
+
 .mail-header .logo {
     width: 50px;
     margin-inline-end: 100px;
+    align-self: center;
+}
+
+.mail-header .keep-icon {
+    width: 50px;
+    padding: 0;
+}
+
+.mail-header .home-icon {
+    font-size: 2rem;
+    color: rgb(187, 57, 40);
+    /* padding-bottom: 13px; */
+}
+
+.mail-header a {
+    margin: 0;
+    padding: 0;
+}
+
+.nav-container {
+    margin-inline-start: auto;
 }

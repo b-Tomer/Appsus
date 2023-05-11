@@ -46,6 +46,26 @@ const demoEmails = [
         from: 'muki@muki.com',
         to: 'user@appsus.com',
     },
+    {
+        id: utilService.makeId(),
+        subject: 'How do I embed a big file (>1 GB) in a C++ program?',
+        body: 'Some people say: "Write DRY code". However, that is the last thing I care about. Even after 1 year in programming my main concern is the functionality. I have seen even senior developers not caring about aesthetics. Is this normal?',
+        isRead: true,
+        sentAt: 1551032930594,
+        removedAt: null,
+        from: 'muki@muki.com',
+        to: 'user@appsus.com',
+    },
+    {
+        id: utilService.makeId(),
+        subject: 'Is C++ the best programming language to learn first?',
+        body: 'Is C++ the best language to start programming No No no no. My god, no  C++ is great … and terrible. Its big and complicated and gnarly. Start with a simpler language, for your own sanity. When you run into the limits of what you can do with another language, C++ will be there waiting for you and youll have learnt enough to know why the complexities of C++ are (sometimes) worth it. But dont start there.',
+        isRead: true,
+        sentAt: 1521032930594,
+        removedAt: null,
+        from: 'muki@muki.com',
+        to: 'user@appsus.com',
+    },
 ]
 
 const loggedinUser = { email: 'user@appsus.com', fullname: 'Mahatma Appsus' }
@@ -91,22 +111,20 @@ function send(mailData) {
 function setUnread(id) {
     asyncStorageService.get(EMAILS_STORAGE_KEY, id).then((mail) => {
         mail.isRead = false
-        return asyncStorageService
-            .put(EMAILS_STORAGE_KEY, mail)
-            .then((mail) => {
-                return mail
-            })
+        return asyncStorageService.put(EMAILS_STORAGE_KEY, mail)
+        // .then((mail) => {
+        //     return mail
+        // })
     })
 }
 
 function setRead(id) {
     asyncStorageService.get(EMAILS_STORAGE_KEY, id).then((mail) => {
         mail.isRead = true
-        return asyncStorageService
-            .put(EMAILS_STORAGE_KEY, mail)
-            .then((mail) => {
-                return mail
-            })
+        return asyncStorageService.put(EMAILS_STORAGE_KEY, mail)
+        // .then((mail) => {
+        //     return mail
+        // })
     })
 }
 

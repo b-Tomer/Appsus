@@ -25,7 +25,7 @@ export function MailPreview({ mail, onNavigate, onRemoveMail, onMarkUnread }) {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
-            <td className="mail-subject">{mail.subject} </td>
+            <td className="mail-subject no-wrap">{mail.subject} </td>
             <td className="mail-body no-wrap">{mail.body}</td>
             {isHovered && (
                 <MailActions
