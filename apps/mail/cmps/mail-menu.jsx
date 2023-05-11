@@ -1,13 +1,7 @@
 import { MailCompose } from '../cmps/mail-compose.jsx'
 const { useEffect, useState } = React
 
-export function MailMenu() {
-    const [isCompose, setIsCompose] = useState(false)
-
-    function onToggleCompose(event) {
-        setIsCompose(!isCompose)
-    }
-
+export function MailMenu({ onToggleCompose, isCompose }) {
     return (
         <React.Fragment>
             <button
@@ -46,7 +40,7 @@ export function MailMenu() {
                 </li>
             </ul>
 
-            {isCompose && <MailCompose />}
+            {isCompose && <MailCompose onToggleCompose={onToggleCompose} />}
         </React.Fragment>
     )
 }

@@ -6,6 +6,7 @@ export const mailService = {
     query,
     get,
     remove,
+    send,
     setUnread,
     setRead,
 }
@@ -65,6 +66,11 @@ function remove(id) {
     return asyncStorageService.remove(EMAILS_STORAGE_KEY, id)
 }
 
+function send(mailData) {
+    const newMail = _createEmail(mailData)
+    return asyncStorageService.post(EMAILS_STORAGE_KEY, newMail)
+}
+
 function setUnread(id) {
     asyncStorageService.get(EMAILS_STORAGE_KEY, id).then((mail) => {
         mail.isRead = false
@@ -97,12 +103,15 @@ function _createEmails() {
     }
 }
 
-// function _createEmail(title, description, thumbnail, listPrice) {
-//     const book = getEmptyBook()
-//     book.id = utilService.makeId()
-//     book.title = title
-//     book.description = description
-//     book.thumbnail = thumbnail
-//     book.listPrice = listPrice
-//     return book
-//   }
+function _createEmail({ toUser, subject, body }) {
+    const mail = {}
+    mail.id = utilService.makeId()
+    mail.subject = subject
+    mail.body = body
+    mail.isRead = false
+    mail.sentAt = Date.now()
+    mail.removedAt = null
+    mail.from = loggedinUser.email
+    mail.to = toUser
+    return mail
+}
