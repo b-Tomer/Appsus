@@ -1,11 +1,61 @@
 .mail-menu-container {
     display: flex;
+    flex-direction: column;
     position: fixed;
     height: 100%;
     width: 100px;
     background-color: var(--mail-side-menu);
     z-index: 1;
+    /* justify-content: center; */
+    align-content: center;
+    align-items: center;
+}
+
+.mail-menu-container:hover {
+    transition: all 500ms;
+    width: 200px;
+    box-shadow: 0px 3px 5px 0px #000;
+}
+
+.mail-menu-container:hover .mail-categories li {
+    padding-inline-start: 10px;
+}
+
+.mail-menu-container button {
+    margin-inline: 0;
+}
+
+.mail-categories {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.mail-categories button {
+    width: 80%;
+    position: relative;
+    display: flex;
     justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 50px;
+    margin-inline-start: 25px;
+}
+
+.mail-categories li:hover {
+    background-color: darkgray;
+    /* cursor: pointer; */
+    padding: 0;
+}
+
+.mail-categories li:hover button {
+    width: 100%;
+    margin: 0;
+}
+
+.mail-categories li:hover img {
+    width: 40px;
+    height: 40px;
 }
 
 .compose-mail {
@@ -17,6 +67,8 @@
     border-radius: 20px;
     height: 70px;
     width: 70px;
+    margin-block-end: 50px;
+    margin-block-start: 10px;
 }
 
 .compose-mail:hover {
@@ -25,13 +77,7 @@
 }
 
 .compose-mail img {
-    width: 50px;
-}
-
-.mail-menu-container:hover {
-    transition: all 500ms;
-    width: 200px;
-    box-shadow: 0px 3px 5px 0px #000;
+    width: auto;
 }
 
 .mail-menu-container:hover .compose-mail::after {
@@ -41,6 +87,150 @@
     margin-inline-start: 5px;
 }
 
+.mail-menu-container:hover .mail-categories button::after {
+    content: '';
+    font-size: 1rem;
+    font-family: roboto-bold;
+    margin-inline-start: 10px;
+}
+
+.mail-menu-container:hover .mail-categories .mail-inbox::after {
+    content: 'Inbox';
+}
+
+.mail-menu-container:hover .mail-categories .mail-star::after {
+    content: 'Starred';
+}
+
+.mail-menu-container:hover .mail-categories .mail-sent::after {
+    content: 'Sent';
+}
+
+.mail-menu-container:hover .mail-categories .mail-draft::after {
+    content: 'Draft';
+}
+
+.mail-menu-container:hover .mail-categories .mail-trash::after {
+    content: 'Trash';
+}
+
 .mail-menu-container:hover .compose-mail {
     width: 100%;
+}
+
+.mail-compose {
+    background-color: var(--unshown-mail-bg-color);
+    position: fixed;
+    bottom: 0;
+    right: 10%;
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    box-shadow: 0px 3px 5px 0px #000;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.mail-compose form input {
+    width: 80%;
+    padding: 5px;
+    flex-grow: 1;
+    border: none;
+    padding: 10px;
+}
+
+.form-to,
+.form-subject {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #e5e5e5;
+    color: darkgray;
+}
+
+.mail-compose .mail-compose-header {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+    background-color: var(--compose-mail-bg-color);
+    height: 5vh;
+    position: relative;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.mail-compose-header span {
+    margin-inline-start: 10px;
+    font-family: roboto-bold;
+}
+
+.mail-compose-header img {
+    position: absolute;
+    right: 15px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.mail-compose textarea {
+    padding: 10px;
+    border: none;
+    resize: none;
+    width: 100%;
+    height: 200px;
+    font-size: 1rem;
+    font-family: roboto;
+}
+
+.mail-compose textarea:focus,
+input:focus {
+    outline: none;
+}
+
+.mail-compose .form-btns {
+    display: flex;
+    justify-content: space-between;
+}
+
+.mail-compose .form-send-btn {
+    background-color: #297be6;
+    padding-inline: 20px;
+    color: white;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-family: roboto-bold;
+    border-radius: 25px;
+    position: relative;
+    bottom: 15px;
+    left: 15px;
+    transition: 0.1s;
+}
+
+.mail-compose button:hover {
+    box-shadow: 0px 3px 5px 0px #000;
+}
+
+.mail-compose .form-trash-btn {
+    width: 50px;
+    position: relative;
+    bottom: 15px;
+    right: 20px;
+    border: none;
+    cursor: pointer;
+    background-color: white;
+    border-radius: 15px;
+}
+
+@media (min-width: 650px) {
+    .mail-compose {
+        width: 50%;
+    }
+}
+
+@media (min-width: 980px) {
+    .mail-compose {
+        width: 40%;
+    }
 }

@@ -2,9 +2,16 @@
     width: 100%;
     margin-inline-start: 100px;
 }
+
 table {
     width: 100%;
     table-layout: fixed;
+    background-color: var(--unshown-mail-bg-color);
+}
+
+.mail-filter {
+    margin-block: 10px;
+    margin-inline-start: 20px;
 }
 
 .mail-preview {
@@ -12,6 +19,7 @@ table {
     height: 100%;
     display: flex;
     padding-block: 0.5rem;
+    border-block-end: 1px lightgray solid;
 }
 
 .mail-preview img {
@@ -29,6 +37,11 @@ table {
 
 .mail-actions {
     justify-content: space-between;
+    margin-inline-end: 10px;
+}
+
+.mail-actions button {
+    margin-inline-start: 10px;
 }
 
 .mail-preview:hover {
@@ -41,7 +54,6 @@ table {
     white-space: nowrap;
     min-width: 100px;
     margin-inline-end: 50px;
-    font-family: roboto-bold;
 }
 
 .mail-body {
@@ -51,4 +63,14 @@ table {
 .mail-date {
     white-space: nowrap;
     width: auto;
+}
+
+.unread {
+    font-family: roboto-bold;
+    background-color: var(--unshown-mail-bg-color);
+}
+
+.read {
+    font-family: roboto;
+    background-color: var(--shown-mail-bg-color);
 }
