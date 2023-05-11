@@ -1,14 +1,14 @@
-button {
+.btn {
     cursor: pointer;
     color: var(--clr4);
     background: inherit;
     margin: 0.5em;
     border: 0;
     padding: 0.5em;
-    border-radius: 50%; 
+    border-radius: 50%;
 }
 
-button:hover {
+.btn:hover {
     background-color: var(--clr1);
     /* transition: .3s; */
 }
@@ -20,24 +20,20 @@ input:focus {
     outline: none;
 }
 
-table{
-    background-color: #e2e2e2ab;
-    border-radius: 0.5em;
-}
 
-a{
+a {
     cursor: pointer;
-    background-color: var(--clr2bg);
+    /* background-color: var(--clr2bg); */
     margin: 0.5em;
     border: 0;
     padding: 0.5em 0.8em;
-    border-radius: 4px;  
-    
-    
+    border-radius: 4px;
+
+
 }
 
 a:hover {
-    
+
     color: var(--clr3);
     transition: .6s;
 }

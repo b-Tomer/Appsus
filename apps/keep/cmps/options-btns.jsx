@@ -16,13 +16,13 @@ export function OptionsBtns({ onRemoveNote, onPinNote, note , onSetCardStyle }) 
 
     return (
 
-        <section className="options-container">
-            <button className="options-btn"><i className="fa-regular fa-copy"></i></button>
-            <button onClick={() => onPinNote(note.id)} className="options-btn"><i className="fa-solid fa-thumbtack"></i></button>
-            <button className="options-btn"><i className="fa-solid fa-envelope"></i></button>
-            <button onClick={()=> setIsChangeColor(!isChangeColor)} className="options-btn"><i className="fa-solid fa-palette"></i></button>
+        <section className=" options-container">
+            <button className="btn options-btn"><i className="fa-regular fa-copy"></i></button>
+            <button onClick={() => onPinNote(note.id)} className="btn options-btn"><i className="fa-solid fa-thumbtack"></i></button>
+            <button className="btn options-btn"><i className="fa-solid fa-envelope"></i></button>
+            <button onClick={()=> setIsChangeColor(!isChangeColor)} className="btn options-btn"><i className="fa-solid fa-palette"></i></button>
             {isChangeColor &&  <ColorInput onSetCardStyle={onSetCardStyle}/>}
-            <button onClick={() => onRemoveNote(note.id)} className="options-btn"><i className="fa-solid fa-trash-can"></i></button>
+            <button onClick={() => onRemoveNote(note.id)} className="btn options-btn"><i className="fa-solid fa-trash-can"></i></button>
         </section>
     )
 }

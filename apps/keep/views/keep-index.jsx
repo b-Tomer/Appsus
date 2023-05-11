@@ -18,7 +18,7 @@ export function KeepIndex() {
 
   const pinnedNotes = notes.filter(note => note.isPinned);
   const unpinnedNotes = notes.filter(note => !note.isPinned);
-  // const [filterBy, setFilterBy] = useState(bookService.getDefaultFilter())
+  // const [filterBy, setFilterBy] = useState(keepService.getDefaultFilter())
   //
   useEffect(() => {
     loadNotes()
