@@ -2,7 +2,6 @@ import { mailService } from '../services/mail.service.js'
 import { MailList } from '../cmps/mail-list.jsx'
 import { MailDetails } from '../cmps/mail-details.jsx'
 import { MailMenu } from '../cmps/mail-menu.jsx'
-import { MailCompose } from '../cmps/mail-compose.jsx'
 import { MailHeader } from '../cmps/mail-header.jsx'
 
 const { useEffect, useState } = React
@@ -34,20 +33,32 @@ export function MailIndex() {
 
     function onRemoveMail(ev, id) {
         ev.stopPropagation()
-        if (confirm('Are you sure you wish to delete this email?')) {
-            mailService
-                .remove(id)
-                .then(() => {
-                    setMails((prevMails) => {
-                        return prevMails.filter((mail) => mail.id !== id)
+        const currMail = mails.find((mail) => mail.id === id)
+        if (currMail.isTrash) {
+            if (confirm('Are you sure you wish to delete this email?')) {
+                mailService
+                    .remove(id)
+                    .then(() => {
+                        if (params && Object.keys(params).length > 0) {
+                            navigate('/mail')
+                        }
                     })
+                    .then(loadMails)
+                    .catch((error) => {
+                        console.error('Failed to remove mail:', error)
+                    })
+            }
+        } else {
+            mailService
+                .setTrash(id)
+                .then(() => {
                     if (params && Object.keys(params).length > 0) {
                         navigate('/mail')
                     }
                 })
                 .then(loadMails)
                 .catch((error) => {
-                    console.error('Failed to remove mail:', error)
+                    console.error('Failed to trash mail:', error)
                 })
         }
     }
@@ -56,21 +67,32 @@ export function MailIndex() {
         ev.stopPropagation()
         mailService
             .setUnread(id)
-            .then(() => {
-                setMails((prevMails) => {
-                    return prevMails.map((mail) => {
-                        if (mail.id === id) {
-                            return { ...mail, isRead: false }
-                        }
-                        return mail
-                    })
-                })
-            })
             .then(loadMails)
-            .then(countUnread)
             .catch((error) => {
                 console.error('Failed to mark mail as unread:', error)
             })
+    }
+
+    function onStarMail(ev, id) {
+        ev.stopPropagation()
+        mailService
+            .toggleStarred(id)
+            .then(loadMails)
+            .catch((error) => {
+                console.error('Failed to mark mail as star:', error)
+            })
+    }
+
+    function onRestoreMail(ev, id) {
+        ev.stopPropagation()
+        if (confirm('Are you sure you wish to restore this email?')) {
+            mailService
+                .restoreMail(id)
+                .then(loadMails)
+                .catch((error) => {
+                    console.error('Failed to restore mail :', error)
+                })
+        }
     }
 
     function countUnread() {
@@ -80,7 +102,6 @@ export function MailIndex() {
             }
             return acc
         }, 0)
-        // console.log(count)
         return count
     }
 
@@ -128,6 +149,8 @@ export function MailIndex() {
                             onRemoveMail={onRemoveMail}
                             onMarkUnread={onMarkUnread}
                             countUnread={countUnread}
+                            onStarMail={onStarMail}
+                            onRestoreMail={onRestoreMail}
                         />
                     </div>
                 )}

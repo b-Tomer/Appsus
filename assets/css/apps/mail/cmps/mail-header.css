@@ -8,7 +8,7 @@
 
 .mail-header .mail-search {
     background-color: var(--search-color);
-    flex-basis: 70%;
+    flex-basis: 50%;
     border: 0;
     border-radius: 10px;
     padding-inline-start: 20px;
@@ -17,19 +17,26 @@
 
 .mail-header .logo {
     width: 50px;
+    min-width: 50px;
     margin-inline-end: 100px;
     align-self: center;
 }
 
 .mail-header .keep-icon {
+    min-width: 50px;
     width: 50px;
     padding: 0;
 }
 
 .mail-header .home-icon {
     font-size: 2rem;
-    color: rgb(187, 57, 40);
+    color: #4285f4;
     /* padding-bottom: 13px; */
+}
+
+.mail-header .books-icon {
+    font-size: 2rem;
+    color: #34a853;
 }
 
 .mail-header a {
@@ -38,5 +45,7 @@
 }
 
 .nav-container {
+    padding-inline-start: 20px;
     margin-inline-start: auto;
+    padding-inline-end: 10px;
 }

@@ -18,6 +18,8 @@ export function MailList({
     onRemoveMail,
     onMarkUnread,
     countUnread,
+    onStarMail,
+    onRestoreMail,
 }) {
     const navigate = useNavigate()
 
@@ -27,7 +29,7 @@ export function MailList({
 
     useEffect(() => {
         loadMails()
-    }, [filterBy, sortBy, isCompose])
+    }, [filterBy, sortBy, isCompose, onStarMail, onMarkUnread, onRemoveMail])
 
     function onNavigate(id) {
         navigate(`/mail/${id}`)
@@ -69,6 +71,9 @@ export function MailList({
                                 onNavigate={onNavigate}
                                 onRemoveMail={onRemoveMail}
                                 onMarkUnread={onMarkUnread}
+                                onStarMail={onStarMail}
+                                filterBy={filterBy}
+                                onRestoreMail={onRestoreMail}
                             />
                         ))}
                     </tbody>

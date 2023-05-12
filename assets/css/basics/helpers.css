@@ -49,3 +49,7 @@
 .unselected {
     background-color: transparent;
 }
+
+.hide {
+    display: none;
+}

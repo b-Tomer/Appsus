@@ -4,7 +4,7 @@ const { useState, useEffect, useRef } = React
 export function MailFilter({ onSetFilter, filterBy, onSetSortBy, sortBy }) {
     const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
     const [sortByToEdit, setSortByToEdit] = useState(sortBy)
-    const sortRefs = [useRef(null), useRef(null)]
+    const sortRefs = [useRef(null), useRef(null), useRef(null)]
 
     useEffect(() => {
         onSetFilter(filterByToEdit)
@@ -69,10 +69,18 @@ export function MailFilter({ onSetFilter, filterBy, onSetSortBy, sortBy }) {
                     Sort by date
                 </button>
                 <button
-                    className="sort-subject"
+                    className="sort-from"
                     onClick={(event) => handleClick(event, 1)}
-                    name="sortBySubject"
+                    name="sortByFrom"
                     ref={sortRefs[1]}
+                >
+                    Sort by from
+                </button>
+                <button
+                    className="sort-subject"
+                    onClick={(event) => handleClick(event, 2)}
+                    name="sortBySubject"
+                    ref={sortRefs[2]}
                 >
                     Sort by subject
                 </button>

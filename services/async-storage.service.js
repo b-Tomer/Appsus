@@ -30,7 +30,6 @@ function post(entityType, newEntity) {
         _save(entityType, entities)
         // console.log('newEntity from asyncStorage: ', newEntity )
         return newEntity
-
     })
 }
 
@@ -39,10 +38,7 @@ function put(entityType, updatedEntity) {
         const idx = entities.findIndex(
             (entity) => entity.id === updatedEntity.id
         )
-        if (idx < 0)
-            throw new Error(
-                `Update failed, cannot find entity with `
-            )
+        if (idx < 0) throw new Error(`Update failed, cannot find entity with `)
         entities.splice(idx, 1, updatedEntity)
         _save(entityType, entities)
         return updatedEntity

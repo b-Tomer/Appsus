@@ -64,7 +64,6 @@
 
 .mail-categories button:hover {
     background-color: var(--hover-color);
-    padding: 0;
 }
 
 .mail-menu-container:hover .mail-categories img {
@@ -129,14 +128,16 @@
     content: 'Trash';
 }
 
-.mail-inbox .unread-count {
+.mail-categories .unread-count {
     display: none;
+    font-size: 0;
 }
 
-.mail-menu-container:hover .mail-inbox .unread-count {
+.mail-menu-container:hover .mail-categories .unread-count {
     display: inline;
     font-family: roboto-bold;
     margin-inline-start: auto;
+    font-size: 1rem;
 }
 
 .mail-menu-container:hover .compose-mail {
