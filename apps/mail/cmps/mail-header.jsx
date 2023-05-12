@@ -33,7 +33,7 @@ export function MailHeader({ onSetFilter, filterBy }) {
             />
             <nav className="nav-container">
                 <NavLink to="/">
-                    <div className=" home-container">
+                    <div className="home-container">
                         <i className="home-icon fa-solid fa-house-chimney"></i>
                     </div>
                 </NavLink>
@@ -44,6 +44,11 @@ export function MailHeader({ onSetFilter, filterBy }) {
                         src="./assets/img/keep-icon.png"
                         alt=""
                     />
+                </NavLink>
+                <NavLink to="/book">
+                    <div className="books-container">
+                        <i className="books-icon fa-solid fa-book-open"></i>
+                    </div>
                 </NavLink>
             </nav>
         </header>

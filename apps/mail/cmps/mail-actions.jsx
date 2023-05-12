@@ -7,7 +7,7 @@ export function MailActions({
 }) {
     return (
         <td className="mail-actions flex">
-            {filterBy.trashMails && (
+            {filterBy && filterBy.trashMails && (
                 <button onClick={(event) => onRestoreMail(event, mailId)}>
                     <img src="./assets/icons/restore.png" alt="" />
                 </button>

@@ -150,6 +150,20 @@ const demoEmails = [
         isStarred: false,
         isTrash: false,
     },
+    {
+        id: utilService.makeId(),
+        subject:
+            'Getting Started with LangChain: A Beginners Guide to Building LLM-Powered Applications | Leonie Monigatti in Towards Data Science',
+        body: 'Since the release of ChatGPT, large language models (LLMs) have gained a lot of popularity. Although you probably don’t have enough money and computational resources to train an LLM from scratch in your basement, you can still use pre-trained LLMs to build something cool, such as:',
+        isRead: false,
+        sentAt: Date.now(),
+        removedAt: null,
+        from: 'noreply@medium.com',
+        shortFrom: _shortFrom('noreply@medium.com'),
+        to: 'user@appsus.com',
+        isStarred: false,
+        isTrash: false,
+    },
 ]
 
 const loggedinUser = { email: 'user@appsus.com', fullname: 'Mahatma Appsus' }

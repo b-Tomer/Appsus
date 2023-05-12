@@ -67,13 +67,13 @@ table {
     margin-inline-end: 10px;
 }
 
-.mail-actions button {
+.mail-preview .mail-actions button {
     margin-inline-start: 15px;
     width: 15px;
     padding: 0;
 }
 
-.mail-actions img {
+.mail-preview .mail-actions img {
     width: 100%;
 }
 
