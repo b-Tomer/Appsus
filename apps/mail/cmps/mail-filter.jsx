@@ -10,38 +10,57 @@ export function MailFilter({ onSetFilter, filterBy, onSetSortBy, sortBy }) {
     const location = useLocation()
 
     useEffect(() => {
-        onSetFilter(filterByToEdit)
-        onSetSortBy(sortByToEdit)
-
-        // Update query string parameters and navigate to the updated URL
         const queryParams = new URLSearchParams(location.search)
-        queryParams.set('filterBy', filterByToEdit.readFilter || 'All mails')
-        queryParams.set('sortBy', getTrueKey(sortByToEdit))
-        navigate({
-            search: queryParams.toString(),
-        })
-    }, [filterByToEdit, sortByToEdit])
-
-    useEffect(() => {
-        // Retrieve query string parameters and update the state
-        const queryParams = new URLSearchParams(location.search)
-        const filterBy = queryParams.get('filterBy')
-        const sortBy = queryParams.get('sortBy')
-
+        let filterBy = queryParams.get('filterBy')
+        let sortBy = queryParams.get('sortBy')
         setFilterByToEdit((prevFilterBy) => ({
             ...prevFilterBy,
-            readFilter: filterBy || 'All mails',
-        }))
-
-        setSortByToEdit((prevSortBy) => ({
-            ...prevSortBy,
+            [filterBy]: true,
             [sortBy]: true,
         }))
-    }, [location.search])
+        if (!filterBy) {
+            filterBy = 'All mails'
+            queryParams.set('filterBy', 'All mails')
+            navigate({
+                search: queryParams.toString(),
+            })
+        }
+        if (!sortBy) {
+            sortBy = 'sortByDate'
+            queryParams.set('sortBy', 'sortByDate')
+            navigate({
+                search: queryParams.toString(),
+            })
+        }
+        sortRefs.forEach((ref) => {
+            const field = ref.current.name
+            if (ref.current.name === sortBy) {
+                setSortByToEdit((prevSortBy) => ({
+                    ...prevSortBy,
+                    [field]: true,
+                }))
+                ref.current.style.backgroundColor = '#d3e3fd'
+            } else {
+                setSortByToEdit((prevSortBy) => ({
+                    ...prevSortBy,
+                    [field]: false,
+                }))
+                ref.current.style.backgroundColor = 'transparent'
+            }
+        })
+
+        const field = 'readFilter'
+        const value = filterBy
+        setFilterByToEdit((prevFilterBy) => ({
+            ...prevFilterBy,
+            [field]: value,
+        }))
+    }, [])
 
     useEffect(() => {
-        sortRefs[0].current.style.backgroundColor = '#d3e3fd'
-    }, [])
+        onSetFilter(filterByToEdit)
+        onSetSortBy(sortByToEdit)
+    }, [filterByToEdit, sortByToEdit])
 
     function getTrueKey(obj) {
         for (const key in obj) {
@@ -52,15 +71,31 @@ export function MailFilter({ onSetFilter, filterBy, onSetSortBy, sortBy }) {
     }
 
     function handleChange({ target }) {
+        const queryParams = new URLSearchParams(location.search)
+        const filterBy = target.value
+        queryParams.set('filterBy', filterBy)
+        navigate({
+            search: queryParams.toString(),
+        })
         const field = target.name
         const value = target.value
         setFilterByToEdit((prevFilterBy) => ({
             ...prevFilterBy,
             [field]: value,
         }))
+        queryParams.set('filterBy', filterBy)
+        navigate({
+            search: queryParams.toString(),
+        })
     }
 
     function handleClick(ev, idx) {
+        const queryParams = new URLSearchParams(location.search)
+        const sortBy = ev.target.name
+        queryParams.set('sortBy', sortBy)
+        navigate({
+            search: queryParams.toString(),
+        })
         ev.preventDefault()
         sortRefs.forEach((ref, i) => {
             const field = ref.current.name
@@ -78,11 +113,7 @@ export function MailFilter({ onSetFilter, filterBy, onSetSortBy, sortBy }) {
                 ref.current.style.backgroundColor = 'transparent'
             }
         })
-
-        // Update query string parameters and navigate to the updated URL
-        const queryParams = new URLSearchParams(location.search)
-        queryParams.set('filterBy', filterByToEdit.readFilter || 'All mails')
-        queryParams.set('sortBy', getTrueKey(sortByToEdit))
+        queryParams.set('sortBy', sortBy)
         navigate({
             search: queryParams.toString(),
         })

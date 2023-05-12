@@ -45,6 +45,10 @@
     font-size: 1.2rem;
 }
 
+.email-details-content .details-to {
+    font-size: 1.2rem;
+}
+
 .email-details-content .details-body {
     font-size: 1rem;
     margin-block-start: 20px;

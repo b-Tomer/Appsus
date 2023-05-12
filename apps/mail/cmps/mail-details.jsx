@@ -49,6 +49,7 @@ export function MailDetails({ onRemoveMail, onMarkUnread }) {
             <div className="email-details-content">
                 <p className="details-subject">Subject: {mail.subject}</p>
                 <p className="details-from">From: {mail.from}</p>
+                <p className="details-to">To: {mail.to}</p>
                 <p className="details-body">{mail.body}</p>
             </div>
         </section>

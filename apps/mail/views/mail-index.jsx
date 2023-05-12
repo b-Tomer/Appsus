@@ -131,10 +131,9 @@ export function MailIndex() {
     }
 
     function onSaveDraft(to, subject, body) {
-        // console.log(`to: ${to}, sub: ${subject}, body: ${body}`)
         if (!to && !subject && !body) return
         mailService
-            .saveDraft(to, subject, body)
+            .saveDraft(to || '', subject || '', body || '')
             .then(loadMails)
             .then(() => {
                 showSuccessMsg('Mail saved to draft successfully')

@@ -286,7 +286,7 @@ function toggleStarred(id) {
 }
 
 function saveDraft(to, subject, body) {
-    const newMail = _createEmail(to, subject, body)
+    const newMail = _createEmail({ to, subject, body })
     newMail.isDraft = true
     return asyncStorageService.post(EMAILS_STORAGE_KEY, newMail)
 }

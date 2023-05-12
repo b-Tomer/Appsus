@@ -24,17 +24,38 @@ export function MailMenu({
 
     useEffect(() => {
         const queryParams = new URLSearchParams(location.search)
-        const category = queryParams.get('category')
+        let category = queryParams.get('category')
         setFilterByToEdit((prevFilterBy) => ({
             ...prevFilterBy,
             [category]: true,
         }))
         if (!category) {
+            category = 'inbox'
             queryParams.set('category', 'inbox')
             navigate({
                 search: queryParams.toString(),
             })
         }
+        categoryRefs.forEach((ref) => {
+            let field = ref.current.name
+            let value
+            const elSpanChild = ref.current.querySelector('span')
+            if (ref.current.name === category) {
+                ref.current.classList.add('selected')
+                ref.current.classList.remove('unselected')
+                elSpanChild.style.display = 'inline'
+                value = true
+            } else {
+                ref.current.classList.remove('selected')
+                ref.current.classList.add('unselected')
+                elSpanChild.style.display = 'none'
+                value = false
+            }
+            setFilterByToEdit((prevFilterBy) => ({
+                ...prevFilterBy,
+                [field]: value,
+            }))
+        })
     }, [])
 
     useEffect(() => {
@@ -58,7 +79,6 @@ export function MailMenu({
             let field = ref.current.name
             let value
             const elSpanChild = ref.current.querySelector('span')
-
             if (i === index) {
                 ref.current.classList.add('selected')
                 ref.current.classList.remove('unselected')
@@ -70,7 +90,6 @@ export function MailMenu({
                 value = false
                 elSpanChild.style.display = 'none'
             }
-
             setFilterByToEdit((prevFilterBy) => ({
                 ...prevFilterBy,
                 [field]: value,
