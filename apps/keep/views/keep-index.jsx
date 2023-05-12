@@ -1,7 +1,7 @@
 
 
 const { Link, NavLink, Route, Routes } = ReactRouterDOM
-const { useEffect, useState ,useRef } = React
+const { useEffect, useState, useRef } = React
 
 
 import { KeepHeader } from "../cmps/keep-header.jsx";
@@ -13,14 +13,22 @@ import { AddInbox } from "../cmps/add-inbox.jsx";
 import { OpenAddInbox } from "../cmps/open-add-inbox.jsx";
 import { utilService } from "../../../services/util.service.js";
 import { KeepMenu } from "../cmps/keep-menu.jsx";
+import { AddListItems } from "../cmps/add-list-items.jsx";
+import { AddCanvas } from "../cmps/add-canvas.jsx";
 
 
 
 export function KeepIndex() {
 
   const [notes, setNotes] = useState([])
+  const [darkMode, setDarkMode] = useState(true)
+  const [isCardsView, setIsCardsView] = useState(true)
+  const [mainStyle, setMainStyle] = useState({})
+  const [cardsStyle, setCardsStyle] = useState({})
   const [isAddOpen, setIsAddOpen] = useState(true)
+  const [isAddCanvas, setIsAddCanvas] = useState(false)
   const [isAddboxShown, setIsAddboxShown] = useState(false)
+  const [isAddList, setIsAddList] = useState(false)
   const [newNote, setNewNote] = useState('')
   const pinnedNotes = notes.filter(note => note.isPinned);
   const unpinnedNotes = notes.filter(note => !note.isPinned);
@@ -31,7 +39,7 @@ export function KeepIndex() {
 
   useEffect(() => {
     loadNotes()
-  }, [newNote,notes]);
+  }, [newNote, notes]);
 
   function loadNotes() {
     keepService.query().then(setNotes)
@@ -39,13 +47,29 @@ export function KeepIndex() {
 
 
   function onAddNewNote(newNote) {
-    if (!newNote.title && !newNote.info.txt) return
-    keepService.save(newNote).then((note)=>{
+    if (!newNote.title && !newNote.info.txt && !newNote.info.title) {
+      console.log('no title');
+      return
+    }
+    keepService.save(newNote).then((note) => {
       notes.push(note)
       const updatedNotes = notes
-      console.log(updatedNotes);
+      console.log('from addNewNote: ', updatedNotes);
       setNotes(updatedNotes)
     })
+  }
+
+  function onDuplicateNote(note) {
+    console.log('onDuplicateNote: ', note);
+    const copyNote = note
+    copyNote.id = utilService.makeId()
+    setTimeout(() => {
+
+      console.log("note from duplicate: ", copyNote);
+      onAddNewNote(copyNote)
+
+    }, 2000)
+    // loadNotes()
   }
 
   function onRemoveNote(noteId) {
@@ -73,13 +97,6 @@ export function KeepIndex() {
   }
 
 
-  function onDuplicateNote(note) {
-    console.log('onDuplicateNote: ', note);
-    note.id = utilService.makeId()
-    console.log("note from duplicate: ",note);
-    onAddNewNote(note)
-    // loadNotes()
-  }
 
   function onOpenAddInbox() {
     setIsAddOpen(!isAddOpen)
@@ -88,6 +105,19 @@ export function KeepIndex() {
     if (isAddboxShown) {
       onAddNewNote(newNote)
     }
+  }
+
+  function onOpenListInbox() {
+    setIsAddOpen(false)
+    setIsAddboxShown(false)
+    setIsAddList(true)
+  }
+
+  function onOpenCanvs() {
+    setIsAddOpen(false)
+    setIsAddboxShown(false)
+    setIsAddList(false)
+    setIsAddCanvas(true)
   }
 
   function onHandleTitleChange({ target }) {
@@ -102,16 +132,49 @@ export function KeepIndex() {
     newNote.info.txt = val
   }
 
+  function onDarkMode() {
+    setDarkMode(!darkMode)
+    console.log(darkMode);
+    if (darkMode) {
+      setMainStyle({ backgroundColor: '#c0c0c0', color: 'white' })
+    } else setMainStyle({})
+  }
+
+  function onToggleView() {
+    setIsCardsView(!isCardsView)
+    console.log(isCardsView);
+    if (!isCardsView) {
+      setCardsStyle({ columnCount: 1 })
+    } else setCardsStyle({})
+  }
+
+  function onAddListNote() {
+    setIsAddList(false)
+    setIsAddOpen(true)
+    console.log('added list note');
+  }
+
+  function onAddCanvasNote() {
+    console.log('canvass added');
+    setIsAddOpen(true)
+    setIsAddCanvas(false)
+  }
+
+  
+
+
   return (
 
-    <section className="note-inedx app main-layout ">
-      <KeepHeader />
-      <main ref={boxRef} className="keep-content">
-{/* <KeepMenu/> */}
-        {isAddboxShown && <OpenAddInbox onOpenAddInbox={onOpenAddInbox} onHandleTitleChange={onHandleTitleChange} onHandleTextChange={onHandleTextChange} />}
-        {isAddOpen && <AddInbox onOpenAddInbox={onOpenAddInbox} />}
+    <section style={mainStyle} className="note-inedx app main-layout ">
+      <KeepHeader onToggleView={onToggleView} onDarkMode={onDarkMode} />
 
-        <NoteList pinnedNotes={pinnedNotes} unpinnedNotes={unpinnedNotes} onRemoveNote={onRemoveNote} onPinNote={onPinNote} notes={notes} onDuplicateNote={onDuplicateNote} />
+      <main ref={boxRef} className="keep-content">
+        {/* <KeepMenu/> */}
+        {isAddOpen && <AddInbox onOpenCanvs={onOpenCanvs} onOpenListInbox={onOpenListInbox} onOpenAddInbox={onOpenAddInbox} />}
+        {isAddboxShown && <OpenAddInbox onOpenAddInbox={onOpenAddInbox} onHandleTitleChange={onHandleTitleChange} onHandleTextChange={onHandleTextChange} />}
+        {isAddList && <AddListItems onAddListNote={onAddListNote} onHandleTitleChange={onHandleTitleChange} onOpenListInbox={onOpenListInbox} />}
+        {isAddCanvas && <AddCanvas onAddCanvasNote={onAddCanvasNote} onHandleTitleChange={onHandleTitleChange} />}
+        <NoteList cardsStyle={cardsStyle} pinnedNotes={pinnedNotes} unpinnedNotes={unpinnedNotes} onRemoveNote={onRemoveNote} onPinNote={onPinNote} notes={notes} onDuplicateNote={onDuplicateNote} />
 
       </main>
       {/* <UserMsg /> */}

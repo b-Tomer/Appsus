@@ -57,7 +57,7 @@ const gNotes = [
             title: 'Nina Simon'
         },
         style: {
-            backgroundColor: ''
+            backgroundColor: '#f7f6f67e'
         }
     },
 
@@ -82,10 +82,10 @@ const gNotes = [
         isPinned: true,
         info: {
             url: 'https://images.unsplash.com/photo-1511884642898-4c92249e20b6?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=1080&ixid=MnwxfDB8MXxyYW5kb218MHx8d2FsbHBhcGVyLGxhbmRzY2FwZXx8fHx8fDE2ODM4MjAxMTY&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1920',
-            title: 'Nice view'
+            title: 'My trip'
         },
         style: {
-            backgroundColor: ''
+            backgroundColor: '#f7f6f67e'
         }
     },
 
@@ -98,7 +98,7 @@ const gNotes = [
             title: 'Gaza'
         },
         style: {
-            backgroundColor: ''
+            backgroundColor: '#f7f6f67e'
         }
     },
 
@@ -161,15 +161,15 @@ function save(note) {
     // }
 }
 
-function getEmptyNote() {
+function getEmptyNote(type = 'NoteTxt') {
     return {
         id: utilService.makeId(),
         title: '',
         createdAt: Date.now(),
-        type: 'NoteTxt',
+        type: type,
         isPinned: false,
         style: {
-            backgroundColor: '#00d'
+            backgroundColor: ''
         },
         info: {
             txt: ''

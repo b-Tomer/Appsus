@@ -1,4 +1,3 @@
-
 .keep-header {
     /* background-color: var(--yellow3); */
     color: var(--clr4);
@@ -12,20 +11,21 @@
     cursor: pointer;
 }
 
-.header-btns{
-display: flex;
-align-items: center;
-gap:5px;
-/* margin-right: auto; */
-justify-self: flex-end;
+.header-btns {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    /* margin-right: auto; */
+    justify-self: flex-end;
 }
 
-.left-menu{
+.left-menu {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.right-menu{
+
+.right-menu {
     display: flex;
 }
 
@@ -61,46 +61,46 @@ justify-self: flex-end;
     justify-self: center;
     color: var(--clr2bg-light);
     font-size: 1.2em;
-    
 }
 
-.btn-opt{
+.btn-opt {
     font-size: 1.2em;
     justify-self: flex-end;
     height: max-content;
     margin: 0;
 }
 
-.app-title{
+.app-title {
     font-size: 1.7em;
-    
+
 }
 
-.nav-links{
+.nav-links {
     display: flex;
     align-items: center;
     justify-content: end;
- 
+
 }
+
 .keep-icons {
     font-size: 1.3rem;
     padding: 0;
     margin: 0;
 }
 
-.gmaill{
+.gmaill {
     padding: 0;
     margin-bottom: 1px;
     margin-right: 3px;
 }
 
-.gmaill-img{
+.gmaill-img {
     min-width: 20px;
     width: 23px;
     padding: 0;
 }
 
-.keeper-nav{
+.keeper-nav {
     padding: 0;
     margin: 0;
 }

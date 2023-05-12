@@ -25,12 +25,24 @@
 }
 
 .add-btns {
+   min-width: 120px;
+   width: 120px;
     align-self: center;
+    z-index: 3;
+}
+
+.empty-box{
+    color:var(--clr4);
+    padding: 7px;
+    font-size: 0.7em;
 }
 
 .add-btn {
     font-size: 1em;
     margin: 0.2em;
+}
+.add-btn-list{
+    width: 30px;
 }
 
 textarea{
@@ -59,6 +71,11 @@ textarea{
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 70px 1fr 80px;
+}
+
+.list-form{
+    display: grid;
+    grid-template-columns: 1fr;
 
 }
 
@@ -91,4 +108,15 @@ textarea{
     height: max-content;
     align-self: center;
     width: 23px;
+}
+
+.list-item{
+    border: 0;
+    padding: 5px;
+    border-radius: 0.3em;
+    position: relative;
+}
+
+.list-item:hover{
+    background-color: var(--clr1);
 }

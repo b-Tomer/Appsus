@@ -15,6 +15,10 @@
     .nav-container {
     padding-right: 23px;
     }
+    .keep-content{
+        padding: 20px;
+        padding-left: 15px;
+    }
 
     .home {
         padding-right: 0;
@@ -23,6 +27,9 @@
     .icon-img {
         min-width: 55px;
         width: 70px;
+    }
+    .keep-header{
+        padding-left: 0;
     }
 
     .mail {
@@ -36,6 +43,9 @@
 
     .main-footer{
         padding-inline-end: 0px;
+    }
+    :root{
+        --layout-padding: 0px 
     }
 
 }
