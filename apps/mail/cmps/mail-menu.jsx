@@ -35,7 +35,6 @@ export function MailMenu({
             let field = ref.current.name
             let value
             const elSpanChild = ref.current.querySelector('span')
-            console.log(elSpanChild)
             if (i === index) {
                 ref.current.classList.add('selected')
                 ref.current.classList.remove('unselected')

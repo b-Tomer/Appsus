@@ -110,12 +110,14 @@ _createEmails()
 
 function query(filterBy = {}, sortBy = {}) {
     return asyncStorageService.query(EMAILS_STORAGE_KEY).then((mails) => {
-        // if (filterBy.readFilter === 'All mails' || filterBy.readFilter === '') {
-        //     return mails
-        // }
         if (filterBy.searchFilter) {
             const regExp = new RegExp(filterBy.searchFilter, 'i')
-            mails = mails.filter((mail) => regExp.test(mail.subject))
+            mails = mails.filter(
+                (mail) =>
+                    regExp.test(mail.subject) ||
+                    regExp.test(mail.body) ||
+                    regExp.test(mail.shortFrom)
+            )
         }
         if (filterBy.readFilter === 'Read') {
             mails = mails.filter((mail) => mail.isRead)
@@ -133,7 +135,9 @@ function query(filterBy = {}, sortBy = {}) {
             mails = mails.filter((mail) => mail.isStarred)
         }
         if (sortBy.sortByDate) mails = _sortMails(mails, 'sortByDate')
-        else mails = _sortMails(mails, 'sortBySubject')
+        else if (sortBy.sortBySubject)
+            mails = _sortMails(mails, 'sortBySubject')
+        else if (sortBy.sortByFrom) mails = _sortMails(mails, 'sortByFrom')
         return mails
     })
 }
@@ -175,11 +179,11 @@ function toggleStarred(id) {
 }
 
 function getDefaultFilter() {
-    return { readFilter: 'All mails', inbox: true }
+    return {}
 }
 
 function getDefaultSort() {
-    return { sortByDate: true, sortBySubject: false }
+    return { sortByDate: true, sortBySubject: false, sortByFrom: false }
 }
 
 // private functions:
@@ -212,11 +216,14 @@ function _sortMails(mails, sortBy) {
         const newMail = mails.sort(
             (mailA, mailB) => mailB.sentAt - mailA.sentAt
         )
-
         return newMail
     } else if (sortBy === 'sortBySubject') {
         return mails.sort((mailA, mailB) =>
             mailA.subject.localeCompare(mailB.subject)
+        )
+    } else if (sortBy === 'sortByFrom') {
+        return mails.sort((mailA, mailB) =>
+            mailA.from.localeCompare(mailB.from)
         )
     }
 }
