@@ -1,19 +1,55 @@
 import { mailService } from '../services/mail.service.js'
 const { useState, useEffect, useRef } = React
+const { useNavigate, useLocation } = ReactRouterDOM
 
 export function MailFilter({ onSetFilter, filterBy, onSetSortBy, sortBy }) {
     const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
     const [sortByToEdit, setSortByToEdit] = useState(sortBy)
     const sortRefs = [useRef(null), useRef(null), useRef(null)]
+    const navigate = useNavigate()
+    const location = useLocation()
 
     useEffect(() => {
         onSetFilter(filterByToEdit)
         onSetSortBy(sortByToEdit)
+
+        // Update query string parameters and navigate to the updated URL
+        const queryParams = new URLSearchParams(location.search)
+        queryParams.set('filterBy', filterByToEdit.readFilter || 'All mails')
+        queryParams.set('sortBy', getTrueKey(sortByToEdit))
+        navigate({
+            search: queryParams.toString(),
+        })
     }, [filterByToEdit, sortByToEdit])
+
+    useEffect(() => {
+        // Retrieve query string parameters and update the state
+        const queryParams = new URLSearchParams(location.search)
+        const filterBy = queryParams.get('filterBy')
+        const sortBy = queryParams.get('sortBy')
+
+        setFilterByToEdit((prevFilterBy) => ({
+            ...prevFilterBy,
+            readFilter: filterBy || 'All mails',
+        }))
+
+        setSortByToEdit((prevSortBy) => ({
+            ...prevSortBy,
+            [sortBy]: true,
+        }))
+    }, [location.search])
 
     useEffect(() => {
         sortRefs[0].current.style.backgroundColor = '#d3e3fd'
     }, [])
+
+    function getTrueKey(obj) {
+        for (const key in obj) {
+            if (obj[key]) {
+                return key
+            }
+        }
+    }
 
     function handleChange({ target }) {
         const field = target.name
@@ -41,6 +77,14 @@ export function MailFilter({ onSetFilter, filterBy, onSetSortBy, sortBy }) {
                 }))
                 ref.current.style.backgroundColor = 'transparent'
             }
+        })
+
+        // Update query string parameters and navigate to the updated URL
+        const queryParams = new URLSearchParams(location.search)
+        queryParams.set('filterBy', filterByToEdit.readFilter || 'All mails')
+        queryParams.set('sortBy', getTrueKey(sortByToEdit))
+        navigate({
+            search: queryParams.toString(),
         })
     }
 

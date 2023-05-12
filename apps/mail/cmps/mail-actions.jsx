@@ -4,12 +4,18 @@ export function MailActions({
     onMarkUnread,
     filterBy,
     onRestoreMail,
+    onEditDraft,
 }) {
     return (
         <td className="mail-actions flex">
             {filterBy && filterBy.trashMails && (
                 <button onClick={(event) => onRestoreMail(event, mailId)}>
                     <img src="./assets/icons/restore.png" alt="" />
+                </button>
+            )}
+            {filterBy && filterBy.draftMails && (
+                <button onClick={(event) => onEditDraft(event, mailId)}>
+                    <img src="./assets/icons/edit.png" alt="" />
                 </button>
             )}
             <button>

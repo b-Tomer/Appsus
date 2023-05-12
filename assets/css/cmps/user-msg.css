@@ -1,13 +1,15 @@
 .user-msg {
     background-color: var(--mail-side-menu);
     padding: 1em;
-    position: absolute;
-    top: 1em;
-    right: 1em;
+    position: fixed;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    height: auto;
 }
 
 .user-msg.success {
-    background-color: lightgreen;
+    background-color: black;
 }
 
 .user-msg.error {

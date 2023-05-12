@@ -11,6 +11,7 @@ export function MailPreview({
     onStarMail,
     filterBy,
     onRestoreMail,
+    onEditDraft,
 }) {
     const [isHovered, setIsHovered] = useState(false)
 
@@ -58,6 +59,7 @@ export function MailPreview({
                     mailId={mail.id}
                     filterBy={filterBy}
                     onRestoreMail={onRestoreMail}
+                    onEditDraft={onEditDraft}
                 />
             )}
             {!isHovered && (

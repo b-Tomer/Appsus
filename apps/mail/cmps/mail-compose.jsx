@@ -1,7 +1,8 @@
 import { mailService } from '../services/mail.service.js'
+import { showSuccessMsg } from '../../../services/event-bus.service.js'
 const { useEffect, useState } = React
 
-export function MailCompose({ onToggleCompose }) {
+export function MailCompose({ onToggleCompose, onSaveDraft }) {
     const [data, setData] = useState({})
 
     const handleChange = (event) => {
@@ -12,7 +13,17 @@ export function MailCompose({ onToggleCompose }) {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        mailService.send(data).then(onToggleCompose())
+        mailService
+            .send(data)
+            .then(onToggleCompose())
+            .then(() => {
+                showSuccessMsg('Mail sent successfully')
+            })
+    }
+
+    function discardMsg() {
+        onToggleCompose()
+        showSuccessMsg('Mail discarded successfully')
     }
 
     return (
@@ -20,7 +31,14 @@ export function MailCompose({ onToggleCompose }) {
             <form onSubmit={handleSubmit}>
                 <div className="mail-compose-header">
                     <span>New message</span>
-                    <img src="./assets/icons/close.png" alt="" />
+                    <img
+                        onClick={() => {
+                            onSaveDraft(data.toUser, data.subject, data.body)
+                            onToggleCompose()
+                        }}
+                        src="./assets/icons/close.png"
+                        alt=""
+                    />
                 </div>
                 <div className="form-to">
                     <label htmlFor="to-user">To:</label>
@@ -54,10 +72,7 @@ export function MailCompose({ onToggleCompose }) {
                     <button type="submit" className="form-send-btn">
                         Send
                     </button>
-                    <button
-                        onClick={onToggleCompose}
-                        className="form-trash-btn"
-                    >
+                    <button onClick={discardMsg} className="form-trash-btn">
                         <img src="./assets/icons/delete.png" alt="" />
                     </button>
                 </div>

@@ -14,6 +14,7 @@ export const mailService = {
     toggleStarred,
     setTrash,
     restoreMail,
+    saveDraft,
 }
 
 const EMAILS_STORAGE_KEY = 'emailsDB'
@@ -31,6 +32,7 @@ const demoEmails = [
         to: 'user@appsus.com',
         isStarred: true,
         isTrash: false,
+        isDraft: false,
     },
     {
         id: utilService.makeId(),
@@ -43,6 +45,7 @@ const demoEmails = [
         shortFrom: _shortFrom('muki@muki.com'),
         to: 'user@appsus.com',
         isStarred: true,
+        isDraft: false,
         isTrash: false,
     },
     {
@@ -56,6 +59,7 @@ const demoEmails = [
         shortFrom: _shortFrom('muki@muki.com'),
         to: 'user@appsus.com',
         isStarred: false,
+        isDraft: false,
         isTrash: true,
     },
     {
@@ -69,6 +73,7 @@ const demoEmails = [
         shortFrom: _shortFrom('buki@muki.com'),
         to: 'user@appsus.com',
         isStarred: false,
+        isDraft: false,
         isTrash: false,
     },
     {
@@ -82,6 +87,7 @@ const demoEmails = [
         shortFrom: _shortFrom('shuki@muki.com'),
         to: 'user@appsus.com',
         isStarred: true,
+        isDraft: false,
         isTrash: false,
     },
     {
@@ -95,6 +101,7 @@ const demoEmails = [
         shortFrom: _shortFrom('user@appsus.com'),
         to: 'user@appsus.com',
         isStarred: false,
+        isDraft: false,
         isTrash: false,
     },
     {
@@ -109,6 +116,7 @@ const demoEmails = [
         shortFrom: _shortFrom('english-personalized-digest@quora.com'),
         to: 'user@appsus.com',
         isStarred: true,
+        isDraft: false,
         isTrash: false,
     },
     {
@@ -122,6 +130,7 @@ const demoEmails = [
         shortFrom: _shortFrom('darkestsecrets-space@quora.com'),
         to: 'user@appsus.com',
         isStarred: false,
+        isDraft: false,
         isTrash: false,
     },
     {
@@ -135,6 +144,7 @@ const demoEmails = [
         shortFrom: _shortFrom('googleplay-noreply@google.com'),
         to: 'user@appsus.com',
         isStarred: true,
+        isDraft: false,
         isTrash: false,
     },
     {
@@ -148,6 +158,7 @@ const demoEmails = [
         shortFrom: _shortFrom('info@wolt.com'),
         to: 'user@appsus.com',
         isStarred: false,
+        isDraft: false,
         isTrash: false,
     },
     {
@@ -162,6 +173,7 @@ const demoEmails = [
         shortFrom: _shortFrom('noreply@medium.com'),
         to: 'user@appsus.com',
         isStarred: false,
+        isDraft: false,
         isTrash: false,
     },
 ]
@@ -189,20 +201,32 @@ function query(filterBy = {}, sortBy = {}) {
         }
         if (filterBy.inbox === true) {
             mails = mails.filter(
-                (mail) => mail.from !== loggedinUser.email && !mail.isTrash
+                (mail) =>
+                    mail.from !== loggedinUser.email &&
+                    !mail.isTrash &&
+                    !mail.isDraft
             )
         }
         if (filterBy.sentMails === true) {
             mails = mails.filter(
-                (mail) => mail.from === loggedinUser.email && !mail.isTrash
+                (mail) =>
+                    mail.from === loggedinUser.email &&
+                    !mail.isTrash &&
+                    !mail.isDraft
             )
         }
         if (filterBy.starredMails === true) {
-            mails = mails.filter((mail) => mail.isStarred && !mail.isTrash)
+            mails = mails.filter(
+                (mail) => mail.isStarred && !mail.isTrash && !mail.isDraft
+            )
         }
         if (filterBy.trashMails === true) {
-            mails = mails.filter((mail) => mail.isTrash)
+            mails = mails.filter((mail) => mail.isTrash && !mail.isDraft)
         }
+        if (filterBy.draftMails === true) {
+            mails = mails.filter((mail) => mail.isDraft && !mail.isTrash)
+        }
+
         if (sortBy.sortByDate) mails = _sortMails(mails, 'sortByDate')
         else if (sortBy.sortBySubject)
             mails = _sortMails(mails, 'sortBySubject')
@@ -227,38 +251,44 @@ function send(mailData) {
 }
 
 function setUnread(id) {
-    asyncStorageService.get(EMAILS_STORAGE_KEY, id).then((mail) => {
+    return asyncStorageService.get(EMAILS_STORAGE_KEY, id).then((mail) => {
         mail.isRead = false
         return asyncStorageService.put(EMAILS_STORAGE_KEY, mail)
     })
 }
 
 function setRead(id) {
-    asyncStorageService.get(EMAILS_STORAGE_KEY, id).then((mail) => {
+    return asyncStorageService.get(EMAILS_STORAGE_KEY, id).then((mail) => {
         mail.isRead = true
         return asyncStorageService.put(EMAILS_STORAGE_KEY, mail)
     })
 }
 
 function setTrash(id) {
-    asyncStorageService.get(EMAILS_STORAGE_KEY, id).then((mail) => {
+    return asyncStorageService.get(EMAILS_STORAGE_KEY, id).then((mail) => {
         mail.isTrash = true
         return asyncStorageService.put(EMAILS_STORAGE_KEY, mail)
     })
 }
 
 function restoreMail(id) {
-    asyncStorageService.get(EMAILS_STORAGE_KEY, id).then((mail) => {
+    return asyncStorageService.get(EMAILS_STORAGE_KEY, id).then((mail) => {
         mail.isTrash = false
         return asyncStorageService.put(EMAILS_STORAGE_KEY, mail)
     })
 }
 
 function toggleStarred(id) {
-    asyncStorageService.get(EMAILS_STORAGE_KEY, id).then((mail) => {
+    return asyncStorageService.get(EMAILS_STORAGE_KEY, id).then((mail) => {
         mail.isStarred = !mail.isStarred
         return asyncStorageService.put(EMAILS_STORAGE_KEY, mail)
     })
+}
+
+function saveDraft(to, subject, body) {
+    const newMail = _createEmail(to, subject, body)
+    newMail.isDraft = true
+    return asyncStorageService.post(EMAILS_STORAGE_KEY, newMail)
 }
 
 function getDefaultFilter() {
@@ -292,6 +322,7 @@ function _createEmail({ toUser, subject, body }) {
     mail.to = toUser
     mail.isStarred = false
     mail.isTrash = false
+    mail.isDraft = false
     return mail
 }
 

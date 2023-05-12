@@ -1,11 +1,14 @@
 import { mailService } from '../services/mail.service.js'
+import { eventBusService } from '../../../services/event-bus.service.js'
+import { showSuccessMsg } from '../../../services/event-bus.service.js'
 import { MailList } from '../cmps/mail-list.jsx'
 import { MailDetails } from '../cmps/mail-details.jsx'
 import { MailMenu } from '../cmps/mail-menu.jsx'
 import { MailHeader } from '../cmps/mail-header.jsx'
+import { UserMsg } from '../../../cmps/user-msg.jsx'
 
 const { useEffect, useState } = React
-const { useParams, useNavigate } = ReactRouterDOM
+const { useParams, useNavigate, useLocation } = ReactRouterDOM
 
 export function MailIndex() {
     const [isCompose, setIsCompose] = useState(false)
@@ -14,6 +17,19 @@ export function MailIndex() {
     const [mails, setMails] = useState([])
     const params = useParams()
     const navigate = useNavigate()
+    const location = useLocation()
+
+    useEffect(() => {
+        const showUserMsgListener = eventBusService.on(
+            'show-user-msg',
+            (msg) => {
+                console.log('Received show-user-msg event:', msg)
+            }
+        )
+        return () => {
+            showUserMsgListener()
+        }
+    }, [])
 
     function onSetSortBy(sortBy) {
         setSortBy((prevSortBy) => ({ ...prevSortBy, ...sortBy }))
@@ -32,6 +48,7 @@ export function MailIndex() {
     }
 
     function onRemoveMail(ev, id) {
+        if (!id) return
         ev.stopPropagation()
         const currMail = mails.find((mail) => mail.id === id)
         if (currMail.isTrash) {
@@ -42,6 +59,7 @@ export function MailIndex() {
                         if (params && Object.keys(params).length > 0) {
                             navigate('/mail')
                         }
+                        showSuccessMsg('Mail deleted successfully')
                     })
                     .then(loadMails)
                     .catch((error) => {
@@ -55,6 +73,7 @@ export function MailIndex() {
                     if (params && Object.keys(params).length > 0) {
                         navigate('/mail')
                     }
+                    showSuccessMsg('Mail sent to trash successfully')
                 })
                 .then(loadMails)
                 .catch((error) => {
@@ -64,6 +83,7 @@ export function MailIndex() {
     }
 
     function onMarkUnread(ev, id) {
+        if (!id || !ev) return
         ev.stopPropagation()
         mailService
             .setUnread(id)
@@ -74,6 +94,7 @@ export function MailIndex() {
     }
 
     function onStarMail(ev, id) {
+        if (!id) return
         ev.stopPropagation()
         mailService
             .toggleStarred(id)
@@ -84,10 +105,14 @@ export function MailIndex() {
     }
 
     function onRestoreMail(ev, id) {
+        if (!id) return
         ev.stopPropagation()
         if (confirm('Are you sure you wish to restore this email?')) {
             mailService
                 .restoreMail(id)
+                .then(() => {
+                    showSuccessMsg('Mail restored successfully')
+                })
                 .then(loadMails)
                 .catch((error) => {
                     console.error('Failed to restore mail :', error)
@@ -105,11 +130,27 @@ export function MailIndex() {
         return count
     }
 
+    function onSaveDraft(to, subject, body) {
+        // console.log(`to: ${to}, sub: ${subject}, body: ${body}`)
+        if (!to && !subject && !body) return
+        mailService
+            .saveDraft(to, subject, body)
+            .then(loadMails)
+            .then(() => {
+                showSuccessMsg('Mail saved to draft successfully')
+            })
+            .catch((error) => {
+                console.error('Failed to save mail as draft :', error)
+            })
+    }
+
+    function onEditDraft() {}
+
     function onSetFilter(filterBy) {
         setFilterBy((prevFilterBy) => ({ ...prevFilterBy, ...filterBy }))
     }
 
-    function onToggleCompose(event) {
+    function onToggleCompose() {
         setIsCompose(!isCompose)
     }
 
@@ -125,6 +166,7 @@ export function MailIndex() {
                         countUnread={countUnread}
                         onSetFilter={onSetFilter}
                         filterBy={filterBy}
+                        onSaveDraft={onSaveDraft}
                     />
                 </aside>
 
@@ -151,10 +193,12 @@ export function MailIndex() {
                             countUnread={countUnread}
                             onStarMail={onStarMail}
                             onRestoreMail={onRestoreMail}
+                            onEditDraft={onEditDraft}
                         />
                     </div>
                 )}
             </main>
+            <UserMsg />
         </React.Fragment>
     )
 }

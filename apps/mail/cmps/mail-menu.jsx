@@ -1,5 +1,6 @@
 import { MailCompose } from '../cmps/mail-compose.jsx'
 const { useEffect, useRef, useState } = React
+const { useNavigate, useLocation } = ReactRouterDOM
 
 export function MailMenu({
     onToggleCompose,
@@ -8,7 +9,10 @@ export function MailMenu({
     mails,
     onSetFilter,
     filterBy,
+    onSaveDraft,
 }) {
+    const navigate = useNavigate()
+    const location = useLocation()
     const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
     const categoryRefs = [
         useRef(null),
@@ -19,7 +23,18 @@ export function MailMenu({
     ]
 
     useEffect(() => {
-        handleClick(0)
+        const queryParams = new URLSearchParams(location.search)
+        const category = queryParams.get('category')
+        setFilterByToEdit((prevFilterBy) => ({
+            ...prevFilterBy,
+            [category]: true,
+        }))
+        if (!category) {
+            queryParams.set('category', 'inbox')
+            navigate({
+                search: queryParams.toString(),
+            })
+        }
     }, [])
 
     useEffect(() => {
@@ -31,10 +46,19 @@ export function MailMenu({
     }, [mails])
 
     function handleClick(index) {
+        const queryParams = new URLSearchParams(location.search)
+        const category = categoryRefs[index].current.name
+
+        queryParams.set('category', category)
+        navigate({
+            search: queryParams.toString(),
+        })
+
         categoryRefs.forEach((ref, i) => {
             let field = ref.current.name
             let value
             const elSpanChild = ref.current.querySelector('span')
+
             if (i === index) {
                 ref.current.classList.add('selected')
                 ref.current.classList.remove('unselected')
@@ -46,10 +70,15 @@ export function MailMenu({
                 value = false
                 elSpanChild.style.display = 'none'
             }
+
             setFilterByToEdit((prevFilterBy) => ({
                 ...prevFilterBy,
                 [field]: value,
             }))
+        })
+        queryParams.set('category', category)
+        navigate({
+            search: queryParams.toString(),
         })
     }
 
@@ -115,7 +144,12 @@ export function MailMenu({
                 </button>
             </div>
 
-            {isCompose && <MailCompose onToggleCompose={onToggleCompose} />}
+            {isCompose && (
+                <MailCompose
+                    onToggleCompose={onToggleCompose}
+                    onSaveDraft={onSaveDraft}
+                />
+            )}
         </React.Fragment>
     )
 }
