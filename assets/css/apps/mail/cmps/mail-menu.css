@@ -64,7 +64,6 @@
 
 .mail-categories button:hover {
     background-color: var(--hover-color);
-    padding: 0;
 }
 
 .mail-menu-container:hover .mail-categories img {

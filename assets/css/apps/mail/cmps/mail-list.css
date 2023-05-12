@@ -51,10 +51,6 @@ table {
     cursor: pointer;
 }
 
-.mail-preview img {
-    width: 20px;
-}
-
 .mail-preview button {
     margin-block: 0;
     padding-block: 0;
@@ -72,18 +68,26 @@ table {
 }
 
 .mail-actions button {
-    margin-inline-start: 10px;
+    margin-inline-start: 15px;
+    width: 15px;
+    padding: 0;
+}
+
+.mail-actions img {
+    width: 100%;
 }
 
 .mail-from {
     margin-inline-end: 20px;
-    min-width: 50px;
+    width: 150px;
+    min-width: 70px;
 }
 
 .mail-subject {
     flex-basis: 10%;
     white-space: nowrap;
-    min-width: 100px;
+    width: 150px;
+    min-width: 70px;
     margin-inline-end: 20px;
 }
 
@@ -95,6 +99,14 @@ table {
 .mail-date {
     white-space: nowrap;
     width: auto;
+}
+
+.mail-star button {
+    margin-inline: 10px;
+}
+
+.mail-star button:hover {
+    background-color: transparent;
 }
 
 .unread {

@@ -11,6 +11,7 @@ export const mailService = {
     setRead,
     getDefaultFilter,
     getDefaultSort,
+    toggleStarred,
 }
 
 const EMAILS_STORAGE_KEY = 'emailsDB'
@@ -26,6 +27,7 @@ const demoEmails = [
         from: 'momo@momo.com',
         shortFrom: _shortFrom('momo@momo.com'),
         to: 'user@appsus.com',
+        isStarred: true,
     },
     {
         id: utilService.makeId(),
@@ -37,6 +39,7 @@ const demoEmails = [
         from: 'muki@muki.com',
         shortFrom: _shortFrom('muki@muki.com'),
         to: 'user@appsus.com',
+        isStarred: true,
     },
     {
         id: utilService.makeId(),
@@ -48,6 +51,7 @@ const demoEmails = [
         from: 'muki@muki.com',
         shortFrom: _shortFrom('muki@muki.com'),
         to: 'user@appsus.com',
+        isStarred: false,
     },
     {
         id: utilService.makeId(),
@@ -59,6 +63,7 @@ const demoEmails = [
         from: 'buki@muki.com',
         shortFrom: _shortFrom('buki@muki.com'),
         to: 'user@appsus.com',
+        isStarred: false,
     },
     {
         id: utilService.makeId(),
@@ -70,6 +75,32 @@ const demoEmails = [
         from: 'shuki@muki.com',
         shortFrom: _shortFrom('shuki@muki.com'),
         to: 'user@appsus.com',
+        isStarred: true,
+    },
+    {
+        id: utilService.makeId(),
+        subject: 'How do I embed a big file (>1 GB) in a C++ program?',
+        body: 'Some people say: "Write DRY code". However, that is the last thing I care about. Even after 1 year in programming my main concern is the functionality. I have seen even senior developers not caring about aesthetics. Is this normal?',
+        isRead: false,
+        sentAt: 1551032930594,
+        removedAt: null,
+        from: 'user@appsus.com',
+        shortFrom: _shortFrom('user@appsus.com'),
+        to: 'user@appsus.com',
+        isStarred: false,
+    },
+    {
+        id: utilService.makeId(),
+        subject:
+            'Why cant an OS be written in pure C or C++? Why are some certain parts of every OS w...?',
+        body: 'Why cant an OS be written in pure C or C++? Why are some certain parts of every OS written in assembly? Ages ago when I built a realtime OS, it was written about 99% in pure C. The only part that wasnt (~50 lines) was what handled context switching. It required dumping and swapping the contents of registers. I may have been able to write it in C, but the “asm” block was actually quite easy to understand, and quite short. Other than that, there are instances where the optimiser of the day wasn’t able to produce equivalent instructions that were as efficient. Today? Im pretty sure that isnt true; provably. (fixed spelling)',
+        isRead: false,
+        sentAt: 1551532930594,
+        removedAt: null,
+        from: 'english-personalized-digest@quora.com',
+        shortFrom: _shortFrom('english-personalized-digest@quora.com'),
+        to: 'user@appsus.com',
+        isStarred: true,
     },
 ]
 
@@ -92,8 +123,14 @@ function query(filterBy = {}, sortBy = {}) {
         if (filterBy.readFilter === 'Unread') {
             mails = mails.filter((mail) => !mail.isRead)
         }
+        if (filterBy.inbox === true) {
+            mails = mails.filter((mail) => mail.from !== loggedinUser.email)
+        }
         if (filterBy.sentMails === true) {
             mails = mails.filter((mail) => mail.from === loggedinUser.email)
+        }
+        if (filterBy.starredMails === true) {
+            mails = mails.filter((mail) => mail.isStarred)
         }
         if (sortBy.sortByDate) mails = _sortMails(mails, 'sortByDate')
         else mails = _sortMails(mails, 'sortBySubject')
@@ -120,9 +157,6 @@ function setUnread(id) {
     asyncStorageService.get(EMAILS_STORAGE_KEY, id).then((mail) => {
         mail.isRead = false
         return asyncStorageService.put(EMAILS_STORAGE_KEY, mail)
-        // .then((mail) => {
-        //     return mail
-        // })
     })
 }
 
@@ -130,14 +164,18 @@ function setRead(id) {
     asyncStorageService.get(EMAILS_STORAGE_KEY, id).then((mail) => {
         mail.isRead = true
         return asyncStorageService.put(EMAILS_STORAGE_KEY, mail)
-        // .then((mail) => {
-        //     return mail
-        // })
+    })
+}
+
+function toggleStarred(id) {
+    asyncStorageService.get(EMAILS_STORAGE_KEY, id).then((mail) => {
+        mail.isStarred = !mail.isStarred
+        return asyncStorageService.put(EMAILS_STORAGE_KEY, mail)
     })
 }
 
 function getDefaultFilter() {
-    return { readFilter: 'All mails' }
+    return { readFilter: 'All mails', inbox: true }
 }
 
 function getDefaultSort() {
@@ -165,6 +203,7 @@ function _createEmail({ toUser, subject, body }) {
     mail.from = loggedinUser.email
     mail.shortFrom = _shortFrom(mail.from)
     mail.to = toUser
+    mail.isStarred = false
     return mail
 }
 
