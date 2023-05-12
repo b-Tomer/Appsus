@@ -82,19 +82,21 @@ justify-self: flex-end;
     justify-content: end;
  
 }
-.bookk {
-    font-size: 1.7rem;
-    color: rgb(187, 57, 40);
-    padding: 0;
-}
-.gmaill{
+.keep-icons {
+    font-size: 1.3rem;
     padding: 0;
     margin: 0;
 }
 
+.gmaill{
+    padding: 0;
+    margin-bottom: 1px;
+    margin-right: 3px;
+}
+
 .gmaill-img{
-    min-width: 30px;
-    width: 30px;
+    min-width: 20px;
+    width: 23px;
     padding: 0;
 }
 
