@@ -19,6 +19,7 @@ export function MailList({
     onMarkUnread,
     countUnread,
     onStarMail,
+    onRestoreMail,
 }) {
     const navigate = useNavigate()
 
@@ -71,6 +72,8 @@ export function MailList({
                                 onRemoveMail={onRemoveMail}
                                 onMarkUnread={onMarkUnread}
                                 onStarMail={onStarMail}
+                                filterBy={filterBy}
+                                onRestoreMail={onRestoreMail}
                             />
                         ))}
                     </tbody>

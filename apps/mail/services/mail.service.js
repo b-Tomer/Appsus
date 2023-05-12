@@ -13,6 +13,7 @@ export const mailService = {
     getDefaultSort,
     toggleStarred,
     setTrash,
+    restoreMail,
 }
 
 const EMAILS_STORAGE_KEY = 'emailsDB'
@@ -228,6 +229,13 @@ function setRead(id) {
 function setTrash(id) {
     asyncStorageService.get(EMAILS_STORAGE_KEY, id).then((mail) => {
         mail.isTrash = true
+        return asyncStorageService.put(EMAILS_STORAGE_KEY, mail)
+    })
+}
+
+function restoreMail(id) {
+    asyncStorageService.get(EMAILS_STORAGE_KEY, id).then((mail) => {
+        mail.isTrash = false
         return asyncStorageService.put(EMAILS_STORAGE_KEY, mail)
     })
 }

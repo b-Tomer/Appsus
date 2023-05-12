@@ -9,6 +9,8 @@ export function MailPreview({
     onRemoveMail,
     onMarkUnread,
     onStarMail,
+    filterBy,
+    onRestoreMail,
 }) {
     const [isHovered, setIsHovered] = useState(false)
 
@@ -54,6 +56,8 @@ export function MailPreview({
                     onRemoveMail={onRemoveMail}
                     onMarkUnread={onMarkUnread}
                     mailId={mail.id}
+                    filterBy={filterBy}
+                    onRestoreMail={onRestoreMail}
                 />
             )}
             {!isHovered && (

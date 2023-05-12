@@ -83,6 +83,18 @@ export function MailIndex() {
             })
     }
 
+    function onRestoreMail(ev, id) {
+        ev.stopPropagation()
+        if (confirm('Are you sure you wish to restore this email?')) {
+            mailService
+                .restoreMail(id)
+                .then(loadMails)
+                .catch((error) => {
+                    console.error('Failed to restore mail :', error)
+                })
+        }
+    }
+
     function countUnread() {
         let count = mails.reduce((acc, mail) => {
             if (mail.isRead === false) {
@@ -138,6 +150,7 @@ export function MailIndex() {
                             onMarkUnread={onMarkUnread}
                             countUnread={countUnread}
                             onStarMail={onStarMail}
+                            onRestoreMail={onRestoreMail}
                         />
                     </div>
                 )}

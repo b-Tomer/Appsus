@@ -1,6 +1,17 @@
-export function MailActions({ onRemoveMail, mailId, onMarkUnread }) {
+export function MailActions({
+    onRemoveMail,
+    mailId,
+    onMarkUnread,
+    filterBy,
+    onRestoreMail,
+}) {
     return (
         <td className="mail-actions flex">
+            {filterBy.trashMails && (
+                <button onClick={(event) => onRestoreMail(event, mailId)}>
+                    <img src="./assets/icons/restore.png" alt="" />
+                </button>
+            )}
             <button>
                 <img src="./assets/icons/reply.png" alt="" />
             </button>
