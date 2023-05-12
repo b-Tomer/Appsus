@@ -24,6 +24,7 @@ const demoEmails = [
         sentAt: 1551133930594,
         removedAt: null,
         from: 'momo@momo.com',
+        shortFrom: _shortFrom('momo@momo.com'),
         to: 'user@appsus.com',
     },
     {
@@ -34,6 +35,7 @@ const demoEmails = [
         sentAt: 1551132930594,
         removedAt: null,
         from: 'muki@muki.com',
+        shortFrom: _shortFrom('muki@muki.com'),
         to: 'user@appsus.com',
     },
     {
@@ -44,6 +46,7 @@ const demoEmails = [
         sentAt: Date.now(),
         removedAt: null,
         from: 'muki@muki.com',
+        shortFrom: _shortFrom('muki@muki.com'),
         to: 'user@appsus.com',
     },
     {
@@ -53,7 +56,8 @@ const demoEmails = [
         isRead: true,
         sentAt: 1551032930594,
         removedAt: null,
-        from: 'muki@muki.com',
+        from: 'buki@muki.com',
+        shortFrom: _shortFrom('buki@muki.com'),
         to: 'user@appsus.com',
     },
     {
@@ -63,7 +67,8 @@ const demoEmails = [
         isRead: true,
         sentAt: 1521032930594,
         removedAt: null,
-        from: 'muki@muki.com',
+        from: 'shuki@muki.com',
+        shortFrom: _shortFrom('shuki@muki.com'),
         to: 'user@appsus.com',
     },
 ]
@@ -155,6 +160,7 @@ function _createEmail({ toUser, subject, body }) {
     mail.sentAt = Date.now()
     mail.removedAt = null
     mail.from = loggedinUser.email
+    mail.shortFrom = _shortFrom(mail.from)
     mail.to = toUser
     return mail
 }
@@ -170,5 +176,15 @@ function _sortMails(mails, sortBy) {
         return mails.sort((mailA, mailB) =>
             mailA.subject.localeCompare(mailB.subject)
         )
+    }
+}
+
+function _shortFrom(str) {
+    const atIndex = str.indexOf('@')
+
+    if (atIndex !== -1) {
+        return str.substring(0, atIndex)
+    } else {
+        return str
     }
 }

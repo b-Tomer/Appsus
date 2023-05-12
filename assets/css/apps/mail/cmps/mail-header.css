@@ -1,8 +1,8 @@
 .mail-header {
     display: flex;
     justify-content: space-between;
-    margin-block: 10px;
-    margin-inline-start: 20px;
+    padding-block: 10px;
+    padding-inline-start: 20px;
     background-color: var(--shown-mail-bg-color);
 }
 

@@ -12,7 +12,7 @@ export function MailFilter({ onSetFilter, filterBy, onSetSortBy, sortBy }) {
     }, [filterByToEdit, sortByToEdit])
 
     useEffect(() => {
-        sortRefs[0].current.style.backgroundColor = 'lightgray'
+        sortRefs[0].current.style.backgroundColor = '#d3e3fd'
     }, [])
 
     function handleChange({ target }) {
@@ -33,7 +33,7 @@ export function MailFilter({ onSetFilter, filterBy, onSetSortBy, sortBy }) {
                     ...prevSortBy,
                     [field]: true,
                 }))
-                ref.current.style.backgroundColor = 'lightgray'
+                ref.current.style.backgroundColor = '#d3e3fd'
             } else {
                 setSortByToEdit((prevSortBy) => ({
                     ...prevSortBy,
@@ -49,19 +49,19 @@ export function MailFilter({ onSetFilter, filterBy, onSetSortBy, sortBy }) {
     return (
         <section>
             <form className="mail-filter">
-                <input
+                <select
+                    className="filter-read"
                     value={readFilter}
                     name="readFilter"
-                    type="text"
-                    list="mailFilters"
-                    id="mailFilterInput"
                     onChange={handleChange}
-                />
-                <datalist id="mailFilters">
-                    <option value="All mails" />
-                    <option value="Read" />
-                    <option value="Unread" />
-                </datalist>
+                >
+                    <option selected value="All mails">
+                        All mails
+                    </option>
+                    <option value="Read">Read</option>
+                    <option value="Unread">Unread</option>
+                </select>
+
                 <button
                     className="sort-date"
                     onClick={(event) => handleClick(event, 0)}
