@@ -1,0 +1,52 @@
+.email-deatils {
+    /* margin-inline-start: 100px; */
+}
+
+.email-details-tools {
+    border-block-end: 1px var(--details-border-color) solid;
+}
+
+.details-actions-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.details-actions-container .details-back {
+    margin-inline-start: 100px;
+    background-color: transparent;
+}
+
+.details-actions-container .mail-actions {
+    margin-inline-start: auto;
+    justify-content: end;
+}
+
+.details-actions-container .mail-actions button {
+    background-color: transparent;
+    margin-inline-end: 20px;
+}
+
+.details-actions-container img {
+    width: 30px;
+    height: 30px;
+}
+
+.email-details-content {
+    margin-inline-start: 100px;
+    margin-block-start: 20px;
+}
+
+.email-details-content .details-subject {
+    font-size: 1.5rem;
+    font-family: roboto-bold;
+}
+
+.email-details-content .details-from {
+    font-size: 1.2rem;
+}
+
+.email-details-content .details-body {
+    font-size: 1rem;
+    margin-block-start: 20px;
+    margin-inline-start: 20px;
+}

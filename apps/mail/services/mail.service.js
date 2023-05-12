@@ -24,6 +24,7 @@ const demoEmails = [
         sentAt: 1551133930594,
         removedAt: null,
         from: 'momo@momo.com',
+        shortFrom: _shortFrom('momo@momo.com'),
         to: 'user@appsus.com',
     },
     {
@@ -34,6 +35,7 @@ const demoEmails = [
         sentAt: 1551132930594,
         removedAt: null,
         from: 'muki@muki.com',
+        shortFrom: _shortFrom('muki@muki.com'),
         to: 'user@appsus.com',
     },
     {
@@ -44,6 +46,29 @@ const demoEmails = [
         sentAt: Date.now(),
         removedAt: null,
         from: 'muki@muki.com',
+        shortFrom: _shortFrom('muki@muki.com'),
+        to: 'user@appsus.com',
+    },
+    {
+        id: utilService.makeId(),
+        subject: 'How do I embed a big file (>1 GB) in a C++ program?',
+        body: 'Some people say: "Write DRY code". However, that is the last thing I care about. Even after 1 year in programming my main concern is the functionality. I have seen even senior developers not caring about aesthetics. Is this normal?',
+        isRead: false,
+        sentAt: 1551032930594,
+        removedAt: null,
+        from: 'buki@muki.com',
+        shortFrom: _shortFrom('buki@muki.com'),
+        to: 'user@appsus.com',
+    },
+    {
+        id: utilService.makeId(),
+        subject: 'Is C++ the best programming language to learn first?',
+        body: 'Is C++ the best language to start programming No No no no. My god, no  C++ is great … and terrible. Its big and complicated and gnarly. Start with a simpler language, for your own sanity. When you run into the limits of what you can do with another language, C++ will be there waiting for you and youll have learnt enough to know why the complexities of C++ are (sometimes) worth it. But dont start there.',
+        isRead: false,
+        sentAt: 1521032930594,
+        removedAt: null,
+        from: 'shuki@muki.com',
+        shortFrom: _shortFrom('shuki@muki.com'),
         to: 'user@appsus.com',
     },
 ]
@@ -66,6 +91,9 @@ function query(filterBy = {}, sortBy = {}) {
         }
         if (filterBy.readFilter === 'Unread') {
             mails = mails.filter((mail) => !mail.isRead)
+        }
+        if (filterBy.sentMails === true) {
+            mails = mails.filter((mail) => mail.from === loggedinUser.email)
         }
         if (sortBy.sortByDate) mails = _sortMails(mails, 'sortByDate')
         else mails = _sortMails(mails, 'sortBySubject')
@@ -91,22 +119,20 @@ function send(mailData) {
 function setUnread(id) {
     asyncStorageService.get(EMAILS_STORAGE_KEY, id).then((mail) => {
         mail.isRead = false
-        return asyncStorageService
-            .put(EMAILS_STORAGE_KEY, mail)
-            .then((mail) => {
-                return mail
-            })
+        return asyncStorageService.put(EMAILS_STORAGE_KEY, mail)
+        // .then((mail) => {
+        //     return mail
+        // })
     })
 }
 
 function setRead(id) {
     asyncStorageService.get(EMAILS_STORAGE_KEY, id).then((mail) => {
         mail.isRead = true
-        return asyncStorageService
-            .put(EMAILS_STORAGE_KEY, mail)
-            .then((mail) => {
-                return mail
-            })
+        return asyncStorageService.put(EMAILS_STORAGE_KEY, mail)
+        // .then((mail) => {
+        //     return mail
+        // })
     })
 }
 
@@ -137,6 +163,7 @@ function _createEmail({ toUser, subject, body }) {
     mail.sentAt = Date.now()
     mail.removedAt = null
     mail.from = loggedinUser.email
+    mail.shortFrom = _shortFrom(mail.from)
     mail.to = toUser
     return mail
 }
@@ -152,5 +179,15 @@ function _sortMails(mails, sortBy) {
         return mails.sort((mailA, mailB) =>
             mailA.subject.localeCompare(mailB.subject)
         )
+    }
+}
+
+function _shortFrom(str) {
+    const atIndex = str.indexOf('@')
+
+    if (atIndex !== -1) {
+        return str.substring(0, atIndex)
+    } else {
+        return str
     }
 }
