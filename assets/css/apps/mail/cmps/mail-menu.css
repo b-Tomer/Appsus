@@ -28,6 +28,7 @@
 
 .mail-menu-container:hover .selected {
     border-radius: 0 50px 50px 0;
+    font-family: roboto-bold;
 }
 
 .mail-menu-container:hover .unselected {
@@ -44,9 +45,11 @@
     position: relative;
     height: 50px;
     margin-inline: 10px;
-
     display: flex;
     align-items: center;
+    justify-content: flex-start;
+    justify-items: flex-start;
+    padding-inline-end: 20px;
 }
 
 .mail-categories button img {
@@ -62,6 +65,10 @@
 .mail-categories button:hover {
     background-color: var(--hover-color);
     padding: 0;
+}
+
+.mail-menu-container:hover img {
+    left: 20%;
 }
 
 .compose-mail {
@@ -95,8 +102,11 @@
 .mail-menu-container:hover .mail-categories button::after {
     content: '';
     font-size: 1rem;
-    font-family: roboto-bold;
     margin-inline-start: 10px;
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    transform: translate(-50%, -50%);
 }
 
 .mail-menu-container:hover .mail-categories .mail-inbox::after {
@@ -117,6 +127,16 @@
 
 .mail-menu-container:hover .mail-categories .mail-trash::after {
     content: 'Trash';
+}
+
+.mail-inbox .unread-count {
+    display: none;
+}
+
+.mail-menu-container:hover .mail-inbox .unread-count {
+    display: inline;
+    font-family: roboto-bold;
+    margin-inline-start: auto;
 }
 
 .mail-menu-container:hover .compose-mail {

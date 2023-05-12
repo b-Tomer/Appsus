@@ -1,7 +1,7 @@
 import { MailCompose } from '../cmps/mail-compose.jsx'
 const { useEffect, useRef } = React
 
-export function MailMenu({ onToggleCompose, isCompose }) {
+export function MailMenu({ onToggleCompose, isCompose, countUnread, mails }) {
     const categoryRefs = [
         useRef(null),
         useRef(null),
@@ -14,6 +14,10 @@ export function MailMenu({ onToggleCompose, isCompose }) {
         categoryRefs[0].current.classList.add('selected')
         categoryRefs[0].current.classList.remove('unselected')
     }, [])
+
+    useEffect(() => {
+        countUnread()
+    }, [mails])
 
     function handleClick(index) {
         categoryRefs.forEach((ref, i) => {
@@ -44,6 +48,7 @@ export function MailMenu({ onToggleCompose, isCompose }) {
                     ref={categoryRefs[0]}
                 >
                     <img src="./assets/icons/inbox.png" alt="" />
+                    <span className="unread-count">{countUnread()}</span>
                 </button>
 
                 <button

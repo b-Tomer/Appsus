@@ -25,6 +25,7 @@ export function MailIndex() {
             .query(filterBy, sortBy)
             .then((mails) => {
                 setMails(mails)
+                countUnread(mails)
             })
             .catch((error) => {
                 console.error('Failed to load mails:', error)
@@ -44,6 +45,7 @@ export function MailIndex() {
                         navigate('/mail')
                     }
                 })
+                .then(loadMails)
                 .catch((error) => {
                     console.error('Failed to remove mail:', error)
                 })
@@ -64,9 +66,22 @@ export function MailIndex() {
                     })
                 })
             })
+            .then(loadMails)
+            .then(countUnread)
             .catch((error) => {
                 console.error('Failed to mark mail as unread:', error)
             })
+    }
+
+    function countUnread() {
+        let count = mails.reduce((acc, mail) => {
+            if (mail.isRead === false) {
+                return acc + 1
+            }
+            return acc
+        }, 0)
+        // console.log(count)
+        return count
     }
 
     function onSetFilter(filterBy) {
@@ -85,6 +100,8 @@ export function MailIndex() {
                     <MailMenu
                         onToggleCompose={onToggleCompose}
                         isCompose={isCompose}
+                        mails={mails}
+                        countUnread={countUnread}
                     />
                 </aside>
 
@@ -108,6 +125,7 @@ export function MailIndex() {
                             setMails={setMails}
                             onRemoveMail={onRemoveMail}
                             onMarkUnread={onMarkUnread}
+                            countUnread={countUnread}
                         />
                     </div>
                 )}

@@ -55,9 +55,7 @@ export function MailFilter({ onSetFilter, filterBy, onSetSortBy, sortBy }) {
                     name="readFilter"
                     onChange={handleChange}
                 >
-                    <option selected value="All mails">
-                        All mails
-                    </option>
+                    <option value="All mails">All mails</option>
                     <option value="Read">Read</option>
                     <option value="Unread">Unread</option>
                 </select>

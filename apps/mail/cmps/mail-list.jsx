@@ -17,11 +17,15 @@ export function MailList({
     setMails,
     onRemoveMail,
     onMarkUnread,
+    countUnread,
 }) {
     const navigate = useNavigate()
 
     useEffect(() => {
-        console.log('rndring')
+        loadMails()
+    }, [])
+
+    useEffect(() => {
         loadMails()
     }, [filterBy, sortBy, isCompose])
 
@@ -39,6 +43,7 @@ export function MailList({
                     })
                 })
             })
+            .then(loadMails)
             .catch((error) => {
                 console.error('Failed to mark mail as read:', error)
             })
