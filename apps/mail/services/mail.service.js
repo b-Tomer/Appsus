@@ -12,6 +12,7 @@ export const mailService = {
     getDefaultFilter,
     getDefaultSort,
     toggleStarred,
+    setTrash,
 }
 
 const EMAILS_STORAGE_KEY = 'emailsDB'
@@ -28,6 +29,7 @@ const demoEmails = [
         shortFrom: _shortFrom('momo@momo.com'),
         to: 'user@appsus.com',
         isStarred: true,
+        isTrash: false,
     },
     {
         id: utilService.makeId(),
@@ -40,6 +42,7 @@ const demoEmails = [
         shortFrom: _shortFrom('muki@muki.com'),
         to: 'user@appsus.com',
         isStarred: true,
+        isTrash: false,
     },
     {
         id: utilService.makeId(),
@@ -52,6 +55,7 @@ const demoEmails = [
         shortFrom: _shortFrom('muki@muki.com'),
         to: 'user@appsus.com',
         isStarred: false,
+        isTrash: true,
     },
     {
         id: utilService.makeId(),
@@ -64,6 +68,7 @@ const demoEmails = [
         shortFrom: _shortFrom('buki@muki.com'),
         to: 'user@appsus.com',
         isStarred: false,
+        isTrash: false,
     },
     {
         id: utilService.makeId(),
@@ -76,6 +81,7 @@ const demoEmails = [
         shortFrom: _shortFrom('shuki@muki.com'),
         to: 'user@appsus.com',
         isStarred: true,
+        isTrash: false,
     },
     {
         id: utilService.makeId(),
@@ -88,6 +94,7 @@ const demoEmails = [
         shortFrom: _shortFrom('user@appsus.com'),
         to: 'user@appsus.com',
         isStarred: false,
+        isTrash: false,
     },
     {
         id: utilService.makeId(),
@@ -101,6 +108,46 @@ const demoEmails = [
         shortFrom: _shortFrom('english-personalized-digest@quora.com'),
         to: 'user@appsus.com',
         isStarred: true,
+        isTrash: false,
+    },
+    {
+        id: utilService.makeId(),
+        subject: 'What is the most absurd code youve ever seen?',
+        body: 'Everyone of us started writing the code, trying everything (since at that time it was a high level problem for us). One of my friends had no clue whatsoever about the problem, but he wanted to score well in the test.',
+        isRead: false,
+        sentAt: 1561532930594,
+        removedAt: null,
+        from: 'darkestsecrets-space@quora.com',
+        shortFrom: _shortFrom('darkestsecrets-space@quora.com'),
+        to: 'user@appsus.com',
+        isStarred: false,
+        isTrash: false,
+    },
+    {
+        id: utilService.makeId(),
+        subject: 'Your Google Play Order Receipt from May 10, 2023',
+        body: 'By subscribing, you authorize us to charge you the subscription cost (as described above) automatically, charged to the payment method provided until canceled. Learn how to cancel. Keep this for your records.',
+        isRead: true,
+        sentAt: 1541532930594,
+        removedAt: null,
+        from: 'googleplay-noreply@google.com',
+        shortFrom: _shortFrom('googleplay-noreply@google.com'),
+        to: 'user@appsus.com',
+        isStarred: true,
+        isTrash: false,
+    },
+    {
+        id: utilService.makeId(),
+        subject: 'Purchase receipt',
+        body: 'חשבונית מס / קבלה (מקור) מספר 132089272',
+        isRead: true,
+        sentAt: 1558532930594,
+        removedAt: null,
+        from: 'info@wolt.com',
+        shortFrom: _shortFrom('info@wolt.com'),
+        to: 'user@appsus.com',
+        isStarred: false,
+        isTrash: false,
     },
 ]
 
@@ -126,13 +173,20 @@ function query(filterBy = {}, sortBy = {}) {
             mails = mails.filter((mail) => !mail.isRead)
         }
         if (filterBy.inbox === true) {
-            mails = mails.filter((mail) => mail.from !== loggedinUser.email)
+            mails = mails.filter(
+                (mail) => mail.from !== loggedinUser.email && !mail.isTrash
+            )
         }
         if (filterBy.sentMails === true) {
-            mails = mails.filter((mail) => mail.from === loggedinUser.email)
+            mails = mails.filter(
+                (mail) => mail.from === loggedinUser.email && !mail.isTrash
+            )
         }
         if (filterBy.starredMails === true) {
-            mails = mails.filter((mail) => mail.isStarred)
+            mails = mails.filter((mail) => mail.isStarred && !mail.isTrash)
+        }
+        if (filterBy.trashMails === true) {
+            mails = mails.filter((mail) => mail.isTrash)
         }
         if (sortBy.sortByDate) mails = _sortMails(mails, 'sortByDate')
         else if (sortBy.sortBySubject)
@@ -167,6 +221,13 @@ function setUnread(id) {
 function setRead(id) {
     asyncStorageService.get(EMAILS_STORAGE_KEY, id).then((mail) => {
         mail.isRead = true
+        return asyncStorageService.put(EMAILS_STORAGE_KEY, mail)
+    })
+}
+
+function setTrash(id) {
+    asyncStorageService.get(EMAILS_STORAGE_KEY, id).then((mail) => {
+        mail.isTrash = true
         return asyncStorageService.put(EMAILS_STORAGE_KEY, mail)
     })
 }
@@ -208,6 +269,7 @@ function _createEmail({ toUser, subject, body }) {
     mail.shortFrom = _shortFrom(mail.from)
     mail.to = toUser
     mail.isStarred = false
+    mail.isTrash = false
     return mail
 }
 

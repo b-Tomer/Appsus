@@ -17,6 +17,7 @@
 
 .mail-header .logo {
     width: 50px;
+    min-width: 50px;
     margin-inline-end: 100px;
     align-self: center;
 }

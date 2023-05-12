@@ -33,9 +33,24 @@ export function MailIndex() {
 
     function onRemoveMail(ev, id) {
         ev.stopPropagation()
-        if (confirm('Are you sure you wish to delete this email?')) {
+        const currMail = mails.find((mail) => mail.id === id)
+        if (currMail.isTrash) {
+            if (confirm('Are you sure you wish to delete this email?')) {
+                mailService
+                    .remove(id)
+                    .then(() => {
+                        if (params && Object.keys(params).length > 0) {
+                            navigate('/mail')
+                        }
+                    })
+                    .then(loadMails)
+                    .catch((error) => {
+                        console.error('Failed to remove mail:', error)
+                    })
+            }
+        } else {
             mailService
-                .remove(id)
+                .setTrash(id)
                 .then(() => {
                     if (params && Object.keys(params).length > 0) {
                         navigate('/mail')
@@ -43,7 +58,7 @@ export function MailIndex() {
                 })
                 .then(loadMails)
                 .catch((error) => {
-                    console.error('Failed to remove mail:', error)
+                    console.error('Failed to trash mail:', error)
                 })
         }
     }
