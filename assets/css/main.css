@@ -29,9 +29,9 @@
 @import './cmps/app-footer.css';
 
 @import './apps/mail/views/mail-index.css';
+@import './apps/mail/views/mail-details.css';
 @import './apps/mail/cmps/mail-list.css';
 @import './apps/mail/cmps/mail-menu.css';
 @import './apps/mail/cmps/mail-header.css';
-
 
 @import './setup/mq.css';

@@ -75,6 +75,7 @@ table {
 
 .mail-body {
     flex-basis: 80%;
+    margin-inline-end: 20px;
 }
 
 .mail-date {
