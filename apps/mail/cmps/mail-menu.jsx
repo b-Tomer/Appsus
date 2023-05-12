@@ -1,7 +1,15 @@
 import { MailCompose } from '../cmps/mail-compose.jsx'
-const { useEffect, useRef } = React
+const { useEffect, useRef, useState } = React
 
-export function MailMenu({ onToggleCompose, isCompose, countUnread, mails }) {
+export function MailMenu({
+    onToggleCompose,
+    isCompose,
+    countUnread,
+    mails,
+    onSetFilter,
+    filterBy,
+}) {
+    const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
     const categoryRefs = [
         useRef(null),
         useRef(null),
@@ -16,18 +24,30 @@ export function MailMenu({ onToggleCompose, isCompose, countUnread, mails }) {
     }, [])
 
     useEffect(() => {
+        onSetFilter(filterByToEdit)
+    }, [filterByToEdit])
+
+    useEffect(() => {
         countUnread()
     }, [mails])
 
     function handleClick(index) {
         categoryRefs.forEach((ref, i) => {
+            let field = ref.current.name
+            let value
             if (i === index) {
                 ref.current.classList.add('selected')
                 ref.current.classList.remove('unselected')
+                value = true
             } else {
                 ref.current.classList.remove('selected')
                 ref.current.classList.add('unselected')
+                value = false
             }
+            setFilterByToEdit((prevFilterBy) => ({
+                ...prevFilterBy,
+                [field]: value,
+            }))
         })
     }
 
@@ -43,6 +63,7 @@ export function MailMenu({ onToggleCompose, isCompose, countUnread, mails }) {
             </button>
             <div className="mail-categories clean-list">
                 <button
+                    name="inbox"
                     className="mail-inbox"
                     onClick={() => handleClick(0)}
                     ref={categoryRefs[0]}
@@ -52,6 +73,7 @@ export function MailMenu({ onToggleCompose, isCompose, countUnread, mails }) {
                 </button>
 
                 <button
+                    name="starredMails"
                     className="mail-star unselected"
                     onClick={() => handleClick(1)}
                     ref={categoryRefs[1]}
@@ -60,6 +82,7 @@ export function MailMenu({ onToggleCompose, isCompose, countUnread, mails }) {
                 </button>
 
                 <button
+                    name="sentMails"
                     className="mail-sent unselected"
                     onClick={() => handleClick(2)}
                     ref={categoryRefs[2]}
@@ -68,6 +91,7 @@ export function MailMenu({ onToggleCompose, isCompose, countUnread, mails }) {
                 </button>
 
                 <button
+                    name="draftMails"
                     className="mail-draft unselected"
                     onClick={() => handleClick(3)}
                     ref={categoryRefs[3]}
@@ -76,6 +100,7 @@ export function MailMenu({ onToggleCompose, isCompose, countUnread, mails }) {
                 </button>
 
                 <button
+                    name="trashMails"
                     className="mail-trash unselected"
                     onClick={() => handleClick(4)}
                     ref={categoryRefs[4]}

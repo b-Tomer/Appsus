@@ -102,6 +102,8 @@ export function MailIndex() {
                         isCompose={isCompose}
                         mails={mails}
                         countUnread={countUnread}
+                        onSetFilter={onSetFilter}
+                        filterBy={filterBy}
                     />
                 </aside>
 

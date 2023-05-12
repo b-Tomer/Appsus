@@ -67,7 +67,7 @@
     padding: 0;
 }
 
-.mail-menu-container:hover img {
+.mail-menu-container:hover .mail-categories img {
     left: 20%;
 }
 

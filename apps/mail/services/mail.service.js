@@ -92,6 +92,9 @@ function query(filterBy = {}, sortBy = {}) {
         if (filterBy.readFilter === 'Unread') {
             mails = mails.filter((mail) => !mail.isRead)
         }
+        if (filterBy.sentMails === true) {
+            mails = mails.filter((mail) => mail.from === loggedinUser.email)
+        }
         if (sortBy.sortByDate) mails = _sortMails(mails, 'sortByDate')
         else mails = _sortMails(mails, 'sortBySubject')
         return mails
