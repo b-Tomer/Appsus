@@ -19,8 +19,7 @@ export function MailMenu({
     ]
 
     useEffect(() => {
-        categoryRefs[0].current.classList.add('selected')
-        categoryRefs[0].current.classList.remove('unselected')
+        handleClick(0)
     }, [])
 
     useEffect(() => {
@@ -35,14 +34,18 @@ export function MailMenu({
         categoryRefs.forEach((ref, i) => {
             let field = ref.current.name
             let value
+            const elSpanChild = ref.current.querySelector('span')
+            console.log(elSpanChild)
             if (i === index) {
                 ref.current.classList.add('selected')
                 ref.current.classList.remove('unselected')
                 value = true
+                elSpanChild.style.display = 'inline'
             } else {
                 ref.current.classList.remove('selected')
                 ref.current.classList.add('unselected')
                 value = false
+                elSpanChild.style.display = 'none'
             }
             setFilterByToEdit((prevFilterBy) => ({
                 ...prevFilterBy,
@@ -79,6 +82,7 @@ export function MailMenu({
                     ref={categoryRefs[1]}
                 >
                     <img src="./assets/icons/star.png" alt="" />
+                    <span className="unread-count">{countUnread()}</span>
                 </button>
 
                 <button
@@ -88,6 +92,7 @@ export function MailMenu({
                     ref={categoryRefs[2]}
                 >
                     <img src="./assets/icons/send.png" alt="" />
+                    <span className="unread-count">{countUnread()}</span>
                 </button>
 
                 <button
@@ -97,6 +102,7 @@ export function MailMenu({
                     ref={categoryRefs[3]}
                 >
                     <img src="./assets/icons/draft.png" alt="" />
+                    <span className="unread-count">{countUnread()}</span>
                 </button>
 
                 <button
@@ -106,6 +112,7 @@ export function MailMenu({
                     ref={categoryRefs[4]}
                 >
                     <img src="./assets/icons/delete.png" alt="" />
+                    <span className="unread-count">{countUnread()}</span>
                 </button>
             </div>
 
