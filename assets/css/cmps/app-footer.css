@@ -4,6 +4,7 @@ justify-content: center;
 text-align: center;
 padding-bottom: 20px;
 padding-inline-end: 10px;
+color: var(--clr5);
 }
 
 .main-footer h4{
@@ -13,4 +14,8 @@ padding-inline-end: 10px;
 .copy-rights{
 width: 200px;
 grid-row:2;
+}
+
+.main-footer i{
+    color: var(--clr4);
 }
