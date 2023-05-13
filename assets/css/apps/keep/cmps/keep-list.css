@@ -4,17 +4,14 @@
      display: flex;
      flex-direction: column;
      margin-top: 20px;
+     padding-left: 50px;
  }
 
  .note-list {
      margin-top: 30px;
      column-count: 3;
      column-gap: 15px;
-     justify-content: space-around;
      color: var(--clr5);
-     /* display: grid;
-    grid-auto-flow: dense;
-     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); */
  }
 
  .card {
@@ -34,31 +31,18 @@
 
  }
 
- .card-container {
-   
- }
-
- /* .card:hover .options-container{
-     transform: translateY(0);
-     opacity: 1;
- } */
 
  .options-container {
      position: absolute;
      min-width: max-content;
      margin-top: 5px;
      transform: translateY(-140%) translateX(15%);
-
      transition: 0.6s;
-     /* opacity: 0; */
  }
 
- /* .card:hover .options-container{
-        background-color: #595050;
-    } */
+
 
  .colors-container {
-     /* background-color: var(--clr1bg-light); */
      padding-left: 20px;
      display: flex;
      gap: 10px;
@@ -68,7 +52,6 @@
  }
 
  .color-item {
-     /* background-color: var(--clr2bg); */
      padding: 5px;
      min-height: 20px;
      min-width: 20px;

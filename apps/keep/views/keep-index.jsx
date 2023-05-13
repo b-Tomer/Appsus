@@ -1,6 +1,6 @@
 
 
-const { Link, NavLink, Route, Routes } = ReactRouterDOM
+
 const { useEffect, useState, useRef } = React
 
 
@@ -36,6 +36,7 @@ export function KeepIndex() {
   const [isAddboxShown, setIsAddboxShown] = useState(false)
   const [isAddList, setIsAddList] = useState(false)
   const [newNote, setNewNote] = useState('')
+  const [searchBar, setSearchBar] = useState(keepService.getDefaultFilter())
   const pinnedNotes = notes.filter(note => note.isPinned && !note.isTrash);
   const unpinnedNotes = notes.filter(note => !note.isPinned && !note.isTrash);
   const trashNotes = notes.filter(note => note.isTrash);
@@ -47,7 +48,7 @@ export function KeepIndex() {
   }, [newNote, notes]);
 
   function loadNotes() {
-    keepService.query().then(setNotes)
+    keepService.query(searchBar).then(setNotes)
   }
 
 
@@ -199,16 +200,25 @@ export function KeepIndex() {
     setNoteToEdit(null)
   }
 
+  function onPinNewNote(){
+    newNote.isPinned = (!newNote.isPinned)
+  }
+
+  function onSetSearch(val){
+    setSearchBar(val)
+  }
+  
+
 
   return (
 
     <section style={mainStyle} className="note-inedx app main-layout ">
-      <KeepHeader />
+      <KeepHeader onSetSearch={onSetSearch} />
 
       <main ref={boxRef} className="keep-content">
         <KeepMenu onTrashView={onTrashView} onToggleView={onToggleView} onDarkMode={onDarkMode} />
         {isAddOpen && <AddInbox onOpenCanvs={onOpenCanvs} onOpenListInbox={onOpenListInbox} onOpenAddInbox={onOpenAddInbox} />}
-        {isAddboxShown && <OpenAddInbox onOpenAddInbox={onOpenAddInbox} onHandleTitleChange={onHandleTitleChange} onHandleTextChange={onHandleTextChange} />}
+        {isAddboxShown && <OpenAddInbox onPinNewNote={onPinNewNote} onOpenAddInbox={onOpenAddInbox} onHandleTitleChange={onHandleTitleChange} onHandleTextChange={onHandleTextChange} />}
         {isAddList && <AddListItems onAddListNote={onAddListNote} onHandleTitleChange={onHandleTitleChange} onOpenListInbox={onOpenListInbox} />}
         {isAddCanvas && <AddCanvas onAddCanvasNote={onAddCanvasNote} onHandleTitleChange={onHandleTitleChange} />}
         {!isShowTrash && <NoteList onEditNote={onEditNote} cardsStyle={cardsStyle} pinnedNotes={pinnedNotes} unpinnedNotes={unpinnedNotes} onRemoveNote={onRemoveNote} onPinNote={onPinNote} notes={notes} onDuplicateNote={onDuplicateNote} />}

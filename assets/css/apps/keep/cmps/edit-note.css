@@ -4,9 +4,9 @@
     border-radius: 1em;
     height: 70%;
     width: 95%;
-    /* left: 10%; */
+    border: 1px solid var(--clr1);
     display: grid;
-    grid-template-rows: 20px 60px 1fr 40px;
+    grid-template-rows: 30px 60px 1fr 40px;
     grid-template-columns: 1fr;
     padding: 20px;
     z-index: 9;
