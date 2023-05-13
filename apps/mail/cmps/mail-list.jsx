@@ -23,6 +23,10 @@ export function MailList({
     onEditDraft,
     onSaveDraft,
     onToggleCompose,
+    replyTo,
+    setReplyTo,
+    onReply,
+    // inputRefs,
 }) {
     const navigate = useNavigate()
 
@@ -81,6 +85,9 @@ export function MailList({
                                 isCompose={isCompose}
                                 onSaveDraft={onSaveDraft}
                                 onToggleCompose={onToggleCompose}
+                                replyTo={replyTo}
+                                setReplyTo={setReplyTo}
+                                onReply={onReply}
                             />
                         ))}
                     </tbody>

@@ -1,7 +1,7 @@
 .user-msg {
     background-color: var(--clr2bg);
     opacity: 0.9;
-    padding: .5em 1em;
+    padding: 0.5em 1em;
     position: fixed;
     bottom: 10px;
     right: 1em;
@@ -12,7 +12,7 @@
     flex-direction: column;
     height: 120px;
     width: 260px;
-    border-radius: 1em ;
+    border-radius: 1em;
     align-items: center;
 }
 
@@ -24,14 +24,12 @@
     background-color: var(--clr2);
 }
 
-
-.user-msg button{
+.user-msg button {
     width: fit-content;
     color: var(--clr1bg);
     margin: 1em;
 }
 
-.user-msg button:hover{
-background-color: var( --gray1);
-
+.user-msg button:hover {
+    background-color: var(--gray1);
 }

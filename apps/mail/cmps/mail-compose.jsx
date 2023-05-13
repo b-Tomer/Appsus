@@ -2,10 +2,26 @@ import { mailService } from '../services/mail.service.js'
 import { showSuccessMsg } from '../../../services/event-bus.service.js'
 const { useEffect, useState } = React
 
-export function MailCompose({ onToggleCompose, onSaveDraft }) {
-    const [data, setData] = useState({})
+export function MailCompose({
+    onToggleCompose,
+    onSaveDraft,
+    replyTo,
+    replySubject,
+    replyBody,
+}) {
+    const [data, setData] = useState({ toUser: replyTo || '' })
+
+    useEffect(() => {
+        setData((prevData) => ({
+            ...prevData,
+            toUser: replyTo || '',
+            subject: replySubject || '',
+            body: replyBody || '',
+        }))
+    }, [replyTo, replySubject, replyBody])
 
     const handleChange = (event) => {
+        event.stopPropagation()
         const name = event.target.name
         const value = event.target.value
         setData((values) => ({ ...values, [name]: value }))
@@ -13,6 +29,7 @@ export function MailCompose({ onToggleCompose, onSaveDraft }) {
 
     const handleSubmit = (event) => {
         event.preventDefault()
+        event.stopPropagation()
         mailService
             .send(data)
             .then(onToggleCompose())
@@ -63,11 +80,13 @@ export function MailCompose({ onToggleCompose, onSaveDraft }) {
                     />
                 </div>
                 <textarea
+                    type="text"
                     name="body"
                     rows="18"
                     onChange={handleChange}
                     value={data.body || ''}
                 />
+
                 <div className="form-btns">
                     <button type="submit" className="form-send-btn">
                         Send

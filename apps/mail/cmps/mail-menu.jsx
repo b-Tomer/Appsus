@@ -10,6 +10,11 @@ export function MailMenu({
     onSetFilter,
     filterBy,
     onSaveDraft,
+    inputRefs,
+    replyTo,
+    replySubject,
+    replyBody,
+    onNewMail,
 }) {
     const navigate = useNavigate()
     const location = useLocation()
@@ -106,7 +111,7 @@ export function MailMenu({
             <button
                 className="compose-mail"
                 onClick={(event) => {
-                    onToggleCompose(event)
+                    onNewMail(event)
                 }}
             >
                 <img src="./assets/icons/compose.svg" alt="" />
@@ -167,6 +172,10 @@ export function MailMenu({
                 <MailCompose
                     onToggleCompose={onToggleCompose}
                     onSaveDraft={onSaveDraft}
+                    inputRefs={inputRefs}
+                    replyTo={replyTo}
+                    replySubject={replySubject}
+                    replyBody={replyBody}
                 />
             )}
         </React.Fragment>

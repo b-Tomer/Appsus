@@ -5,7 +5,7 @@
     height: 100%;
     width: 70px;
     background-color: var(--mail-side-menu);
-    z-index: 1;
+    z-index: 2;
     align-content: center;
     align-items: center;
 }
@@ -145,6 +145,7 @@
 }
 
 .mail-compose {
+    z-index: 9999;
     background-color: var(--unshown-mail-bg-color);
     position: fixed;
     bottom: 0;
@@ -156,6 +157,16 @@
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
 }
+
+.mail-compose form {
+    position: relative;
+    z-index: 9999;
+}
+
+/* .mail-compose input {
+    position: relative;
+    z-index: 2;
+} */
 
 .mail-compose form input {
     width: 80%;

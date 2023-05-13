@@ -176,6 +176,105 @@ const demoEmails = [
         isDraft: false,
         isTrash: false,
     },
+    {
+        id: utilService.makeId(),
+        subject: 'Eyal, אפשר להציע לך משהו מתוק? | הפלוס השבוע',
+        body: 'הכי רחוק מתל אביב: המאפיות המתוקות שאסור לפספס מבריוש הטופי ברמת הגולן, דרך קרואסון הפטל במאפייה שמפנקת את תושבי העוטף, ועד הפה-או-שוקולה באילת. היכלי המאפה ששווים עצירה ',
+        isRead: false,
+        sentAt: Date.now(),
+        removedAt: null,
+        from: 'plus@ynet.co.il',
+        shortFrom: _shortFrom('plus@ynet.co.il'),
+        to: 'user@appsus.com',
+        isStarred: true,
+        isDraft: false,
+        isTrash: false,
+    },
+    {
+        id: utilService.makeId(),
+        subject:
+            'Upgrade your network knowledge with the Cisco Learning Network Store',
+        body: 'By enabling new applications and businesses that connect everything, technological advances are generating more data than ever before. And with intent-based networking, data center teams can use that data and take advantage of automation to scale and secure their infrastructure. Our training helps you develop the skills you need to empower data center teams as they take on the challenge of big data.',
+        isRead: false,
+        sentAt: Date.now(),
+        removedAt: null,
+        from: 'learningatcisco-noreply@cisco.com',
+        shortFrom: _shortFrom('learningatcisco-noreply@cisco.com'),
+        to: 'user@appsus.com',
+        isStarred: false,
+        isDraft: false,
+        isTrash: false,
+    },
+    {
+        id: utilService.makeId(),
+        subject: 'Israel kills senior Gaza commanders as rocke...',
+        body: 'Israel kills senior Gaza commanders as rockets cause first death in Israel',
+        isRead: false,
+        sentAt: Date.now(),
+        removedAt: null,
+        from: 'noreply@redditmail.com',
+        shortFrom: _shortFrom('noreply@redditmail.com'),
+        to: 'user@appsus.com',
+        isStarred: false,
+        isDraft: false,
+        isTrash: false,
+    },
+    {
+        id: utilService.makeId(),
+        subject: 'החשבונית החודשית שלך מוכנה לצפייה-STINGT',
+        body: 'לקוחות STINGTV צופים בחשבונית נוחה יותר ומפורטת יותר באתר yes.  למעבר לצפייה בחשבונית החודשית שלכם  ',
+        isRead: false,
+        sentAt: Date.now(),
+        removedAt: null,
+        from: ' service_mail@stingtv.co.il',
+        shortFrom: _shortFrom(' service_mail@stingtv.co.il'),
+        to: 'user@appsus.com',
+        isStarred: false,
+        isDraft: false,
+        isTrash: false,
+    },
+    {
+        id: utilService.makeId(),
+        subject: 'אישור תשלום - עיריית תל-אביב יפו',
+        body: 'מספר אישור תשלום: 087986',
+        isRead: false,
+        sentAt: 1658532930594,
+        removedAt: null,
+        from: 'TLVPaymentsDoNotReply@tlv.onmicrosoft.com',
+        shortFrom: _shortFrom('TLVPaymentsDoNotReply@tlv.onmicrosoft.com'),
+        to: 'user@appsus.com',
+        isStarred: false,
+        isDraft: false,
+        isTrash: false,
+    },
+    {
+        id: utilService.makeId(),
+        subject: 'Line up the perfect songs with the Play Queue',
+        body: 'The Play Queue lets you customize your song lineup for any moment.Tap the three dots next to any song and select "Add to Queue". Use the Play Queue icon in your Now Playing view to change up the order.',
+        isRead: false,
+        sentAt: 1628532930594,
+        removedAt: null,
+        from: 'no-reply@spotify.com',
+        shortFrom: _shortFrom('no-reply@spotify.com'),
+        to: 'user@appsus.com',
+        isStarred: false,
+        isDraft: false,
+        isTrash: false,
+    },
+    {
+        id: utilService.makeId(),
+        subject: 'How to support your employees mental health',
+        body: 'ChatGPT can save hours of work, but some companies are banning it When ChatGPT, the artificial intelligence technology from OpenAI, was released this past November, workers across industries instantly recognized its benefits for crafting professional-sounding communications, creating presentations, generating strings of code, and much more. However, just as quickly, employers started identifying the risks of relying on this tool in the workplace. With more than 40% of surveyed workers using ChatGPT or other AI tools for work, according to a recent Fishbowl survey, employers have become increasingly concerned about exposure to privacy and trade secrets as well as doubts about the AI’s accuracy. That’s why, while some businesses have chosen to embrace the time-saving bot, other major businesses, including JP Morgan and Verizon, have elected to avoid the potential risks by banning the use of ChatGPT.". Use the Play Queue icon in your Now Playing view to change up the order.',
+        isRead: false,
+        sentAt: 1648532930594,
+        removedAt: null,
+        from: 'team@learn.mail.monday.com',
+        shortFrom: _shortFrom('team@learn.mail.monday.com'),
+        to: 'user@appsus.com',
+        isStarred: true,
+        isDraft: false,
+        isTrash: false,
+    },
 ]
 
 const loggedinUser = { email: 'user@appsus.com', fullname: 'Mahatma Appsus' }
@@ -286,7 +385,10 @@ function toggleStarred(id) {
 }
 
 function saveDraft(to, subject, body) {
-    const newMail = _createEmail({ to, subject, body })
+    // console.log(`${to}, ${subject}, ${body}`)
+    const mailTemplate = { toUser: to, subject, body }
+    console.log(mailTemplate)
+    const newMail = _createEmail(mailTemplate)
     newMail.isDraft = true
     return asyncStorageService.post(EMAILS_STORAGE_KEY, newMail)
 }
@@ -310,6 +412,7 @@ function _createEmails() {
 }
 
 function _createEmail({ toUser, subject, body }) {
+    console.log(`${toUser}, ${subject}, ${body}`)
     const mail = {}
     mail.id = utilService.makeId()
     mail.subject = subject

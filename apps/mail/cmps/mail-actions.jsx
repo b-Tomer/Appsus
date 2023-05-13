@@ -1,4 +1,5 @@
 import { MailCompose } from '../cmps/mail-compose.jsx'
+const { useState } = React
 
 export function MailActions({
     onRemoveMail,
@@ -7,9 +8,12 @@ export function MailActions({
     filterBy,
     onRestoreMail,
     onEditDraft,
+    onReply,
     isCompose,
     onSaveDraft,
     onToggleCompose,
+    replyTo,
+    setReplyTo,
 }) {
     return (
         <React.Fragment>
@@ -24,7 +28,7 @@ export function MailActions({
                         <img src="./assets/icons/edit.png" alt="" />
                     </button>
                 )}
-                <button>
+                <button onClick={(event) => onReply(event, mailId)}>
                     <img src="./assets/icons/reply.png" alt="" />
                 </button>
                 <button onClick={(event) => onRemoveMail(event, mailId)}>
@@ -34,12 +38,6 @@ export function MailActions({
                     <img src="./assets/icons/mark_as_unread.png" alt="" />
                 </button>
             </td>
-            {isCompose && (
-                <MailCompose
-                    onToggleCompose={onToggleCompose}
-                    onSaveDraft={onSaveDraft}
-                />
-            )}
         </React.Fragment>
     )
 }

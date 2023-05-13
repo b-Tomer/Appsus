@@ -15,6 +15,9 @@ export function MailPreview({
     isCompose,
     onSaveDraft,
     onToggleCompose,
+    replyTo,
+    setReplyTo,
+    onReply,
 }) {
     const [isHovered, setIsHovered] = useState(false)
 
@@ -66,6 +69,9 @@ export function MailPreview({
                     isCompose={isCompose}
                     onSaveDraft={onSaveDraft}
                     onToggleCompose={onToggleCompose}
+                    replyTo={replyTo}
+                    setReplyTo={setReplyTo}
+                    onReply={onReply}
                 />
             )}
             {!isHovered && (
