@@ -22,7 +22,6 @@ export function BookAdd() {
 
         bookService.addGoogleBook(book)
             .then(() => {
-                console.log('added new book');
                 showSuccessMsg(`The book: ${book.title}  added דuccessfully!`)
             })
     }

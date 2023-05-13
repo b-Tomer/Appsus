@@ -246,7 +246,6 @@ export const keepService = {
 }
 
 function query(filterBy = '') {
-    // console.log('filterBy service:', filterBy)
     return asyncStorageService.query(KEEP_KEY)
         .then(notes => {
             if (filterBy === '') return notes
@@ -271,14 +270,7 @@ function remove(noteId) {
 }
 
 function save(note) {
-    console.log('note.id: ', note.id)
-    // if (note.id) {
-    //     return asyncStorageService.put(KEEP_KEY, note)
-    // } else {
-
-    console.log('note from saved: ', note)
     return asyncStorageService.post(KEEP_KEY, note)
-    // }
 }
 
 

@@ -19,22 +19,13 @@ export function AddListItems({ onHandleTitleChange, onHandleLiChange, onAddListN
 
     function onHandleLiChange({ target }) {
         const val = target.value
-        console.log(val);
-
     }
 
     function onAddListItem() {
         list.push(<ListInput key={utilService.makeId()} onAddListItem={onAddListItem} onHandleLiChange={onHandleLiChange} />)
-        console.log('add list item');
         const items = list.map(item => keepService.getEmptyNote('NoteTodos'))
-        console.log(items);
         setListData(items)
-        console.log(listData);
-
-
     }
-
-    // console.log(list);
     return (
         <div className="open-add-box add-box">
 

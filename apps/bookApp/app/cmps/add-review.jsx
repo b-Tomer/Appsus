@@ -7,7 +7,7 @@ import { RateInput } from './rate-input.jsx'
 import { StarInput } from './star-input.jsx'
 
 export function AddReview({ bookId }) {
-    // console.log(bookId);
+
     const [newReview, setNewReview] = useState(null)
     const [bookToEdit, setBookToEdit] = useState(null)
     const navigate = useNavigate()
@@ -16,7 +16,6 @@ export function AddReview({ bookId }) {
     useEffect(() => {
         if (bookId) loadBook()
         setNewReview(bookService.getEmptyReview())
-        // loadBook()
     }, [])
 
     function loadBook() {
@@ -24,23 +23,20 @@ export function AddReview({ bookId }) {
             .get(bookId)
             .then(setBookToEdit)
             .catch((err) => {
-                console.log('Had issued in book edit:', err)
+
                 showErrorMsg('Book not found!')
             })
     }
 
     function handleChange({ target }) {
         const field = target.name
-        console.log('field: ', field)
         const value =
-            target.type === 'number' ? +target.value || '' : target.value
-        console.log('value: ', value)
+            target.type === 'number' ? +target.value || '' : target.value 
         setNewReview((prevReview) => ({ ...prevReview, [field]: value }))
     }
 
     function onSaveBook(ev) {
         ev.preventDefault()
-        console.log(bookToEdit)
         if (!bookToEdit.reviews) bookToEdit.reviews = [newReview]
         else bookToEdit.reviews.push(newReview)
 
@@ -49,7 +45,6 @@ export function AddReview({ bookId }) {
         })
     }
 
-    // console.log('newReview: ',newReview)
     if (!newReview) return ''
     return (
         <div className="book-add-review">

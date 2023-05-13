@@ -52,7 +52,6 @@ export function Canvas() {
                 x: ev.pageX + ev.target.offsetLeft - ev.target.clientLeft - 37,
                 y: ev.pageY + ev.target.offsetTop - ev.target.clientTop - 37,
             }
-            console.log('pos: ', pos)
         }
         return pos
     }
@@ -62,12 +61,10 @@ export function Canvas() {
         const pos = getEvPos(ev)
         isDrawing = true
         startPos = pos
-        console.log(pos);
     }
 
     function onMove(ev) {
         if (!isDrawing) {
-            console.log('not drawing');
             return
         }
         const pos = getEvPos(ev)
@@ -75,7 +72,6 @@ export function Canvas() {
         const dy = pos.y
         drawLine(startPos.x, startPos.y, dx, dy, gUserColor)
         startPos = pos
-        console.log(pos);
     }
 
     function onUp() {
@@ -90,7 +86,6 @@ export function Canvas() {
     
     function drawImgFromlocal() {
         let file = document.querySelector('.upload').value
-        console.log('file: ', file)
         const img = new Image()
         img.src = file
         img.onload = () => {

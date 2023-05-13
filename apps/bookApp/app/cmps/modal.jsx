@@ -2,16 +2,8 @@
 
 
 export function Modal({ currWatcher, isClosed, setClosed }) {
-    // console.log(currWatcher)
-    // console.log(isClosed)
-
     const closedClass = isClosed ? '' : 'hide'
-
-
-
-
     function onCloseModal() {
-        console.log('closed Modal');
         setClosed(false)
     }
 

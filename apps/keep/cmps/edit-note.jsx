@@ -3,7 +3,6 @@ const { useEffect, useState, useRef } = React
 
 
 export function EditNote({ note, onSaveEdit, onCancelEdit }) {
-    console.log("from editNote cmp: ",note);
     const [editedTitle, setEditedTitle] = useState(note.info.title)
     const [editedText, setEditedText] = useState(note.info.txt)
 

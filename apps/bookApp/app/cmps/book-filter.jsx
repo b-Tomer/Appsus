@@ -13,8 +13,6 @@ export function BookFilter({ filterBy, onSetFilter }) {
         const field = target.name
         const value =
             target.type === 'number' ? +target.value || '' : target.value
-        console.log(value)
-        console.log(field)
         setFilterByToEdit((prevFilterBy) => ({
             ...prevFilterBy,
             [field]: value,

@@ -14,9 +14,7 @@ export function NotePreview({ note, onRemoveNote, onPinNote ,onDuplicateNote,onE
 
     useEffect(() => {
         setCmpType(note.type)
-        // console.log(note.type);
     }, [])
-// console.log(onRemoveNote);
 
 
 function onSetCardStyle(newStyle) {

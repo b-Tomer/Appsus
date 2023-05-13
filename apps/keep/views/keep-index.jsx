@@ -68,28 +68,21 @@ export function KeepIndex() {
 
   function onAddNewNote(newNote) {
     if (!newNote.info.txt && !newNote.info.title) {
-      console.log('no title or txt');
       return
     }
     keepService.save(newNote).then((note) => {
       notes.push(note)
       const updatedNotes = notes
-      console.log('from addNewNote: ', updatedNotes);
       setNotes(updatedNotes)
     })
   }
 
   function onDuplicateNote(note) {
-    console.log('onDuplicateNote: ', note);
     const copyNote = JSON.parse(JSON.stringify(note));
     copyNote.id = utilService.makeId()
     setTimeout(() => {
-
-      console.log("note from duplicate: ", copyNote);
       onAddNewNote(copyNote)
-
     }, 2000)
-    // loadNotes()
   }
 
   function onRemoveNote(noteId) {
@@ -142,20 +135,17 @@ export function KeepIndex() {
 
   function onHandleTitleChange({ target }) {
     const val = target.value
-    console.log(val);
     newNote.info.title = val
   }
 
   function onHandleTextChange({ target }) {
     const val = target.value
-    console.log(val);
     newNote.info.txt = val
   }
 
 
   function onDarkMode() {
     setDarkMode(!darkMode)
-    console.log(darkMode);
     if (darkMode) {
       setMainStyle({ backgroundColor: '#c0c0c0', color: 'white' })
     } else setMainStyle({})
@@ -163,7 +153,6 @@ export function KeepIndex() {
 
   function onToggleView() {
     setIsCardsView(!isCardsView)
-    console.log(isCardsView);
     if (!isCardsView) {
       setCardsStyle({ columnCount: 1 })
     } else setCardsStyle({})
@@ -172,11 +161,9 @@ export function KeepIndex() {
   function onAddListNote() {
     setIsAddList(false)
     setIsAddOpen(true)
-    console.log('added list note');
   }
 
   function onAddCanvasNote() {
-    console.log('canvass added');
     setIsAddOpen(true)
     setIsAddCanvas(false)
   }
@@ -191,14 +178,11 @@ export function KeepIndex() {
   // }
 
   function onEditNote(note) {
-    console.log('edittttttttt');
-    console.log('from onEditNote: ', note);
     setNoteToEdit(note)
     setIsEditNote(true)
   }
 
   function onSaveEdit(updatedNote) {
-    console.log('saved edit: ', updatedNote);
     keepService.put(updatedNote)
       .then(() => {
         loadNotes()
@@ -209,7 +193,6 @@ export function KeepIndex() {
   }
 
   function onCancelEdit() {
-    console.log('cancel edit');
     setIsEditNote(false)
     setNoteToEdit(null)
   }
