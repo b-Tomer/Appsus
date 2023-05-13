@@ -12,7 +12,7 @@
 }
 
 .details-actions-container .details-back {
-    margin-inline-start: 100px;
+    margin-inline-start: 70px;
     background-color: transparent;
 }
 
@@ -32,8 +32,9 @@
 }
 
 .email-details-content {
-    margin-inline-start: 100px;
+    margin-inline-start: 70px;
     margin-block-start: 20px;
+    margin-inline-end: 10px;
 }
 
 .email-details-content .details-subject {
@@ -53,4 +54,27 @@
     font-size: 1rem;
     margin-block-start: 20px;
     margin-inline-start: 20px;
+}
+
+@media (max-width: 600px) {
+    .email-details-content .details-body {
+        margin-inline-start: 0;
+    }
+
+    .email-details-content .details-subject {
+        font-size: 1.2rem;
+    }
+
+    .details-actions-container .mail-actions button {
+        margin-inline-end: 10px;
+    }
+}
+
+@media (max-width: 500px) {
+    .email-details-content {
+        margin-inline-start: 50px;
+    }
+    .details-actions-container .details-back {
+        margin-inline-start: 50px;
+    }
 }

@@ -169,7 +169,7 @@ table {
     }
 }
 
-@media (max-width: 370px) {
+@media (max-width: 380px) {
     .mails-list-container {
         /* font-size: 0.8rem; */
     }
