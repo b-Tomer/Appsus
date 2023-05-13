@@ -186,6 +186,7 @@ export function MailIndex() {
                             filterBy={filterBy}
                             onToggleCompose={onToggleCompose}
                             isCompose={isCompose}
+                            onSaveDraft={onSaveDraft}
                             loadMails={loadMails}
                             sortBy={sortBy}
                             setSortBy={setSortBy}

@@ -12,6 +12,9 @@ export function MailPreview({
     filterBy,
     onRestoreMail,
     onEditDraft,
+    isCompose,
+    onSaveDraft,
+    onToggleCompose,
 }) {
     const [isHovered, setIsHovered] = useState(false)
 
@@ -60,6 +63,9 @@ export function MailPreview({
                     filterBy={filterBy}
                     onRestoreMail={onRestoreMail}
                     onEditDraft={onEditDraft}
+                    isCompose={isCompose}
+                    onSaveDraft={onSaveDraft}
+                    onToggleCompose={onToggleCompose}
                 />
             )}
             {!isHovered && (
