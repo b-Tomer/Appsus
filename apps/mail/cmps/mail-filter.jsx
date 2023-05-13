@@ -62,14 +62,6 @@ export function MailFilter({ onSetFilter, filterBy, onSetSortBy, sortBy }) {
         onSetSortBy(sortByToEdit)
     }, [filterByToEdit, sortByToEdit])
 
-    function getTrueKey(obj) {
-        for (const key in obj) {
-            if (obj[key]) {
-                return key
-            }
-        }
-    }
-
     function handleChange({ target }) {
         const queryParams = new URLSearchParams(location.search)
         const filterBy = target.value
