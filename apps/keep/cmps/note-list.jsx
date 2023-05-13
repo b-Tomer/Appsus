@@ -14,7 +14,7 @@ export function NoteList({ cardsStyle, pinnedNotes, unpinnedNotes, onRemoveNote,
 
     return (
 
-        <React.Fragment>
+        <div className="all-list">
 
 
             <section className="pinned"><h6 className="pinn-title">{pinnedTxt}</h6>
@@ -29,7 +29,7 @@ export function NoteList({ cardsStyle, pinnedNotes, unpinnedNotes, onRemoveNote,
 
 
 
-        </React.Fragment>
+        </div>
 
     )
 }
