@@ -1,0 +1,29 @@
+.book-list {
+    padding: 15px 0 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.book-list li {
+    border-radius: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--book-clr1bg);
+}
+
+.book-list-btns {
+    display: flex;
+    height: 50px;
+    min-width: 100px;
+    align-items: center;
+}
+
+.book-remove-btn {
+    height: 34px;
+    border-radius: 50%;
+    background-color: #c79e9eb7;
+}

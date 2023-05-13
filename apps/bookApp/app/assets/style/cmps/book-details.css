@@ -1,0 +1,25 @@
+.book-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.book-details h1 {
+    color: var(--book-clr1);
+    font-size: 2em;
+}
+.book-details h5 {
+    color: var(--book-clr2);
+}
+.book-details img {
+    max-width: 200px;
+    display: block;
+    margin: auto;
+}
+.book-next-btns {
+    margin: 10px;
+    align-self: center;
+}
+
+.book-back-btn {
+    align-self: center;
+}
