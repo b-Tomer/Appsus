@@ -21,6 +21,8 @@ export function MailList({
     onStarMail,
     onRestoreMail,
     onEditDraft,
+    onSaveDraft,
+    onToggleCompose,
 }) {
     const navigate = useNavigate()
 
@@ -76,6 +78,9 @@ export function MailList({
                                 filterBy={filterBy}
                                 onRestoreMail={onRestoreMail}
                                 onEditDraft={onEditDraft}
+                                isCompose={isCompose}
+                                onSaveDraft={onSaveDraft}
+                                onToggleCompose={onToggleCompose}
                             />
                         ))}
                     </tbody>

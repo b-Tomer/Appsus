@@ -35,6 +35,7 @@
     margin-inline-start: 70px;
     margin-block-start: 20px;
     margin-inline-end: 10px;
+    padding-inline-start: 10px;
 }
 
 .email-details-content .details-subject {
