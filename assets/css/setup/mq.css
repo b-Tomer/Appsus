@@ -7,26 +7,41 @@
         /* padding-left: 4%;    */
     }
 
+    .keep-content {
+        padding-left: 40px;
+    }
+
+    .keep-menu {
+        transform: translateX(-100%);
+    }
+    .menu-btns{
+        font-size: 1em;
+    }
+
     .card {
         max-width: 360px;
         width: 360px;
     }
 
-    .search-btn{
+    .search-btn {
         padding-right: 20px;
     }
+
     .nav-container {
-    padding-right: 23px;
+        padding-right: 23px;
     }
-    .keep-content{
+
+    .keep-content {
         padding: 20px;
         padding-left: 30px;
     }
-    .menu-btn{
+
+    .menu-btn {
         padding: 0;
         padding-left: 10px;
     }
-    .icon{
+
+    .icon {
         padding: 0;
         margin: 0;
     }
@@ -39,7 +54,8 @@
         min-width: 55px;
         width: 70px;
     }
-    .keep-header{
+
+    .keep-header {
         padding-left: 0;
     }
 
@@ -52,11 +68,12 @@
         font-size: 3.4rem;
     }
 
-    .main-footer{
+    .main-footer {
         padding-inline-end: 0px;
     }
-    :root{
-        --layout-padding: 0px 
+
+    :root {
+        --layout-padding: 0px
     }
 
 }

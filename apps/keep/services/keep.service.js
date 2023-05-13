@@ -10,6 +10,59 @@ const KEEP_KEY = 'keepDB'
 
 
 const gNotes = [
+    {
+        id: utilService.makeId(),
+        createdAt: 1112222,
+        type: 'NoteTxt',
+        isPinned: true,
+        style: {
+            backgroundColor: ''
+        },
+        info: {
+            title: 'My Bank-acount password',
+            txt: 's321frr!'
+        }
+    },
+    {
+        id: utilService.makeId(),
+        createdAt: 1112222,
+        type: 'NoteTxt',
+        isPinned: false,
+        style: {
+            backgroundColor: ''
+        },
+        info: {
+            title: 'מאמרים לקרוא:',
+            txt: '\nהיצירה לב הטיפול\nבתוך גבולות המסגרת\nתיאורי מקרה'
+        }
+    },
+    {
+        id: utilService.makeId(),
+        createdAt: 1112222,
+        type: 'NoteTxt',
+        isPinned: false,
+        style: {
+            backgroundColor: ''
+        },
+        info: {
+            title: 'שם מעבר לפסנתר',
+            txt: 'שם מעבר לפסנתר עישנה סיגריות בשרשרת בין שאיפה לשאיפה היא שרה הצטרפתי עם גיטרה. שם רחוק על הערסל בקצה החוף היא מתנדנדת'
+        }
+    },
+
+    {
+        id: utilService.makeId(),
+        createdAt: 1112222,
+        type: 'NoteTxt',
+        isPinned: false,
+        style: {
+            backgroundColor: '#B4FF9F'
+        },
+        info: {
+            title: 'banana pie recepie',
+            txt: '2 bananas ,1/2 flower , 1 egg , 1/2 glass sugar ...'
+        }
+    },
 
     {
         id: utilService.makeId(),
@@ -18,9 +71,9 @@ const gNotes = [
         info: {
             title: 'Get my shit together',
             todos: [
-                { txt: 'Style the app', id: utilService.makeId() , doneAt: null },
-                { txt: 'Go to see a waterfall', id: utilService.makeId() , doneAt: 187111111 },
-                { txt: 'Go to the gym', id: utilService.makeId() , doneAt: null }
+                { txt: 'Style the app', id: utilService.makeId(), doneAt: null },
+                { txt: 'Go to see a waterfall', id: utilService.makeId(), doneAt: 187111111 },
+                { txt: 'Go to the gym', id: utilService.makeId(), doneAt: null }
             ]
         }
     },
@@ -68,8 +121,8 @@ const gNotes = [
         info: {
             title: 'Shoping list:',
             todos: [
-                { txt: 'גמבות לדג', id: utilService.makeId() , doneAt: null },
-                { txt: 'פלפל חריף', id: utilService.makeId() , doneAt: 187121111 }
+                { txt: 'גמבות לדג', id: utilService.makeId(), doneAt: null },
+                { txt: 'פלפל חריף', id: utilService.makeId(), doneAt: 187121111 }
             ]
         },
         style: {
@@ -119,19 +172,13 @@ export const keepService = {
 
 }
 
-function query(/*filterBy = {}*/) {
+function query(filterBy = '') {
     // console.log('filterBy service:', filterBy)
     return asyncStorageService.query(KEEP_KEY)
         .then(notes => {
-            //   if (filterBy.txt) {
-            //     const regExp = new RegExp(filterBy.txt, 'i')
-            //     notes = notes.filter(note => regExp.test(note.title))
-            //   }
-
-            //   if (filterBy.maxPrice) {
-            //     notes = notes.filter(note => note.listPrice.amount <= filterBy.maxPrice)
-            //   }
-
+            if (filterBy === '') return notes
+            const regExp = new RegExp(filterBy, 'i')
+            notes = notes.filter(note => regExp.test(note.info.title))
             return notes
         })
 }
@@ -150,34 +197,21 @@ function remove(noteId) {
     return asyncStorageService.remove(KEEP_KEY, noteId)
 }
 
-// function save(note) {
-//     console.log('note.id: ', note.id )
-//     // if (note.id) {
-//     //     return asyncStorageService.put(KEEP_KEY, note)
-//     // } else {
-       
-//         console.log('note from saved: ', note )
-//         return asyncStorageService.post(KEEP_KEY, note)
-//     // }
-// }
-
 function save(note) {
-    return asyncStorageService.query(KEEP_KEY)
-      .then(notes => {
-        const existingNoteIndex = notes.findIndex(n => n.id === note.id);
-        if (existingNoteIndex !== -1) {
-          notes[existingNoteIndex] = note;
-        } else {
-          notes.push(note);
-        }
-        return asyncStorageService.put(KEEP_KEY, notes);
-      });
-  }
+    console.log('note.id: ', note.id)
+    // if (note.id) {
+    //     return asyncStorageService.put(KEEP_KEY, note)
+    // } else {
+
+    console.log('note from saved: ', note)
+    return asyncStorageService.post(KEEP_KEY, note)
+    // }
+}
+
 
 function getEmptyNote(type = 'NoteTxt') {
     return {
         id: utilService.makeId(),
-        title: '',
         createdAt: Date.now(),
         type: type,
         isPinned: false,
@@ -185,6 +219,7 @@ function getEmptyNote(type = 'NoteTxt') {
             backgroundColor: ''
         },
         info: {
+            title: '',
             txt: ''
         }
     }
@@ -193,7 +228,7 @@ function getEmptyNote(type = 'NoteTxt') {
 
 
 function getDefaultFilter() {
-    return { name: '', maxPrice: '' }
+    return ''
 }
 
 function _createNotes() {

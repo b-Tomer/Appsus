@@ -6,7 +6,7 @@ import { NoteVideo } from "./apps/keep/cmps/note-video.jsx";
 
 const { useEffect, useState } = React
 
-export function NotePreview({ note, onRemoveNote, onPinNote ,onDuplicateNote }) {
+export function NotePreview({ note, onRemoveNote, onPinNote ,onDuplicateNote,onEditNote }) {
     const [cmpType, setCmpType] = useState('')
     const [cardStyle , setCardStyle] = useState({
         backgroundColor: '',
@@ -26,7 +26,7 @@ function onSetCardStyle(newStyle) {
 
 return (
         <div className="card-container">
-            <DynamicCmp cmpType={cmpType} name="tomer" note={note} cardStyle={cardStyle} />
+            <DynamicCmp cmpType={cmpType} name="tomer" note={note} cardStyle={cardStyle} onEditNote={onEditNote} />
             <OptionsBtns onPinNote={onPinNote} onDuplicateNote={onDuplicateNote} onSetCardStyle={onSetCardStyle} onRemoveNote={onRemoveNote} note={note} />
         </div>
     )

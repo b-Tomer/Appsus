@@ -1,6 +1,6 @@
 
 
-const { Link, NavLink, Route, Routes } = ReactRouterDOM
+
 const { useEffect, useState, useRef } = React
 
 
@@ -16,6 +16,7 @@ import { KeepMenu } from "../cmps/keep-menu.jsx";
 import { AddListItems } from "../cmps/add-list-items.jsx";
 import { AddCanvas } from "../cmps/add-canvas.jsx";
 import { TrashList } from "./trash-list.jsx";
+import { EditNote } from "../cmps/edit-note.jsx";
 
 
 
@@ -26,30 +27,34 @@ export function KeepIndex() {
   const [isCardsView, setIsCardsView] = useState(false)
   const [mainStyle, setMainStyle] = useState({})
   const [cardsStyle, setCardsStyle] = useState({})
-  const [isShowTrash, setIsShowTrash] = useState(true)
+  const [isShowTrash, setIsShowTrash] = useState(false)
   const [isAddOpen, setIsAddOpen] = useState(true)
+  const [isOpenMenu, setIsOpenMenu] = useState(false)
+  const [isEditNote, setIsEditNote] = useState(false)
+  const [noteToEdit, setNoteToEdit] = useState(null)
   const [isAddCanvas, setIsAddCanvas] = useState(false)
   const [isAddboxShown, setIsAddboxShown] = useState(false)
   const [isAddList, setIsAddList] = useState(false)
   const [newNote, setNewNote] = useState('')
+  const [searchBar, setSearchBar] = useState(keepService.getDefaultFilter())
   const pinnedNotes = notes.filter(note => note.isPinned && !note.isTrash);
   const unpinnedNotes = notes.filter(note => !note.isPinned && !note.isTrash);
   const trashNotes = notes.filter(note => note.isTrash);
   const boxRef = useRef()
- 
+
 
   useEffect(() => {
     loadNotes()
   }, [newNote, notes]);
 
   function loadNotes() {
-    keepService.query().then(setNotes)
+    keepService.query(searchBar).then(setNotes)
   }
 
 
   function onAddNewNote(newNote) {
-    if (!newNote.title && !newNote.info.txt && !newNote.info.title) {
-      console.log('no title');
+    if (!newNote.info.txt && !newNote.info.title) {
+      console.log('no title or txt');
       return
     }
     keepService.save(newNote).then((note) => {
@@ -124,8 +129,7 @@ export function KeepIndex() {
   function onHandleTitleChange({ target }) {
     const val = target.value
     console.log(val);
-    if(newNote.title == '') newNote.info.title = val
-    else newNote.title = val
+    newNote.info.title = val
   }
 
   function onHandleTextChange({ target }) {
@@ -163,8 +167,45 @@ export function KeepIndex() {
     setIsAddCanvas(false)
   }
 
-  function onTrashView(){
+  function onTrashView() {
     setIsShowTrash(!isShowTrash)
+  }
+
+  // function onToggleMenu(){
+  //   setIsOpenMenu(!isOpenMenu)
+
+  // }
+
+  function onEditNote(note) {
+    console.log('edittttttttt');
+    console.log('from onEditNote: ', note);
+    setNoteToEdit(note)
+    setIsEditNote(true)
+  }
+
+  function onSaveEdit(updatedNote) {
+    console.log('saved edit: ', updatedNote);
+    keepService.put(updatedNote)
+      .then(() => {
+        loadNotes()
+      })
+    setIsEditNote(false)
+    setNoteToEdit(null)
+
+  }
+
+  function onCancelEdit() {
+    console.log('cancel edit');
+    setIsEditNote(false)
+    setNoteToEdit(null)
+  }
+
+  function onPinNewNote(){
+    newNote.isPinned = (!newNote.isPinned)
+  }
+
+  function onSetSearch(val){
+    setSearchBar(val)
   }
   
 
@@ -172,17 +213,17 @@ export function KeepIndex() {
   return (
 
     <section style={mainStyle} className="note-inedx app main-layout ">
-      <KeepHeader />
+      <KeepHeader onSetSearch={onSetSearch} />
 
       <main ref={boxRef} className="keep-content">
-        <KeepMenu onTrashView={onTrashView} onToggleView={onToggleView} onDarkMode={onDarkMode}/>
+        <KeepMenu onTrashView={onTrashView} onToggleView={onToggleView} onDarkMode={onDarkMode} />
         {isAddOpen && <AddInbox onOpenCanvs={onOpenCanvs} onOpenListInbox={onOpenListInbox} onOpenAddInbox={onOpenAddInbox} />}
-        {isAddboxShown && <OpenAddInbox onOpenAddInbox={onOpenAddInbox} onHandleTitleChange={onHandleTitleChange} onHandleTextChange={onHandleTextChange} />}
+        {isAddboxShown && <OpenAddInbox onPinNewNote={onPinNewNote} onOpenAddInbox={onOpenAddInbox} onHandleTitleChange={onHandleTitleChange} onHandleTextChange={onHandleTextChange} />}
         {isAddList && <AddListItems onAddListNote={onAddListNote} onHandleTitleChange={onHandleTitleChange} onOpenListInbox={onOpenListInbox} />}
         {isAddCanvas && <AddCanvas onAddCanvasNote={onAddCanvasNote} onHandleTitleChange={onHandleTitleChange} />}
-        {!isShowTrash && <NoteList cardsStyle={cardsStyle} pinnedNotes={pinnedNotes} unpinnedNotes={unpinnedNotes} onRemoveNote={onRemoveNote} onPinNote={onPinNote} notes={notes} onDuplicateNote={onDuplicateNote} />}
+        {!isShowTrash && <NoteList onEditNote={onEditNote} cardsStyle={cardsStyle} pinnedNotes={pinnedNotes} unpinnedNotes={unpinnedNotes} onRemoveNote={onRemoveNote} onPinNote={onPinNote} notes={notes} onDuplicateNote={onDuplicateNote} />}
         {isShowTrash && <TrashList trashNotes={trashNotes} cardsStyle={cardsStyle} pinnedNotes={pinnedNotes} unpinnedNotes={unpinnedNotes} onRemoveNote={onRemoveNote} onPinNote={onPinNote} notes={notes} onDuplicateNote={onDuplicateNote} />}
-
+        {isEditNote && <EditNote note={noteToEdit} onSaveEdit={onSaveEdit} onCancelEdit={onCancelEdit} />}
       </main>
       {/* <UserMsg /> */}
       <KeepFooter />
