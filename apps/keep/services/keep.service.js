@@ -150,16 +150,29 @@ function remove(noteId) {
     return asyncStorageService.remove(KEEP_KEY, noteId)
 }
 
-function save(note) {
-    console.log('note.id: ', note.id )
-    // if (note.id) {
-    //     return asyncStorageService.put(KEEP_KEY, note)
-    // } else {
+// function save(note) {
+//     console.log('note.id: ', note.id )
+//     // if (note.id) {
+//     //     return asyncStorageService.put(KEEP_KEY, note)
+//     // } else {
        
-        console.log('note from saved: ', note )
-        return asyncStorageService.post(KEEP_KEY, note)
-    // }
-}
+//         console.log('note from saved: ', note )
+//         return asyncStorageService.post(KEEP_KEY, note)
+//     // }
+// }
+
+function save(note) {
+    return asyncStorageService.query(KEEP_KEY)
+      .then(notes => {
+        const existingNoteIndex = notes.findIndex(n => n.id === note.id);
+        if (existingNoteIndex !== -1) {
+          notes[existingNoteIndex] = note;
+        } else {
+          notes.push(note);
+        }
+        return asyncStorageService.put(KEEP_KEY, notes);
+      });
+  }
 
 function getEmptyNote(type = 'NoteTxt') {
     return {

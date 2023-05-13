@@ -1,7 +1,7 @@
 const { useState } = React
 const { NavLink } = ReactRouterDOM
 
-export function KeepHeader({ onDarkMode, onToggleView }) {
+export function KeepHeader() {
     const [menuBtn, setMenuBtn] = useState(false)
     let menuClass = menuBtn ? 'open' : 'closed'
 
@@ -39,7 +39,7 @@ export function KeepHeader({ onDarkMode, onToggleView }) {
                     {/* <button className="btn btn-opt"><i className="fa-solid fa-table"></i></button> */}
                 </section>
                 <section className="nav-links">
-                    <NavLink to="/bookApp" className="keep-icons ">
+                    <NavLink to="/book" className="keep-icons ">
                         <div className="">
                             <i className="bookk-icon fa-solid fa-book-open"></i>
                         </div>

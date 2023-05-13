@@ -28,6 +28,7 @@ export function NoteList({ cardsStyle, pinnedNotes, unpinnedNotes, onRemoveNote,
             )}</div>
 
 
+
         </React.Fragment>
 
     )
