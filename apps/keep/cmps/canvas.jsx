@@ -18,6 +18,7 @@ export function Canvas() {
         addTouchListeners()
     }, [])
 
+    
     function addMouseListeners() {
         canvasRef.current.addEventListener('mousedown', onDown)
         canvasRef.current.addEventListener('mousemove', onMove)
@@ -143,8 +144,24 @@ export function Canvas() {
         XHR.send(formData)
     }
     
-    
-    
+
+    // function onSave() {
+    //     const canvas = canvasRef.current;
+    //     const dataUrl = canvas.toDataURL();
+      
+    //     const note = keepService.getEmptyNote();
+    //     note.type = 'NoteImg';
+    //     note.info = { url: dataUrl };
+      
+    //     keepService.save(note)
+    //       .then(() => {
+    //         console.log('Note saved successfully');
+          
+    //       })
+    //       .catch(error => {
+    //         console.error('Failed to save note:', error);
+    //       });
+    //   }
 
 
 
