@@ -61,7 +61,7 @@ export function KeepIndex() {
 
   function onDuplicateNote(note) {
     console.log('onDuplicateNote: ', note);
-    const copyNote = note
+    const copyNote = JSON.parse(JSON.stringify(note));
     copyNote.id = utilService.makeId()
     setTimeout(() => {
 
@@ -123,7 +123,8 @@ export function KeepIndex() {
   function onHandleTitleChange({ target }) {
     const val = target.value
     console.log(val);
-    newNote.title = val
+    if(newNote.title == '') newNote.info.title = val
+    else newNote.title = val
   }
 
   function onHandleTextChange({ target }) {
@@ -131,6 +132,7 @@ export function KeepIndex() {
     console.log(val);
     newNote.info.txt = val
   }
+
 
   function onDarkMode() {
     setDarkMode(!darkMode)
