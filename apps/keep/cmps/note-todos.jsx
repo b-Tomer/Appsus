@@ -1,11 +1,11 @@
 
 
-export function NoteTodos({ note, cardStyle }) {
+export function NoteTodos({ note, cardStyle,onEditNote }) {
 
     const background = (cardStyle.backgroundColor) ? cardStyle : note.style
 
     return (
-        <div key={note.id} style={background } className="card todos-note">
+        <div onClick={()=>onEditNote(note)} key={note.id} style={background } className="card todos-note">
             <h5 className="note-title">{note.info.title}</h5>
 
             {note.info.todos.map(todo =>

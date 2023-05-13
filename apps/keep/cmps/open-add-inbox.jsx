@@ -6,9 +6,6 @@ useEffect(()=>{
     titleRef.current.focus()
 },[])
 
-
-
-
     return (
         <div className="open-add-box add-box">
 

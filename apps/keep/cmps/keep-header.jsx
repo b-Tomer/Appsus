@@ -23,7 +23,7 @@ export function KeepHeader() {
           {/* <button className="btn btn-opt"><i className="fa-solid fa-table"></i></button> */}
         </section>
         <section className="nav-links">
-          <NavLink to="/book" className="keep-icons "><div className=""><i className="bookk-icon fa-solid fa-book-open"></i></div></NavLink>
+          <NavLink to="/bookApp" className="keep-icons "><div className=""><i className="bookk-icon fa-solid fa-book-open"></i></div></NavLink>
           <NavLink to="/mail" className="gmaill"><img className="gmaill-img animate__pulse" src="./assets/img/gmail-icon.png" alt="" /></NavLink>
           <NavLink to="/" className="keep-icons"><i className="bookk-icon fa-solid fa-house"></i></NavLink>
 
