@@ -6,7 +6,14 @@ import { MailActions as MailActions } from './mail-actions.jsx'
 const { useEffect, useState } = React
 const { useParams, useNavigate } = ReactRouterDOM
 
-export function MailDetails({ onRemoveMail, onMarkUnread }) {
+export function MailDetails({
+    onRemoveMail,
+    onMarkUnread,
+    filterBy,
+    onRestoreMail,
+    onEditDraft,
+    onReply,
+}) {
     const [mail, setMail] = useState(null)
     const params = useParams()
     const navigate = useNavigate()
@@ -42,6 +49,10 @@ export function MailDetails({ onRemoveMail, onMarkUnread }) {
                             onRemoveMail={onRemoveMail}
                             onMarkUnread={onMarkUnread}
                             mailId={params.mailId}
+                            filterBy={filterBy}
+                            onRestoreMail={onRestoreMail}
+                            onEditDraft={onEditDraft}
+                            onReply={onReply}
                         />
                     </tr>
                 </tbody>

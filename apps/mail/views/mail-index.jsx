@@ -9,13 +9,17 @@ import { MailFooter } from '../cmps/mail-footer.jsx'
 
 import { UserMsg } from '../../../cmps/user-msg.jsx'
 
-const { useEffect, useState } = React
+const { useEffect, useState, useRef } = React
 const { useParams, useNavigate, useLocation } = ReactRouterDOM
 
 export function MailIndex() {
     const [isCompose, setIsCompose] = useState(false)
     const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
     const [sortBy, setSortBy] = useState(mailService.getDefaultSort())
+    const [replyTo, setReplyTo] = useState([''])
+    const [replySubject, setReplySubject] = useState([''])
+    const [replyBody, setReplyBody] = useState([''])
+
     const [mails, setMails] = useState([])
     const params = useParams()
     const navigate = useNavigate()
@@ -148,7 +152,35 @@ export function MailIndex() {
             })
     }
 
-    function onEditDraft() {}
+    function onEditDraft(ev, id) {
+        ev.stopPropagation()
+        mailService.get(id).then((currMail) => {
+            console.log(currMail)
+            setReplyTo(currMail.to)
+            setReplySubject(currMail.subject)
+            setReplyBody(currMail.body)
+            onToggleCompose()
+        })
+    }
+
+    function onReply(ev, id) {
+        ev.stopPropagation()
+        mailService.get(id).then((currMail) => {
+            console.log(currMail)
+            setReplyTo(currMail.from)
+            setReplySubject(`Re: ${currMail.subject}`)
+            setReplyBody(null)
+            onToggleCompose()
+        })
+    }
+
+    function onNewMail(ev) {
+        ev.stopPropagation()
+        setReplyTo(null)
+        setReplySubject(null)
+        setReplyBody(null)
+        onToggleCompose()
+    }
 
     function onSetFilter(filterBy) {
         setFilterBy((prevFilterBy) => ({ ...prevFilterBy, ...filterBy }))
@@ -171,6 +203,10 @@ export function MailIndex() {
                         onSetFilter={onSetFilter}
                         filterBy={filterBy}
                         onSaveDraft={onSaveDraft}
+                        replyTo={replyTo}
+                        replySubject={replySubject}
+                        replyBody={replyBody}
+                        onNewMail={onNewMail}
                     />
                 </aside>
 
@@ -178,6 +214,10 @@ export function MailIndex() {
                     <MailDetails
                         onRemoveMail={onRemoveMail}
                         onMarkUnread={onMarkUnread}
+                        filterBy={filterBy}
+                        onRestoreMail={onRestoreMail}
+                        onEditDraft={onEditDraft}
+                        onReply={onReply}
                     />
                 ) : (
                     <div className="mails-list-container">
@@ -199,6 +239,9 @@ export function MailIndex() {
                             onStarMail={onStarMail}
                             onRestoreMail={onRestoreMail}
                             onEditDraft={onEditDraft}
+                            replyTo={replyTo}
+                            setReplyTo={setReplyTo}
+                            onReply={onReply}
                         />
                     </div>
                 )}

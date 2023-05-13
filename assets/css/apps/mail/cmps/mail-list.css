@@ -30,7 +30,7 @@ table {
     border-radius: 25px;
     border: 1px solid var(--details-border-color);
     background-color: transparent;
-    flex: 0 0 auto;
+    flex: 0 1 auto;
 }
 
 .mail-filter :last-child {
@@ -118,6 +118,10 @@ table {
 .read {
     font-family: roboto;
     background-color: var(--shown-mail-bg-color);
+}
+
+.empty-list {
+    padding-inline-start: 10px;
 }
 
 @media (max-width: 600px) {
