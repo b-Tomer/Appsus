@@ -94,6 +94,9 @@ export function MailIndex() {
         mailService
             .setUnread(id)
             .then(loadMails)
+            .then(() => {
+                showSuccessMsg('Mail marked as unread')
+            })
             .catch((error) => {
                 console.error('Failed to mark mail as unread:', error)
             })

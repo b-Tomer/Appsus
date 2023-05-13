@@ -4,3 +4,20 @@
     background-size: cover;
     background-repeat: no-repeat;
 }
+
+.book-index nav {
+    height: 70px;
+    background-color: var(--book-clr1bg);
+}
+
+.book-index nav img {
+    width: 80px;
+}
+
+.book-index nav .mail-icon {
+    height: 50px;
+}
+
+.book-index nav .home-icon {
+    font-size: 3rem;
+}
