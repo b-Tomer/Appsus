@@ -2,7 +2,7 @@
 const { useState } = React
 const { NavLink } = ReactRouterDOM
 
-export function KeepHeader({ onDarkMode, onToggleView }) {
+export function KeepHeader() {
 
   const [menuBtn, setMenuBtn] = useState(false);
   let menuClass = menuBtn ? "open" : "closed";
@@ -22,8 +22,7 @@ export function KeepHeader({ onDarkMode, onToggleView }) {
       <div className="right-menu">
         <section className="header-btns" >
           <button className="btn btn-opt"><i className="fa-solid fa-magnifying-glass"></i></button>
-          <button onClick={onToggleView} className="btn btn-opt"><i className="fa-solid fa-list"></i></button>
-          <button onClick={onDarkMode} className="btn btn-opt"><i className="fa-solid fa-circle-half-stroke"></i></button>
+
           {/* <button className="btn btn-opt"><i className="fa-solid fa-table"></i></button> */}
         </section>
         <section className="nav-links">

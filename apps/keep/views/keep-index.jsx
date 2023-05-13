@@ -15,6 +15,7 @@ import { utilService } from "../../../services/util.service.js";
 import { KeepMenu } from "../cmps/keep-menu.jsx";
 import { AddListItems } from "../cmps/add-list-items.jsx";
 import { AddCanvas } from "../cmps/add-canvas.jsx";
+import { TrashList } from "./trash-list.jsx";
 
 
 
@@ -22,20 +23,20 @@ export function KeepIndex() {
 
   const [notes, setNotes] = useState([])
   const [darkMode, setDarkMode] = useState(true)
-  const [isCardsView, setIsCardsView] = useState(true)
+  const [isCardsView, setIsCardsView] = useState(false)
   const [mainStyle, setMainStyle] = useState({})
   const [cardsStyle, setCardsStyle] = useState({})
+  const [isShowTrash, setIsShowTrash] = useState(true)
   const [isAddOpen, setIsAddOpen] = useState(true)
   const [isAddCanvas, setIsAddCanvas] = useState(false)
   const [isAddboxShown, setIsAddboxShown] = useState(false)
   const [isAddList, setIsAddList] = useState(false)
   const [newNote, setNewNote] = useState('')
-  const pinnedNotes = notes.filter(note => note.isPinned);
-  const unpinnedNotes = notes.filter(note => !note.isPinned);
+  const pinnedNotes = notes.filter(note => note.isPinned && !note.isTrash);
+  const unpinnedNotes = notes.filter(note => !note.isPinned && !note.isTrash);
+  const trashNotes = notes.filter(note => note.isTrash);
   const boxRef = useRef()
-  // const [filterBy, setFilterBy] = useState(keepService.getDefaultFilter())
-  //
-
+ 
 
   useEffect(() => {
     loadNotes()
@@ -162,21 +163,25 @@ export function KeepIndex() {
     setIsAddCanvas(false)
   }
 
+  function onTrashView(){
+    setIsShowTrash(!isShowTrash)
+  }
   
 
 
   return (
 
     <section style={mainStyle} className="note-inedx app main-layout ">
-      <KeepHeader onToggleView={onToggleView} onDarkMode={onDarkMode} />
+      <KeepHeader />
 
       <main ref={boxRef} className="keep-content">
-        {/* <KeepMenu/> */}
+        <KeepMenu onTrashView={onTrashView} onToggleView={onToggleView} onDarkMode={onDarkMode}/>
         {isAddOpen && <AddInbox onOpenCanvs={onOpenCanvs} onOpenListInbox={onOpenListInbox} onOpenAddInbox={onOpenAddInbox} />}
         {isAddboxShown && <OpenAddInbox onOpenAddInbox={onOpenAddInbox} onHandleTitleChange={onHandleTitleChange} onHandleTextChange={onHandleTextChange} />}
         {isAddList && <AddListItems onAddListNote={onAddListNote} onHandleTitleChange={onHandleTitleChange} onOpenListInbox={onOpenListInbox} />}
         {isAddCanvas && <AddCanvas onAddCanvasNote={onAddCanvasNote} onHandleTitleChange={onHandleTitleChange} />}
-        <NoteList cardsStyle={cardsStyle} pinnedNotes={pinnedNotes} unpinnedNotes={unpinnedNotes} onRemoveNote={onRemoveNote} onPinNote={onPinNote} notes={notes} onDuplicateNote={onDuplicateNote} />
+        {!isShowTrash && <NoteList cardsStyle={cardsStyle} pinnedNotes={pinnedNotes} unpinnedNotes={unpinnedNotes} onRemoveNote={onRemoveNote} onPinNote={onPinNote} notes={notes} onDuplicateNote={onDuplicateNote} />}
+        {isShowTrash && <TrashList trashNotes={trashNotes} cardsStyle={cardsStyle} pinnedNotes={pinnedNotes} unpinnedNotes={unpinnedNotes} onRemoveNote={onRemoveNote} onPinNote={onPinNote} notes={notes} onDuplicateNote={onDuplicateNote} />}
 
       </main>
       {/* <UserMsg /> */}
