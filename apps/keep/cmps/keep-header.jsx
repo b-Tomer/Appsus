@@ -21,7 +21,7 @@ export function KeepHeader() {
 
       <div className="right-menu">
         <section className="header-btns" >
-          <button className="btn btn-opt"><i className="fa-solid fa-magnifying-glass"></i></button>
+          <button className="btn btn-opt search-btn"><i className="fa-solid fa-magnifying-glass"></i></button>
 
           {/* <button className="btn btn-opt"><i className="fa-solid fa-table"></i></button> */}
         </section>

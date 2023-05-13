@@ -11,3 +11,7 @@
   footer a {
     color: var(--clr3);
   }
+
+  .app-footer h4 {
+    padding-bottom: 20px;
+  }

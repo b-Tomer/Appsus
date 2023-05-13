@@ -12,6 +12,9 @@
         width: 360px;
     }
 
+    .search-btn{
+        padding-right: 20px;
+    }
     .nav-container {
     padding-right: 23px;
     }
