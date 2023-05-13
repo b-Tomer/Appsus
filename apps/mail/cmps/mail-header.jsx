@@ -1,5 +1,5 @@
 import { mailService } from '../services/mail.service.js'
-const { Link, NavLink } = ReactRouterDOM
+import { MailNav } from '../cmps/mail-nav.jsx'
 
 const { useState, useEffect } = React
 
@@ -31,26 +31,7 @@ export function MailHeader({ onSetFilter, filterBy }) {
                 placeholder="Search mails"
                 onChange={handleChange}
             />
-            <nav className="nav-container">
-                <NavLink to="/">
-                    <div className="home-container">
-                        <i className="home-icon fa-solid fa-house-chimney"></i>
-                    </div>
-                </NavLink>
-
-                <NavLink to="/keep">
-                    <img
-                        className="keep-icon"
-                        src="./assets/img/keep-icon.png"
-                        alt=""
-                    />
-                </NavLink>
-                <NavLink to="/book">
-                    <div className="books-container">
-                        <i className="books-icon fa-solid fa-book-open"></i>
-                    </div>
-                </NavLink>
-            </nav>
+            <MailNav />
         </header>
     )
 }

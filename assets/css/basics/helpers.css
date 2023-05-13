@@ -42,12 +42,26 @@
 }
 
 .selected {
+    background-color: transparent;
+}
+
+.mail-menu-container:hover .selected {
     background-color: var(--selected-color);
     border-radius: 100%;
 }
 
+.selected img {
+    background-color: var(--selected-color);
+    border-radius: 100%;
+    opacity: 1;
+}
+
 .unselected {
     background-color: transparent;
+}
+
+.unselected {
+    opacity: 0.6;
 }
 
 .hide {

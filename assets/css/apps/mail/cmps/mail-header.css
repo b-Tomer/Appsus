@@ -54,3 +54,46 @@
     margin-inline-start: auto;
     padding-inline-end: 10px;
 }
+
+@media (max-width: 650px) {
+    .mail-header {
+        justify-content: flex-start;
+    }
+
+    .mail-header .logo {
+        margin-inline-end: 10px;
+        align-self: center;
+        flex-shrink: 0;
+    }
+
+    .mail-header .nav-container {
+        flex-shrink: 0;
+        padding-inline-start: 5px;
+    }
+
+    .mail-header .mail-search {
+        flex-shrink: 1;
+    }
+}
+
+@media (max-width: 500px) {
+    .mail-header {
+        padding-block: 10px;
+        padding-inline: 10px;
+    }
+
+    .mail-header .logo {
+        display: none;
+    }
+
+    .mail-header .nav-container {
+        display: none;
+    }
+
+    .mail-header .mail-search {
+        max-width: 100%;
+        width: 100%;
+        flex-basis: 100%;
+        text-align: center;
+    }
+}

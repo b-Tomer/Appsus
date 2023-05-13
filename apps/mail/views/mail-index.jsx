@@ -5,6 +5,8 @@ import { MailList } from '../cmps/mail-list.jsx'
 import { MailDetails } from '../cmps/mail-details.jsx'
 import { MailMenu } from '../cmps/mail-menu.jsx'
 import { MailHeader } from '../cmps/mail-header.jsx'
+import { MailFooter } from '../cmps/mail-footer.jsx'
+
 import { UserMsg } from '../../../cmps/user-msg.jsx'
 
 const { useEffect, useState } = React
@@ -131,7 +133,10 @@ export function MailIndex() {
     }
 
     function onSaveDraft(to, subject, body) {
-        if (!to && !subject && !body) return
+        if (!to && !subject && !body) {
+            showSuccessMsg('Must enter at least one parameter to save as draft')
+            return
+        }
         mailService
             .saveDraft(to || '', subject || '', body || '')
             .then(loadMails)
@@ -154,7 +159,7 @@ export function MailIndex() {
     }
 
     return (
-        <React.Fragment>
+        <div className="mail-app-container">
             <MailHeader onSetFilter={onSetFilter} filterBy={filterBy} />
             <main className="mail-app ">
                 <aside className="mail-menu-container">
@@ -197,7 +202,8 @@ export function MailIndex() {
                     </div>
                 )}
             </main>
+            <MailFooter />
             <UserMsg />
-        </React.Fragment>
+        </div>
     )
 }

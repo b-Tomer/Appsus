@@ -15,6 +15,7 @@ table {
 
 .mail-filter {
     display: flex;
+    flex-wrap: wrap;
     justify-content: start;
     padding-block: 10px;
     padding-inline-start: 20px;
@@ -32,9 +33,14 @@ table {
     background-color: transparent;
 }
 
-/* .mail-filter button {
-    background-color: transparent;
-} */
+.mail-filter .filter-read {
+    flex: 0 0 auto;
+}
+
+.mail-filter button {
+    flex: 1;
+    flex-basis: 0;
+}
 
 .mail-preview {
     position: relative;
@@ -117,4 +123,64 @@ table {
 .read {
     font-family: roboto;
     background-color: var(--shown-mail-bg-color);
+}
+
+@media (max-width: 600px) {
+    .mail-filter {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .mail-filter .filter-read {
+        grid-row: 1;
+        grid-column: 1/-1;
+    }
+
+    .mail-filter button {
+        grid-row: 2;
+        margin: 0;
+    }
+}
+
+@media (max-width: 500px) {
+    .mails-list-container {
+        margin-inline-start: 50px;
+    }
+
+    .mail-list .mail-body {
+        display: none;
+    }
+
+    .mail-list .mail-star {
+        flex-basis: 10%;
+    }
+
+    .mail-list .mail-from {
+        flex-basis: 20%;
+    }
+
+    .mail-list .mail-subject {
+        flex-basis: 50%;
+    }
+    .mail-list .mail-date {
+        flex-basis: 20%;
+    }
+}
+
+@media (max-width: 370px) {
+    .mails-list-container {
+        /* font-size: 0.8rem; */
+    }
+    .mail-filter > * {
+        /* font-size: 0.8rem; */
+        padding: 0;
+        padding-block: 3px;
+        padding-inline: 5px;
+    }
+
+    .mail-list .mail-from {
+        display: none;
+    }
 }

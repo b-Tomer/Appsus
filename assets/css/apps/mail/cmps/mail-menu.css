@@ -53,13 +53,13 @@
 }
 
 .mail-categories button img {
-    filter: hue-rotate(180deg);
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: 25px;
-    width: 25px;
+    height: 40px;
+    width: 40px;
+    padding: 10px;
 }
 
 .mail-categories button:hover {
@@ -258,5 +258,17 @@ input:focus {
 @media (min-width: 980px) {
     .mail-compose {
         width: 40%;
+    }
+}
+
+@media (max-width: 500px) {
+    .mail-menu-container {
+        width: 50px;
+    }
+
+    .mail-categories button {
+        height: 50px;
+        padding-block: 20px;
+        margin: 0;
     }
 }
