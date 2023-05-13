@@ -5,7 +5,6 @@ const { useEffect, useState, useRef } = React
 
 
 import { KeepHeader } from "../cmps/keep-header.jsx";
-import { UserMsg } from "../cmps/user-msg.jsx";
 import { KeepFooter } from "../cmps/keep-footer.jsx";
 import { NoteList } from "../cmps/note-list.jsx";
 import { keepService } from "../services/keep.service.js";
@@ -17,6 +16,9 @@ import { AddListItems } from "../cmps/add-list-items.jsx";
 import { AddCanvas } from "../cmps/add-canvas.jsx";
 import { TrashList } from "./trash-list.jsx";
 import { EditNote } from "../cmps/edit-note.jsx";
+import { showSuccessMsg } from "../../../services/event-bus.service.js";
+import { eventBusService } from '../services/event-bus.service.js'
+import { UserMsg } from "../../../cmps/user-msg.jsx";
 
 
 
@@ -46,6 +48,18 @@ export function KeepIndex() {
   useEffect(() => {
     loadNotes()
   }, [newNote, notes]);
+
+  useEffect(() => {
+    const showUserMsgListener = eventBusService.on(
+      'show-user-msg',
+      (msg) => {
+        console.log('Received show-user-msg event:', msg)
+      }
+    )
+    return () => {
+      showUserMsgListener()
+    }
+  }, [])
 
   function loadNotes() {
     keepService.query(searchBar).then(setNotes)
@@ -85,12 +99,12 @@ export function KeepIndex() {
         keepService.remove(noteId).then(() => {
           const updatedNotes = notes.filter((note) => note.id !== noteId)
           setNotes(updatedNotes)
-          //   showSuccessMsg(`Note removed!`)
+          showSuccessMsg(`Note removed!`)
         })
       } else {
         note.isTrash = true
         keepService.put(note)
-        //   showSuccessMsg(`Note moved to Trash!`)
+        showSuccessMsg(`Note moved to Trash!`)
       }
     })
   }
@@ -200,14 +214,14 @@ export function KeepIndex() {
     setNoteToEdit(null)
   }
 
-  function onPinNewNote(){
+  function onPinNewNote() {
     newNote.isPinned = (!newNote.isPinned)
   }
 
-  function onSetSearch(val){
+  function onSetSearch(val) {
     setSearchBar(val)
   }
-  
+
 
 
   return (
@@ -225,7 +239,7 @@ export function KeepIndex() {
         {isShowTrash && <TrashList trashNotes={trashNotes} cardsStyle={cardsStyle} pinnedNotes={pinnedNotes} unpinnedNotes={unpinnedNotes} onRemoveNote={onRemoveNote} onPinNote={onPinNote} notes={notes} onDuplicateNote={onDuplicateNote} />}
         {isEditNote && <EditNote note={noteToEdit} onSaveEdit={onSaveEdit} onCancelEdit={onCancelEdit} />}
       </main>
-      {/* <UserMsg /> */}
+      <UserMsg />
       <KeepFooter />
     </section>
 

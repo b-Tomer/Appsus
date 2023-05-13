@@ -63,6 +63,34 @@ const gNotes = [
             txt: '2 bananas ,1/2 flower , 1 egg , 1/2 glass sugar ...'
         }
     },
+    {
+        id: utilService.makeId(),
+        createdAt: 1112222,
+        type: 'NoteTxt',
+        isPinned: false,
+        isTrash: true,
+        style: {
+            backgroundColor: '#FFD59E'
+        },
+        info: {
+            title: 'ביטוח לאומי',
+            txt: '04-8511436'
+        }
+    },
+    {
+        id: utilService.makeId(),
+        createdAt: 1112222,
+        type: 'NoteTxt',
+        isPinned: false,
+        isTrash: true,
+        style: {
+            backgroundColor: ''
+        },
+        info: {
+            title: 'Bohemian Rhapsody',
+            txt: 'Is this the real life? Is this just fantasy? Caught in a landside,No escape from reality Open your eyes, Look up to the skies and see,'
+        }
+    },
 
     {
         id: utilService.makeId(),
@@ -131,8 +159,26 @@ const gNotes = [
     },
     {
         id: utilService.makeId(),
+        type: 'NoteTodos',
+        isPinned: true,
+        isTrash: true,
+        info: {
+            title: 'Shoping list:',
+            todos: [
+                { txt: 'milk', id: utilService.makeId(), doneAt: null },
+                { txt: 'eggs', id: utilService.makeId(), doneAt: 187121111 },
+                { txt: 'bread', id: utilService.makeId(), doneAt: 187121111 }
+            ]
+        },
+        style: {
+            backgroundColor: '#F9FFA4'
+        }
+    },
+    {
+        id: utilService.makeId(),
         type: 'NoteImg',
         isPinned: true,
+        isTrash: true,
         info: {
             url: 'https://images.unsplash.com/photo-1511884642898-4c92249e20b6?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=1080&ixid=MnwxfDB8MXxyYW5kb218MHx8d2FsbHBhcGVyLGxhbmRzY2FwZXx8fHx8fDE2ODM4MjAxMTY&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1920',
             title: 'My trip'
@@ -141,7 +187,33 @@ const gNotes = [
             backgroundColor: '#f7f6f67e'
         }
     },
+    {
+        id: utilService.makeId(),
+        type: 'NoteImg',
+        isPinned: true,
+        info: {
+            url: 'https://images.unsplash.com/photo-1683220367836-f421ee46c013?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1025&q=80',
+            title: 'Chile'
+        },
+        style: {
+            backgroundColor: '#f7f6f67e'
+        }
+    },
 
+    {
+        id: utilService.makeId(),
+        createdAt: 1112222,
+        type: 'NoteTxt',
+        isPinned: false,
+        isTrash: true,
+        style: {
+            backgroundColor: '#f7f6f67e'
+        },
+        info: {
+            title: 'חנות בשר',
+            txt: 'רחוב קדש 10 , אשדוד'
+        }
+    },
     {
         id: utilService.makeId(),
         type: 'NoteVideo',
@@ -154,6 +226,7 @@ const gNotes = [
             backgroundColor: '#f7f6f67e'
         }
     },
+
 
 ]
 
