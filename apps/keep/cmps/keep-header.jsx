@@ -1,12 +1,9 @@
-
 const { useState } = React
 const { NavLink } = ReactRouterDOM
 
 export function KeepHeader() {
-
-  const [menuBtn, setMenuBtn] = useState(false);
-  let menuClass = menuBtn ? "open" : "closed";
-
+    const [menuBtn, setMenuBtn] = useState(false)
+    let menuClass = menuBtn ? 'open' : 'closed'
 
   return (
     <header className="keep-header full main-layout">

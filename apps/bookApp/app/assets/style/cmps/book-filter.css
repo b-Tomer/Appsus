@@ -1,0 +1,36 @@
+.book-filter {
+    background-color: var(--book-clr2bg);
+    display: flex;
+    justify-content: space-between;
+    border-radius: 0.5em;
+    padding: 5px;
+}
+
+.book-filter form {
+    display: flex;
+    grid-template-columns: 100px 190px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.book-filter-lable {
+    width: 300px;
+    display: flex;
+    gap: 13px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-left: 20px;
+    justify-content: space-between;
+}
+
+/* input {
+    border: 1px solid rgb(203, 203, 203);
+    border-radius: 0.5em;
+    height: 30px;
+    margin-bottom: 2px;
+} */
+
+.book-filter-btn:hover {
+    background-color: #a1adca57;
+    /* position: absolute; */
+}

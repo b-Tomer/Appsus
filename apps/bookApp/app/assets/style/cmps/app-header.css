@@ -1,0 +1,35 @@
+.book-app-header {
+    background-color: var(--book-clr2);
+    color: var(--book-clr2bg-light);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.book-app-nav {
+    align-self: center;
+    display: flex;
+    gap: 15px;
+}
+
+.book-app-nav a {
+    margin-bottom: 20px;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background: inherit;
+    color: var(--book-clr2bg-light);
+}
+.book-app-nav a:hover {
+    color: var(--book-clr2);
+}
+.book-menu-btn {
+    visibility: hidden;
+    z-index: 5;
+    right: 25px;
+    position: fixed;
+    background: #f4f2f200;
+    justify-self: center;
+    color: var(--book-clr2bg-light);
+}
