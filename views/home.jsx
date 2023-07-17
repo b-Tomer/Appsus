@@ -5,7 +5,6 @@ import { MainFooter } from '../cmps/main-footer.jsx'
 export function Home() {
     return <section className="home">
            <AppHeader />
-           {/* <About/> */}
            <MainFooter/>
     </section>
 }

@@ -4,11 +4,6 @@ export function AppHeader() {
     return (
         <header className="app-main-nav">
             <nav className="nav-container">
-                <NavLink to="/bookApp" className="book-img">
-                    <div className="books-container">
-                        <i className="book-icon img-icon fa-solid fa-book-open"></i>
-                    </div>
-                </NavLink>
                 <NavLink to="/mail" className="mail-icon">
                     <img
                         className="icon-img mail animate__pulse"

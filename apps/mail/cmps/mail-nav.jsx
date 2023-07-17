@@ -16,11 +16,6 @@ export function MailNav() {
                     alt=""
                 />
             </NavLink>
-            <NavLink to="/bookApp">
-                <div className="books-container">
-                    <i className="books-icon fa-solid fa-book-open"></i>
-                </div>
-            </NavLink>
         </nav>
     )
 }

@@ -27,6 +27,7 @@
     border: 1px solid var(--clr1);
 }
 
+
  textarea:focus {
     outline: none;
     background: var(--clr1);

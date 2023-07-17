@@ -149,8 +149,8 @@ const gNotes = [
         info: {
             title: 'Shoping list:',
             todos: [
-                { txt: 'גמבות לדג', id: utilService.makeId(), doneAt: null },
-                { txt: 'פלפל חריף', id: utilService.makeId(), doneAt: 187121111 }
+                { txt: 'חלב', id: utilService.makeId(), doneAt: null },
+                { txt: 'ביצים', id: utilService.makeId(), doneAt: 187121111 }
             ]
         },
         style: {

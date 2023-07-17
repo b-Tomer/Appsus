@@ -172,11 +172,6 @@ export function KeepIndex() {
     setIsShowTrash(!isShowTrash)
   }
 
-  // function onToggleMenu(){
-  //   setIsOpenMenu(!isOpenMenu)
-
-  // }
-
   function onEditNote(note) {
     setNoteToEdit(note)
     setIsEditNote(true)

@@ -13,9 +13,6 @@
 /* Views */
 @import './views/home.css';
 
-/* Book */
-@import '../../apps/bookApp/app/assets/style/book-main.css';
-
 /* Keep */
 @import './apps/keep/views/keep-index.css';
 @import './apps/keep/basics-keep/forms.css';

@@ -68,8 +68,6 @@
     display: none;
 }
 
-/* books stuff: */
-
 .flex.flex-column {
     flex-direction: column;
 }

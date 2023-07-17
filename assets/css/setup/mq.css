@@ -1,10 +1,12 @@
 @media (max-width: 760px) {
     .note-list {
         column-count: 1;
+        padding-left: 4%;   
+
     }
 
-    .card-container {
-        /* padding-left: 4%;    */
+    .options-container {
+        transform: translateY(-140%) translateX(16%);
     }
 
     .keep-content {
@@ -20,7 +22,7 @@
 
     .card {
         max-width: 360px;
-        width: 360px;
+        width: 330px;
     }
 
     .search-btn {
@@ -84,13 +86,13 @@
     }
 }
 
-@media (min-width: 980px) {
+@media (min-width: 1030px) {
     .note-list {
         column-count: 3;
     }
 }
 
-@media (min-width: 1260px) {
+@media (min-width: 1357px) {
     .note-list {
         column-count: 4;
     }
